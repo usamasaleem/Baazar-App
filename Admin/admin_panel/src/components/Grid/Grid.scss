@@ -1,0 +1,33 @@
+ @import '../../utils/styles/mixins/mixins.scss';
+ @import '../../utils/styles/colors/colors.scss';
+
+
+ .GridContainer {
+     @include GridView;
+     @include GridGap(1rem);
+
+     grid-template-columns: 20% 50% 25%;
+ }
+
+
+ .col {}
+
+
+ .col1 {
+     height: 100vh;
+     overflow-y: scroll;
+     background: $white;
+ }
+
+
+ .col1::-webkit-scrollbar {
+     width: 4px;
+ }
+
+ .col1::-webkit-scrollbar-track {
+     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+ }
+
+ .col1::-webkit-scrollbar-thumb {
+     background-color: $purple;
+ }

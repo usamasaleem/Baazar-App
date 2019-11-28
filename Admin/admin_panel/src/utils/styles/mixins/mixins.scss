@@ -1,0 +1,22 @@
+@mixin GridView {
+    display: -ms-grid;
+    display: grid;
+}
+
+
+@mixin CharacterSpacing {
+    letter-spacing: .2rem;
+}
+
+@mixin GridGap($val) {
+    -webkit-column-gap: $val;
+    -moz-column-gap: $val;
+    column-gap: $val
+}
+
+
+@mixin FlexBox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}

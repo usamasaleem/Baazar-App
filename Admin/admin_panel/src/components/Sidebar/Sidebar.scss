@@ -1,0 +1,31 @@
+@import "../../utils/styles/colors/colors.scss";
+@import "../../utils/styles/variables/variables.scss";
+@import "../../utils/styles/mixins/mixins.scss";
+
+
+
+.Sidebar{
+    @include GridView;
+    grid-template-rows: 1fr 2fr 1fr;
+    justify-items: center;
+    padding-top: 4rem;
+    margin-bottom: 10vh;
+}
+
+.Sidebar_logo{
+    color: $purple;
+    @include CharacterSpacing;
+    font-size: $fontSize_title;
+    position: relative;
+    top: -2rem;
+}
+
+.Sidebar_Home{
+    margin: $margin 0;
+}
+
+.Sidebar_Frow,.Sidebar_Srow,.Sidebar_Trow{
+@include FlexBox;
+flex-direction: column;
+justify-content: center;
+}

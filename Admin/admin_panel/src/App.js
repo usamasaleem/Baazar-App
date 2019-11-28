@@ -1,12 +1,18 @@
 import React from 'react';
-import './App.css';
-import logo from './assets/images/logo192.png'; 
+import './App.scss';
+import logo from './assets/images/logo192.png';
+import Grid from './components/Grid/Grid.js';
+import styled from 'styled-components';
+import DashboardPage from './containers/DashboardPage/DashboardPage';
+
 
 function App() {
+
+ 
+
   return (
     <div className="App">
-      <h1>Usama</h1>
-      <img src={logo}></img>
+      <DashboardPage></DashboardPage>
     </div>
   );
 }
