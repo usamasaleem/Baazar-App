@@ -1,0 +1,101 @@
+@import "../../utils/styles/colors/colors.scss";
+@import "../../utils/styles/variables/variables.scss";
+@import "../../utils/styles/mixins/mixins.scss";
+
+
+.UserDetail_container {
+    margin: 0 auto;
+    margin-top: $margin_small;
+    width: 95%;
+}
+
+
+
+.UserDetail_buttonContianer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.UserDetail_button {
+    width: 6rem;
+    padding: .5rem 0rem;
+    outline: none;
+    text-align: center;
+    border: 1px solid #BDBDBD;
+    margin: 0 .6rem;
+    color: $deepPurple;
+    background: none;
+    letter-spacing: .05rem;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.UserDetail_button:hover {
+    background: $deepPurple;
+    color: $white;
+    border-color: rgba(189, 189, 189, 0);
+}
+
+
+
+.UserDetail_DetailContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: $margin;
+    flex-wrap: wrap;
+
+}
+
+.UserDetail_userImageContainer {
+
+    flex-basis: 20%;
+}
+
+.UserDetail_userImage {
+    border-radius: 50%;
+    width: 100%;
+}
+
+.UserDetail_userInfoContainer {
+    flex-basis: 70%;
+    max-width: 90%;
+}
+
+.UserDetail_userInfotxt {
+    margin: 0;
+    padding: 0;
+}
+
+.UserDetail_userName {}
+
+.UserDetail_userType {
+    margin-bottom: .8rem;
+    color: $lightGray;
+}
+
+.UserDetail_userDescription {
+    color: $lessBlack;
+    font-size:12px;
+    word-break:break-all;
+}
+
+
+.UserDetail_userDescriptContainer{
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.UserDetail_AddiInfoTxt{
+    margin-top: $margin_nav;
+    font-size: 1.1rem;
+    text-align: left;
+    color:$row_color;
+    margin-left: $margin_small;
+
+}
+
+.UserDetail_AddiInfo{
+    text-align: left;
+    margin-left: $margin_small;
+}

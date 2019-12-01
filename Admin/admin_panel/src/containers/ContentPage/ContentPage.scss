@@ -1,0 +1,47 @@
+@import "../../utils/styles/colors/colors.scss";
+@import "../../utils/styles/variables/variables.scss";
+@import "../../utils/styles/mixins/mixins.scss";
+
+
+.ContentPage_container{
+
+}
+
+
+
+
+.ContentPage_scrollContainer{
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+
+
+.ContentPage_scrollContainer::-webkit-scrollbar {
+    width: 2px;
+}
+
+.ContentPage_scrollContainer::-webkit-scrollbar-track {
+    
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.ContentPage_scrollContainer::-webkit-scrollbar-thumb {
+    
+    background-color: $purple;
+}
+
+
+
+
+
+
+.ContentPage_heading {
+    width: 95%;
+}
+
+.ContentPage_heading>h1{
+    margin: 0 auto;
+    margin-top: $margin;
+    width: 95%;
+}

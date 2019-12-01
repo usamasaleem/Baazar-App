@@ -14,6 +14,13 @@ import delivery from '../../assets/icons/delivery.svg';
 import AvatarImage from '../../assets/images/Avatar.jpg';
 
 
+import ROUTES from "../../constants/ROUTES.json";
+import {
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+
 
 
 export default class Sidebar extends Component {
@@ -31,17 +38,20 @@ export default class Sidebar extends Component {
             <div className="Sidebar">
 
                 <div className="Sidebar_Frow">
-                    <h1 className="Sidebar_logo">{title}</h1>
+                   <Link to={ROUTES.HOME}><h1 className="Sidebar_logo">{title}</h1></Link>
                 </div>
 
                 <div className="Sidebar_Srow">
                     <div className="Sidebar_Home">
-                        <NavLink text="Home" image={compass} />
+                        <NavLink text="Home" image={compass} routeTo={ROUTES.HOME}/>
                     </div>
+                
+                    <NavLink sectionText="Users" text="Customers" image={user} routeTo={ROUTES.RETAILER_PAGE} />
+                    <NavLink text="Retailer" image={shop} routeTo={ROUTES.CUSTOMER_PAGE} />
+                    <NavLink text="Deliverers" image={delivery}  routeTo={ROUTES.DELIVERER_PAGE}/>
 
-                    <NavLink sectionText="Users" text="Customers" image={user} />
-                    <NavLink text="Retailer" image={shop} />
-                    <NavLink text="Deliverers" image={delivery} />
+        
+                 
 
                 </div>
 

@@ -4,7 +4,8 @@ import './DashboardPage.scss';
 import PropTypes from "prop-types";
 import Grid from '../../components/Grid/Grid.js';
 import Sidebar from '../../components/Sidebar/Sidebar.js';
-
+import SearchPage from "../SearchPage/SearchPage";
+import ContentPage from "../ContentPage/ContentPage";
 
 
 export default class DashboardPage extends Component {
@@ -19,7 +20,7 @@ export default class DashboardPage extends Component {
 
         return (
             <div>
-             <Grid col1={<Sidebar title="Baazar"></Sidebar>} col2={<h1>Column2</h1>}   col3={<h1>Column3</h1>}></Grid>
+             <Grid col1={<Sidebar title="Baazar."></Sidebar>} col2={<ContentPage></ContentPage>}   col3={<SearchPage helperText="No Search Result"/>}></Grid>
             </div>
         );
     }

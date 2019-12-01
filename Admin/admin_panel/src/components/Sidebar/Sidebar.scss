@@ -5,14 +5,17 @@
 
 
 .Sidebar{
+    padding-right: 3rem;
     @include GridView;
-    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-rows: 10% 50% 20%;
     justify-items: center;
+    margin-bottom: 1rem;
     padding-top: 4rem;
-    margin-bottom: 10vh;
+
 }
 
 .Sidebar_logo{
+    cursor: pointer;
     color: $purple;
     @include CharacterSpacing;
     font-size: $fontSize_title;
@@ -29,3 +32,7 @@
 flex-direction: column;
 justify-content: center;
 }
+
+
+
+

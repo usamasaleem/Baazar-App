@@ -1,12 +1,13 @@
  @import '../../utils/styles/mixins/mixins.scss';
  @import '../../utils/styles/colors/colors.scss';
+ @import '../../utils/styles/variables/variables.scss';
 
 
  .GridContainer {
      @include GridView;
-     @include GridGap(1rem);
+     //  @include GridGap(1rem);
 
-     grid-template-columns: 20% 50% 25%;
+     grid-template-columns: 15% 60% 25%;
  }
 
 
@@ -30,4 +31,58 @@
 
  .col1::-webkit-scrollbar-thumb {
      background-color: $purple;
+ }
+
+
+ .col2 {
+     background: $gray;
+ }
+
+
+ @media only screen and (max-width:1200px) {
+
+
+
+     .GridContainer {
+
+         grid-template-columns: 20% 55% 20%;
+
+     }
+
+ }
+
+ @media only screen and (max-width:1000px) {
+
+
+    
+    .GridContainer {
+
+        grid-template-columns: 75% 25%;
+
+    }
+
+
+     .col1{
+         display: none;
+     }
+
+ }
+
+
+ @media only screen and (max-width:600px) {
+
+
+    
+    .GridContainer {
+
+        display: block;
+
+    }
+
+
+     .col1 ,.col3{
+         display: none;
+     }
+
+
  }

@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import './NavLink.scss';
 import PropTypes from "prop-types";
 
+import {
+    Link
+} from "react-router-dom";
 
 
 
@@ -15,7 +18,7 @@ export default class NavLink extends Component {
 
     render() {
 
-        const { image, text, sectionText } = this.props;
+        const { image, text, sectionText,routeTo } = this.props;
 
 
         return (
@@ -27,7 +30,7 @@ export default class NavLink extends Component {
 
                 <div className="NavLink">
                     <img src={image} className="NavIcon"></img>
-                    <a href=""><h1 className="NavText">{text}</h1></a>
+                    <Link to={routeTo}><h1 className="NavText">{text}</h1></Link>
                 </div>
             </div>
         );

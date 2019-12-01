@@ -19,8 +19,8 @@ export default class Grid extends Component {
         return (
             <div className="GridContainer">
                 <div className="col col1">{col1}</div>
-                <div className="col">{col2}</div>
-                <div className="col">{col3}</div>
+                <div className="col col2">{col2}</div>
+                <div className="col col3">{col3}</div>
             </div>
         );
     }

@@ -1,0 +1,49 @@
+@import '../../utils/styles/mixins/mixins.scss';
+@import '../../utils/styles/colors/colors.scss';
+@import '../../utils/styles/variables/variables.scss';
+
+
+.Searchbar{
+    margin-top: $margin;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+
+.Seachbar_inputContainer{
+}
+
+.Searchbar_input{
+    width: 100%;
+    background: $gray;
+    padding: $searchbar_PaddingV $searchbar_PaddingH;
+    border-radius: $searchbar_Radius;
+    border-color: $searchbar_BorderColor;
+    border-width: 0px;
+    border-style: solid;
+    outline: none;
+}
+
+
+
+.Searchbar_input::placeholder{
+    color: $placeholder_color ;
+}
+
+
+
+.Searchbar_iconContainer{
+    position: relative;
+    // left: -2rem;
+    padding: .35rem .6rem;
+    border-radius: 50%;
+    display: inline-block;
+    background: $purple;
+}
+
+
+
+.searchIcon{
+    width: 14px;
+}
