@@ -6,6 +6,9 @@ var mongoose=require('mongoose');
 // var Retailers=mongoose.model('Retailer');
 var session=require("cookie-session");
 
+
+
+
 var findProducts=function(req,res,storeID){
 
   Products
@@ -17,8 +20,7 @@ var findProducts=function(req,res,storeID){
       res
       .status(500)
       .json(err);
-
-    }
+ }
     else{
         res
         .status(200)

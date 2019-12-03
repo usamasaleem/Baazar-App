@@ -1,4 +1,6 @@
 require('./api/models/db.js'); 
+require('./api/models/authenticationUser.js');
+
 var express = require('express');
 var app=express();
 var adminRoutes = require('./api/routes');
@@ -8,7 +10,9 @@ var session=require('express-session');
 var cookieSession = require('cookie-session')
 //to give path
 var path = require('path');
-
+require('./api/config/passport.js');
+var passport=require('passport');
+var auth=require('./api/routes/auth.js')
 
 
 
@@ -37,9 +41,13 @@ app.use(cookieSession({
   name: 'session',
   keys: ['keyboard cat']
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/', adminRoutes);
+app.use(require('./api/routes/authIndex.js'));
+app.use('/', adminRoutes,auth.optional);
 app.use('/retailer', routes);
+
 // app.get('/home',function(req,res){
 //     res
 //     .status(200)

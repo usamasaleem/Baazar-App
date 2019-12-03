@@ -6,6 +6,8 @@ var Retailers=require('../models/retailers.model.js');
 var mongoose=require('mongoose');
 // var Retailers=mongoose.model('Retailer');
 var session=require("cookie-session");
+var passport=require('passport');
+
 
 
 // var _addreview=function(req,res,store){
@@ -23,7 +25,45 @@ var session=require("cookie-session");
 
 
 
-
+module.exports.login=(req, res, next) => {
+    const { body: { user } } = req;
+  
+    console.log(req.body);
+  
+    if(!req.body.email) {
+      return res.status(422).json({
+        errors: {
+          email: 'is required',
+        },
+      });
+    }
+  
+    if(!req.body.password) {
+      return res.status(422).json({
+        errors: {
+          password: 'is required',
+        },
+      });
+    }
+  
+    return passport.authenticate('retailer', { session: false }, (err, passportUser, info) => {
+      if(err) {
+        
+        res
+        .json({error:" email or password': 'is invalid' "})
+        return next(err);
+      }
+  
+      if(passportUser) {
+        const user = passportUser;
+        user.token = passportUser.generateJWT();
+  
+        return res.json({ message:"successfully signed up", user: user.toAuthJSON() });
+      }
+  
+      return status(400).info;
+    })(req, res, next);
+  };
 
 
 

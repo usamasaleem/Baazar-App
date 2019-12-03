@@ -5,12 +5,16 @@ var router=express.Router();
 var adminCtrl=require('../controllers/admin.controller.js');
 var productCtrl=require('../controllers/product.controller.js');
 // var retCtrl=require("../controllers/retailer.controller.js");
+var passport=require('passport');
+var auth=require('../routes/auth.js');
 
-
+// router
+// .route('/admin/login')
+// // .post(adminCtrl.signup)
+// .post(adminCtrl.login);
 router
 .route('/admin/login')
-// .post(adminCtrl.signup)
-.post(adminCtrl.login);
+.post(auth.optional, adminCtrl.login)
 
 router
 .route('/test')
@@ -49,6 +53,8 @@ router
 router
 .route('/admin/retailers/view/:retailerlID/stores')
 .get(adminCtrl.verifiedRetailerStores)
+
+
 
 
 module.exports=router;
