@@ -14,19 +14,22 @@ const useStyles = makeStyles(theme => ({
 
 
 
-function StoreSignupPage() {
+function StoreSignupPage(props) {
 
     const classes = useStyles();
 
-    const [message, setMessage] = React.useState("");
     const [formsent, setformsent] = React.useState(false);
-    const [fomrData,setformData] = React.useState({
-        Name:"",
-        Description:"",
-        Address:"",
-        Name:"",
+    const [formData, setformData] = React.useState({
+        Name: "",
+        Description: "",
+        Address: "",
 
     })
+
+    const [errorMessage, seterrorMessage] = React.useState("");
+
+
+
 
     return (
 
@@ -43,32 +46,68 @@ function StoreSignupPage() {
 
 
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth error  helperText="Incorrect entry." />
+                            <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth onChange={
+                                (e) => {
+                                    setformData({ ...formData, Name: e.target.value })
+                                }
+                            } />
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Description" variant="outlined" fullWidth />
+                            <TextField id="outlined-basic" label="Description" variant="outlined"  helperText="Description length should greater than 25 characters" multiline rows="4" fullWidth onChange={
+                                (e) => {
+                                    setformData({ ...formData, Description: e.target.value })
+                                }
+                            } />
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Address" variant="outlined" fullWidth multiline rows="4" />
+                            <TextField id="outlined-basic" label="Address" variant="outlined" fullWidth multiline rows="4" onChange={
+                                (e) => {
+                                    setformData({ ...formData, Address: e.target.value })
+                                }
+                            } />
                         </Grid>
 
                         <Grid item xs={12}>
                             <Button className={classes.extendedIcon} variant="contained" color="primary" size="large" onClick={() => {
-                                setMessage("Response has beed submitted")
-                                setformsent(true)
-                            }}>Submit</Button>
+
+
+                                if (formData.Name.length < 1 || formData.Description.length < 1 || formData.Address.length < 1) {
+                                    seterrorMessage("Please fill all feilds")
+                                    setformsent(false)
+
+
+                                }
+                                else {
+
+                                    if (formData.Description.length <= 25) {
+                                        seterrorMessage("Invalid entry")
+                                        setformsent(false)
+
+                                    }
+
+                                    else {
+                                        seterrorMessage("Response has been submitted")
+                                        setformsent(true)
+                                        props.history.push("/Home")
+                                    }
+                                }
+
+
+                            }}
+                            
+                            >Submit</Button>
                         </Grid>
 
                         <Grid item xs={12}>
                             {formsent &&
-                                <p style={{color:"green"}}>{message}</p>
-                                
+                                <p style={{ color: "green" }}>{errorMessage}</p>
+
                             }
 
                             {!formsent &&
-                                <p style={{color:"red"}}>{message}</p>
+                                <p style={{ color: "red" }}>{errorMessage}</p>
                             }
 
                         </Grid>

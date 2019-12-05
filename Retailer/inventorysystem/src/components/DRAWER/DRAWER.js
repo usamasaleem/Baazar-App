@@ -59,6 +59,10 @@ function DRAWER(props) {
             
             <Drawer open={props.drawerOpen} onClose={false}>
                 {sideList('left')}
+                <ListItem button key={"LogOut"}>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemText primary={"LogOut"} />
+            </ListItem>
             </Drawer>
         
         </div>

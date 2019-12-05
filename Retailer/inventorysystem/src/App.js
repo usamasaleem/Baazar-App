@@ -8,7 +8,18 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import SignupPage from "./container/Signup/SignupPage";
 import StoreSignupPage from "./container/Signup/StoreSignupPage";
+import Home from "./container/Home/Home";
+import StoreDetail from "./container/StoreDetail/StoreDetail";
+import addProduct from "./container/Product/AddProduct";
 
+
+import {
+  Switch,
+  Route,
+  Link,
+  BrowserRouter as Router,
+} from "react-router-dom";
+import AddProduct from './container/Product/AddProduct';
 
 
 
@@ -36,9 +47,26 @@ function App() {
   return (
 
     <div>
+      <Router>
+        <Switch>
+          <Route path="/retailerSignup" />
 
-      <StoreSignupPage />
+          <Route path={"/storeSignup"} render={routerProps => <StoreSignupPage {...routerProps} />} />
 
+          <Route path={"/Home"}>
+            <Home />
+          </Route>
+          
+          <Route path="/Stores/:name" strict render={(props) => <StoreDetail {...props} />} />
+          
+          
+          <Route path="/addProduct" render={(props) => <AddProduct {...props} />} />
+
+
+
+          
+        </Switch>
+      </Router>
     </div>
   );
 

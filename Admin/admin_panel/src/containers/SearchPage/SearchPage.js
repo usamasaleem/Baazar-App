@@ -19,13 +19,14 @@ export default class SearchPage extends Component {
 
         return (
             <div className="SearchPage"> 
-                <Searchbar placeholderText="Search Here" />
+           { /*
+                   <Searchbar placeholderText="Search Here" />
                 <ProfileTabs />
                 <div className="helperText">
                     {helperText}
                 
                 </div>
-
+           */}
 
             </div>
         );

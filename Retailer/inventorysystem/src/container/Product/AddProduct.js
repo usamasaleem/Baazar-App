@@ -24,24 +24,23 @@ const passwordRegex = new RegExp("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$
 
 
 
-function SignupPage(props) {
+function AddProduct(props) {
 
     const classes = useStyles();
     const [formsent, setformsent] = React.useState(false);
     const [formData, setformData] = React.useState({
         Name: "",
-        City: "",
-        Address: "",
-        Email: "",
-        MobileNo: "",
+        Stock: "",
+        Category: "",
+        Description: "",
     })
 
 
 
     const [errorMessage, seterrorMessage] = React.useState("");
 
-    const handleCityChange = event => {
-        setformData({ ...formData, City: event.target.value })
+    const handleCategoryChange = event => {
+        setformData({ ...formData, Category: event.target.value })
     };
 
 
@@ -53,7 +52,7 @@ function SignupPage(props) {
 
             <Container maxWidth="sm">
                 <form noValidate autoComplete="off" style={{ marginTop: "5rem" }}>
-                    <h1>Retailer Form</h1>
+                    <h1>Product Form</h1>
 
                     <Grid container spacing={2}
                         justify="start"
@@ -69,9 +68,9 @@ function SignupPage(props) {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth helperText="Enter a valid email address"  onChange={
+                            <TextField id="outlined-basic" label="Stock" variant="outlined" type={"number"} fullWidth  onChange={
                                 (e) => {
-                                    setformData({ ...formData, Email: e.target.value })
+                                    setformData({ ...formData, Stock: e.target.value })
                                 }
                             } />
                         </Grid>
@@ -79,68 +78,50 @@ function SignupPage(props) {
                         <Grid item xs={12}>
                             <FormControl variant="outlined" fullWidth>
                                 <InputLabel id="demo-simple-select-outlined-label">
-                                    City
+                                    Category
                         </InputLabel>
                                 <Select
                                     labelId="demo-simple-select-outlined-label"
                                     id="demo-simple-select-outlined"
-                                    onChange={handleCityChange}
-                                    value={formData.Cit}
+                                    onChange={handleCategoryChange}
+                                    value={formData.Category}
                                 >
-                                    <MenuItem value={"Rawalpind"}>Rawalpindi</MenuItem>
-                                    <MenuItem value={"Islamabad"}>Islamabad</MenuItem>
+                                    <MenuItem value={"Rawalpind"}>Snack</MenuItem>
+                                    <MenuItem value={"Islamabad"}>Soft Drinks</MenuItem>
 
                                 </Select>
                             </FormControl>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Address" variant="outlined" multiline rows="4" fullWidth onChange={
+                            <TextField id="outlined-basic" label="Description" variant="outlined" multiline rows="4" fullWidth onChange={
                                 (e) => {
-                                    setformData({ ...formData, Address: e.target.value })
+                                    setformData({ ...formData, Description: e.target.value })
                                 }
                             } />
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Mobile No" variant="outlined" type={"number"} fullWidth onChange={
-                                (e) => {
-                                    setformData({ ...formData, MobileNo: e.target.value })
-                                }
-                            } />
-                        </Grid>
+                  
 
 
                         <Grid item xs={12}>
                             <Button className={classes.extendedIcon} variant="contained" color="primary" size="large" onClick={() => {
 
 
-                                if (formData.Name.length < 1 || formData.Address.length < 1 || formData.City.length < 1 || formData.Email.length < 1 || formData.MobileNo.length < 1) {
+                                if (formData.Name.length < 1  ) {
                                     seterrorMessage("Please fill all feilds")
                                     setformsent(false)
                                 }
                                 else {
 
-                                    if (!emailRegex.test(formData.Email)) {
-                                        seterrorMessage("Invalid Email")
-                                        setformsent(false)
-
-                                    }
-                                    else if(formData.MobileNo.length<11){
-                                        seterrorMessage("Invalid Mobile Number")
-                                        setformsent(false)
-                                    }
-                                    else {
-                                        seterrorMessage("Response sent")
-                                        setformsent(true)
-                                        props.history.push('/signin')
-                                    }
+                                    seterrorMessage("Product Added")
+                                    setformsent(true)
 
                                 }
 
 
                             }}
-                            >Sign up</Button>
+                            >Add Product</Button>
                         </Grid>
 
 
@@ -171,4 +152,4 @@ function SignupPage(props) {
 
 
 
-export default SignupPage;
+export default AddProduct;
