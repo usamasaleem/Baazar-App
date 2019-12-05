@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 import ROUTES from "../../constants/ROUTES.json";
+import MaterialTable from 'material-table';
 
 
 
@@ -24,6 +25,17 @@ export default class CöntentPage extends Component {
 
     render() {
 
+        var column = [{ title: 'Name', field: 'name' },
+        { title: 'Surname', field: 'surname',searchable :false },
+        { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
+        {
+            title: 'Birth Place',
+            field: 'birthCity',
+            lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
+        },
+        ]
+
+
         return (
             <div className="ContentPage_container">
 
@@ -33,13 +45,44 @@ export default class CöntentPage extends Component {
 
 
                         <Route path={ROUTES.RETAILER_PAGE}>
-                            <UserTable title="Pending Retailers" data={[["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"]]} />
+
+                            <div className="tables_container">
+                                <MaterialTable
+                                    title="Retailers"
+                                    columns={column}
+                                    data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
+                                />
+                            </div>
+
                         </Route>
                         <Route path={ROUTES.CUSTOMER_PAGE}>
-                            <UserTable title="Pending Customers" data={[["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"]]} />
+
+
+                            <div className="tables_container">
+                                <MaterialTable
+                                    title="Customers"
+                                    columns={column}
+                                    data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
+                                />
+                            </div>
+
+
                         </Route>
                         <Route path={ROUTES.DELIVERER_PAGE}>
-                            <UserTable title="Deliverers" data={[["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"]]} />
+
+
+                            <div className="tables_container">
+                                <MaterialTable
+                                    title="Deliverers"
+                                    columns={column}
+                                    data={[{ name: 'Mehmet', surname: 'ABC', birthYear: 1987, birthCity: 63 },{ name: 'Usama', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
+                                    options={{
+                                        search: true
+                                      }}
+                                />
+                            </div>
+
+
                         </Route>
 
                         <Route path={ROUTES.USERDETAIL_PAGE}>
@@ -54,11 +97,30 @@ export default class CöntentPage extends Component {
                         <Route path="/">
                             <div className="ContentPage_heading" >
                                 <h1>Dashboard</h1>
-                                <PopUp message="Are you sure you want to delete" Visible={false}/>
-                                <UserTable title="Pending Retailers" data={[["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"]]} />
-                                <UserTable title="Pending Customers" data={[["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"]]} />
-                                <UserTable title="Deliverers" data={[["Usama", "Usama", "Usama", "Usama"], ["Usama", "Usama", "Usama", "Usama"]]} />
-                      
+                                <PopUp message="Are you sure you want to delete" Visible={false} />
+
+                                <div className="tables_container">
+                                    <MaterialTable
+                                        title="Pending"
+                                        columns={column}
+                                        data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
+                                    />
+                                </div>
+
+                                <div className="tables_container">
+                                <MaterialTable
+                                    title="Recently Verified"
+                                    columns={column}
+                                    data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
+                                />
+                            </div>s
+
+
+
+
+                                
+
+
                             </div>
                         </Route>
 
