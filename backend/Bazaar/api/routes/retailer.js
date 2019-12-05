@@ -3,6 +3,13 @@ var router=express.Router();
 
 var retCtrl=require('../controllers/retailer.controller.js');
 var storeCtrl=require('../controllers/store.controller.js');
+var auth=require('../routes/auth.js');
+
+
+
+router
+.route('/login')
+.post(auth.optional, retCtrl.login)
 
 router
 .route('/request')

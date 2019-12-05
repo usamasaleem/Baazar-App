@@ -1,6 +1,8 @@
 var mongoose=require('mongoose');
 var Admin=mongoose.model('admin');
 var Retailer=require("../models/retailers.model.js");
+var passport=require('passport');
+var auth=require('../routes/auth.js');
 
 ///////////////// AUTHENTICATION FOR ADMIN /////////////////
 module.exports.signup=function(req,res){
@@ -31,44 +33,87 @@ module.exports.signup=function(req,res){
     }
 };
 
-module.exports.login=function(req,res){
 
-    if(req.body && req.body.email && req.body.password){
+module.exports.login=(req, res, next) => {
+  const { body: { user } } = req;
 
-        Admin
-        
-        .find({ email: req.body.email }).find({ password: req.body.password})
+  console.log(req.body);
 
-        .exec(function(err,admin){
-            if(err){
-              console.log("server err" + err);
-              res
-              .status(500)
-              .json(err);
+  if(!req.body.email) {
+    return res.status(422).json({
+      errors: {
+        email: 'is required',
+      },
+    });
+  }
+
+  if(!req.body.password) {
+    return res.status(422).json({
+      errors: {
+        password: 'is required',
+      },
+    });
+  }
+
+  return passport.authenticate('user', { session: false }, (err, passportUser, info) => {
+    if(err) {
       
-            }
-           
-            else{
-            console.log("found admin");
-            req.session.admin = req.body.email;
-            console.log(req.session.admin);
-            res
-            .status(201)
-            .json(admin);
-      
-            }
-          });
-      
-
+      res
+      .json({error:" email or password': 'is invalid' "})
+      return next(err);
     }
-    else{
-        res
 
-        .status(500)
-        .json({message: "not nomi"});
+    if(passportUser) {
+      const user = passportUser;
+      user.token = passportUser.generateJWT();
 
+      return res.json({ message:"successfully signed up", user: user.toAuthJSON() });
     }
+
+    return status(400).info;
+  })(req, res, next);
 };
+
+
+// module.exports.login=function(req,res){
+
+//     if(req.body && req.body.email && req.body.password){
+
+//         Admin
+        
+//         .find({ email: req.body.email })
+//         .where({ password: req.body.password})
+
+//         .exec(function(err,admin){
+//             if(err){
+//               console.log("server err" + err);
+//               res
+//               .status(500)
+//               .json(err);
+      
+//             }
+           
+//             else{
+//             console.log("found admin");
+//             req.session.admin = req.body.email;
+//             console.log(req.session.admin);
+//             res
+//             .status(201)
+//             .json(admin);
+      
+//             }
+//           });
+      
+
+//     }
+//     else{
+//         res
+
+//         .status(500)
+//         .json({message: "not nomi"});
+
+//     }
+// };
 
 ///////////////// AUTHENTICATION FOR ADMIN /////////////////
 
