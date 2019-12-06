@@ -20,15 +20,15 @@ var RetailersSchema = new mongoose.Schema({
 
     F_name:{
         type: String,
-        // required:true
+        required:true
     },
     L_name:{
         type: String,
-        // required:true
+        required:true
     },
     email : {
       type : String,
-    //   required : true,
+      required : true,
       unique:true
       
     },
@@ -41,15 +41,15 @@ var RetailersSchema = new mongoose.Schema({
       },
     Contact_no:{
         type: String,
-        
+        unique:true
     },
     City:{
         type:String,
-        // required:true
+         required:true
     },
     Address:{
         type:String,
-        // required: true
+         required: true
     },
     Stores : [storeSchema],
     Verfication: {
