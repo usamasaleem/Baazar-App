@@ -12,6 +12,9 @@ import { connect } from 'react-redux'
 import { addRetailer } from '../../actions/Retailer/retailerAction'
 import store from "../../store/store";
 
+import MaterialTable from 'material-table';
+
+
 
 class DashboardPage extends Component {
 
@@ -27,14 +30,26 @@ class DashboardPage extends Component {
     }
 
     render() {
+
+        var column =  [
+            { title: 'Name', field: 'name' },
+            { title: 'Surname', field: 'surname' },
+            { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
+            {
+              title: 'Birth Place',
+              field: 'birthCity',
+              lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
+            },
+          ]
+  
         
         console.log(this.props.retailers[0])
 
         return (
             <div>
-                <button onClick={this.handleAddRetailer}>Click me</button>
+                  
                 <Grid col1={<Sidebar title="Baazar."></Sidebar>} col2={<ContentPage></ContentPage>} col3={<SearchPage helperText="No Search Result" />}></Grid>
-
+                
             </div>
         );
     }

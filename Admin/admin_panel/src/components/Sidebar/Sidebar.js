@@ -46,8 +46,8 @@ export default class Sidebar extends Component {
                         <NavLink text="Home" image={compass} routeTo={ROUTES.HOME}/>
                     </div>
                 
-                    <NavLink sectionText="Users" text="Customers" image={user} routeTo={ROUTES.RETAILER_PAGE} />
-                    <NavLink text="Retailer" image={shop} routeTo={ROUTES.CUSTOMER_PAGE} />
+                    <NavLink sectionText="Users" text="Customers" image={user} routeTo={ROUTES.CUSTOMER_PAGE} />
+                    <NavLink text="Retailer" image={shop} routeTo={ROUTES.RETAILER_PAGE} />
                     <NavLink text="Deliverers" image={delivery}  routeTo={ROUTES.DELIVERER_PAGE}/>
 
         
