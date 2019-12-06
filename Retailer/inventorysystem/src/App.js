@@ -49,7 +49,7 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route path="/retailerSignup" />
+          <Route path="/retailerSignup" render={routerProps => <SignupPage {...routerProps} />} />
 
           <Route path={"/storeSignup"} render={routerProps => <StoreSignupPage {...routerProps} />} />
 
