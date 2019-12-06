@@ -72,6 +72,9 @@ export default class CöntentPage extends Component {
         var a = [];
         var b = [];
 
+        
+
+
         if (this.state.retailers.length > 0) {
             console.log(this.state.retailers[0].Preferences.toString())
             for (let index = 0; index < this.state.retailers.length; index++) {
@@ -200,6 +203,15 @@ export default class CöntentPage extends Component {
                                 options={{
                                     sorting: true
                                 }}
+                                actions={[
+                    
+                                    {
+                                      icon: 'delete',
+                                      tooltip: 'Delete User',
+                                      onClick: (event, rowData) => alert("You want to delete " + rowData.F_name)
+                                    }
+                                  ]}
+
                             />
                                 </div>
 

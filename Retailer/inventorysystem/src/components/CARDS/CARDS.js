@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import AvatarImage from "../../assets/images/Avatar.jpg";
+import ImagePlaceholder from "../../assets/icons/picture.svg";
 
 
 
@@ -22,8 +23,8 @@ const useStyles = makeStyles({
     media: {
         paddingTop:"1rem",
         height: 240,
-        objectFit:"contain"
-    }
+        backgroundSize:"contain"
+     }
     ,
 });
 
@@ -37,7 +38,7 @@ function CARDS(props) {
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={AvatarImage}
+                    image={ImagePlaceholder}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">

@@ -69,7 +69,7 @@ function SignupPage(props) {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth helperText="Enter a valid email address"  onChange={
+                            <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth helperText="Enter a valid email address" onChange={
                                 (e) => {
                                     setformData({ ...formData, Email: e.target.value })
                                 }
@@ -113,7 +113,8 @@ function SignupPage(props) {
 
                         <Grid item xs={12}>
                             <Button className={classes.extendedIcon} variant="contained" color="primary" size="large" onClick={() => {
-
+                                    
+                     
 
                                 if (formData.Name.length < 1 || formData.Address.length < 1 || formData.City.length < 1 || formData.Email.length < 1 || formData.MobileNo.length < 1) {
                                     seterrorMessage("Please fill all feilds")
@@ -126,14 +127,28 @@ function SignupPage(props) {
                                         setformsent(false)
 
                                     }
-                                    else if(formData.MobileNo.length<11){
+                                    else if (formData.MobileNo.length < 11) {
                                         seterrorMessage("Invalid Mobile Number")
                                         setformsent(false)
                                     }
                                     else {
+
+                                        const a =formData.Name.split(" ");
+                                        const L_name = a[0];
+                                        const F_name = a[1];
+                             
+
+                                        fetch('http://localhost:3000/retailer/request', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Accept': 'application/json',
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({ F_name: F_name, L_name: L_name,Contact_no:formData.MobileNo,City:formData.City,Address:formData.Address,email:formData.Email})
+                                        });
                                         seterrorMessage("Response sent")
                                         setformsent(true)
-                                        props.history.push('/signin')
+                                        props.history.push('/storeSignup')
                                     }
 
                                 }
@@ -155,6 +170,7 @@ function SignupPage(props) {
                             }
 
                         </Grid>
+
 
 
 

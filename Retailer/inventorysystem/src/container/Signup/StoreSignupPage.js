@@ -54,7 +54,7 @@ function StoreSignupPage(props) {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Description" variant="outlined"  helperText="Description length should greater than 25 characters" multiline rows="4" fullWidth onChange={
+                            <TextField id="outlined-basic" label="Description" variant="outlined" helperText="Description length should greater than 25 characters" multiline rows="4" fullWidth onChange={
                                 (e) => {
                                     setformData({ ...formData, Description: e.target.value })
                                 }
@@ -88,6 +88,14 @@ function StoreSignupPage(props) {
                                     }
 
                                     else {
+                                        fetch('http://localhost:3000/retailer/request/store', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Accept': 'application/json',
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({ name: formData.Name, description: formData.Description,location: formData.Address,})
+                                        });
                                         seterrorMessage("Response has been submitted")
                                         setformsent(true)
                                         props.history.push("/Home")
@@ -96,7 +104,7 @@ function StoreSignupPage(props) {
 
 
                             }}
-                            
+
                             >Submit</Button>
                         </Grid>
 
