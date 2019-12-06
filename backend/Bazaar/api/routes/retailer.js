@@ -12,6 +12,10 @@ router
 .post(auth.optional, retCtrl.login)
 
 router
+.route('/forgot')
+.post(retCtrl.forgot_password)
+
+router
 .route('/request')
 .post(retCtrl.addRetailer);
 

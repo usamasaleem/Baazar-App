@@ -8,6 +8,208 @@ var session=require("cookie-session");
 
 
 
+//retailer finding one product 
+
+module.exports.viewOneProduct=function(req,res){
+  var retailerlID=req.params.retailerlID;	
+  var storeID=req.params.storeID;
+  var productID=req.params.productID;
+  
+  console.log('The params is', retailerlID);
+  console.log('The params is', storeID);
+  console.log('The params is',productID);
+
+
+  Retailers
+  .findById(retailerlID) ////SESSION CONTROL HERE
+  
+  .select('Stores')
+  
+  .exec(function(err,products){
+      
+      if(err){
+        console.log("server err" + err);
+        res
+        .status(500)  
+        .json(err);
+
+      }
+   
+      else{
+        console.log(products);
+          var idd=products.Stores.id(storeID) ////SESSION CONTROL HERE
+     
+          var store=idd._id;
+          console.log(store,"yalo");
+
+          Products
+          .findById(productID)
+          .where({"store_id":storeID})
+          .exec(function(err,products){
+            if(err){
+              console.log("server err" + err);
+              res
+              .status(500)
+              .json(err);
+         }
+         else if(!products){
+          console.log("ID dont exist" + productID);
+          res
+          .status(400)
+          .json({"message": "ID not found"});
+
+         }
+            else{
+              console.log("found Product",products.length);
+              console.log(session.retailerEmail);
+                res
+                .status(200)
+                .json(products);
+            }
+        
+          });
+          
+     
+
+      // res
+      // .status(201)
+      // .json(idd._id);
+
+      }
+    });
+  
+};
+
+
+module.exports.updateOneProduct=function(req,res){
+
+  var retailerlID=req.params.retailerlID;	
+  var storeID=req.params.storeID;
+  var productID=req.params.productID;
+  
+  console.log('The params is', retailerlID);
+  console.log('The params is', storeID);
+  console.log('The params is',productID);
+
+
+  Retailers
+  .findById(retailerlID) ////SESSION CONTROL HERE
+  
+  .select('Stores')
+  
+  .exec(function(err,products){
+      
+      if(err){
+        console.log("server err" + err);
+        res
+        .status(500)  
+        .json(err);
+
+      }
+   
+      else{
+        console.log(products);
+          var idd=products.Stores.id(storeID) ////SESSION CONTROL HERE
+     
+          var store=idd._id;
+          console.log(store,"yalo");
+
+          Products
+          .findById(productID)
+          .where({"store_id":storeID})
+          .exec(function(err,products){
+            if(err){
+              console.log("server err" + err);
+              res
+              .status(500)
+              .json(err);
+         }
+            else{
+
+               products.Name =req.body.name,
+                
+                products.Discription=req.body.discription,
+                products.Brand=req.body.brand,
+                products.Price=req.body.price,
+                products.Quantity=req.body.quantity,
+                products.store_id=storeID   
+
+            }
+            products.save(function(err,productUpdate){
+              if(err){
+                res
+                .status(500)
+                .json(err)
+              }else{
+                res
+                .status(204)
+                .json();
+          
+              }
+        
+          });
+        })
+      }
+    });
+  
+  };
+
+  module.exports.deleteOneProduct=function(req,res){
+
+    var retailerlID=req.params.retailerlID;	
+    var storeID=req.params.storeID;
+    var productID=req.params.productID;
+    
+    console.log('The params is', retailerlID);
+    console.log('The params is', storeID);
+    console.log('The params is',productID);
+  
+  
+    Retailers
+    .findById(retailerlID) ////SESSION CONTROL HERE
+    
+    .select('Stores')
+    
+    .exec(function(err,products){
+        
+        if(err){
+          console.log("server err" + err);
+          res
+          .status(500)  
+          .json(err);
+  
+        }
+     
+        else{
+          console.log(products);
+            var idd=products.Stores.id(storeID) ////SESSION CONTROL HERE
+       
+            var store=idd._id;
+            console.log(store,"yalo");
+  
+            Products
+            .findByIdAndDelete(productID)
+            .where({"store_id":storeID})
+            .exec(function(err,products){
+              if(err){
+                console.log("server err" + err);
+                res
+                .status(500)
+                .json(err);
+           }
+              else{
+  
+                console.log("Product deleted" );
+                res
+                .status(200)
+                .json({"deleted :" : products});
+              }
+              
+          });
+        }
+      });
+    
+    };
 
 var findProducts=function(req,res,storeID){
 
@@ -21,7 +223,10 @@ var findProducts=function(req,res,storeID){
       .status(500)
       .json(err);
  }
+ 
     else{
+      console.log("found Product",products.length);
+      console.log(session.retailerEmail);
         res
         .status(200)
         .json(products);
@@ -33,29 +238,41 @@ var findProducts=function(req,res,storeID){
 };
 
 module.exports.viewProduct=function(req,res){
-    var store='5de22dcf4a05f01e10a5c619';
+  // retailer id 5de3aae60c756e32b030c899
+  //5de622ab6ce22e2c3c730872storeid
+    var store='5de23087464b8b1a54f497d9';
     var ret='5de22dac4a05f01e10a5c618';   ////SESSION CONTROL HERE
-    
+    var retailerlID=req.params.retailerlID;	
+    var storeID=req.params.storeID;
+
+    console.log(retailerlID);
+    console.log(storeID);
+
+    var sess=session.retailerEmail;
+    console.log(sess);
 
     Retailers
-    .findById(ret)  ////SESSION CONTROL HERE
+    .findById(retailerlID) ////SESSION CONTROL HERE
     
     .select('Stores')
+    
     .exec(function(err,products){
         
         if(err){
           console.log("server err" + err);
           res
-          .status(500)
+          .status(500)  
           .json(err);
   
         }
      
         else{
-            var idd=products.Stores.id(store) ////SESSION CONTROL HERE
-        console.log("found Product",products.length);
-        var storeID=idd._id;
-        findProducts(req,res,storeID);
+          console.log(products);
+            var idd=products.Stores.id(storeID) ////SESSION CONTROL HERE
+       
+            var store=idd._id;
+            console.log(store,"yalo");
+            findProducts(req,res,store);
        
         // res
         // .status(201)
@@ -95,6 +312,8 @@ module.exports.viewProduct=function(req,res){
 
 // };
 module.exports.addProduct=function(req,res){
+  var retailerlID=req.params.retailerlID;	
+  var storeID=req.params.storeID;
     console.log("agaya");
     
         if(req.body){
@@ -110,7 +329,7 @@ module.exports.addProduct=function(req,res){
                 Brand:req.body.brand,
                 Price:req.body.price,
                 Quantity:req.body.quantity,
-                store_id:req.body.id
+                store_id:storeID                 //session for store ID
              
     
             },function(err,Product){
@@ -135,3 +354,6 @@ module.exports.addProduct=function(req,res){
             console.log("na");
         }
     };
+
+
+

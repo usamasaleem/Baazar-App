@@ -17,9 +17,20 @@ router
 .post(auth.optional, adminCtrl.login)
 
 router
-.route('/test')
-.post(productCtrl.addProduct)
-.get(productCtrl.viewProduct)
+.route('/test/:retailerlID/stores/:storeID/products')
+.post(productCtrl.addProduct) 
+.get(productCtrl.viewProduct)   ///SHIFT TO RETAILER
+
+
+router
+.route('/test/:retailerlID/stores/:storeID/products/:productID')
+
+.get(productCtrl.viewOneProduct)
+.put(productCtrl.updateOneProduct) 
+.delete(productCtrl.deleteOneProduct)
+
+
+
 
 
 /// Retailers Request///
@@ -37,22 +48,28 @@ router
 .route('/admin/retailers/request/:retailerlID/stores')
 .get(adminCtrl.ctrlGetStores)
 
-//VERFIED RETAILERS ROUTES//
+//VERFIED RETAILERS ROUTES//////////
 router
-.route('/admin/retailers/viewAll')
+.route('/admin/retailers/verified')
 .get(adminCtrl.ctrlViewAllRetailer)
 // .put(ctrlHotels.ctrlUpdatetOne)
 // .delete(ctrlHotels.hotelsDeleteOne);
 
 router
-.route('/admin/retailers/view/:retailerlID')
+.route('/admin/retailers/verified/:retailerlID')
 .get(adminCtrl.ctrlViewOneRetailer)
 // // .put(ctrlHotels.ctrlUpdatetOne)
 // // .delete(ctrlHotels.hotelsDeleteOne);
 
 router
-.route('/admin/retailers/view/:retailerlID/stores')
+.route('/admin/retailers/verified/:retailerlID/stores')
 .get(adminCtrl.verifiedRetailerStores)
+
+router
+.route('/admin/retailers/verified/:retailerlID/stores/:storeID')
+.get(adminCtrl.oneStore)
+.put(adminCtrl.ctrlUpdatetOne)
+.delete(adminCtrl.storeDeleteOne);
 
 
 

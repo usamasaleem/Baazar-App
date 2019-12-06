@@ -126,34 +126,7 @@ module.exports.login=(req, res, next) => {
 module.exports.ctrlGetAllRetailers=function(req,res){
     console.log("mei hon yahan");
    
-    // var offset=0;
-    // var count=5;
-    // var maxCount=10;
-  
-    // if (req.query && req.query.lat && req.query.lng) {
-    //   runGeoQuery(req, res);
-    //   return;
-    // }
-    // if(req.query && req.query.offset){
-    //     offset=parseInt(req.query.offset, 10);
-  
-    // }
-    // if(req.query && req.query.count){
-    //     count= parseInt(req.query.count, 10);
-  
-    // }
-    // if(isNaN(offset) || isNaN(count)){
-    //   res
-    //   .status(400)
-    //   .json({"message" : "Bad request"});
-    //   return;
-    // }
-    // if(count>maxCount){
-    //   res
-    //   .status(400)
-    //   .json({"message" : "Count limit is"+ maxCount});
-    //   return;
-    // }
+
     Retailer
     .find()
     .where({"Verfication":false})
@@ -168,11 +141,7 @@ module.exports.ctrlGetAllRetailers=function(req,res){
         .json(err);
 
       }
-    //   else if (req.session.views) {
-    //     req.session.views++
-    //     console.log("view"+""+req.session.views);
-        
-    //   }
+    
       else{
       console.log("found retailers",retailers.length);
      
@@ -336,3 +305,135 @@ module.exports.ctrlGetOneRetailer=function(req,res){
     });
    
   };
+
+  module.exports.oneStore=function(req,res){
+
+    var retailerlID=req.params.retailerlID;	
+    var storeID=req.params.storeID;
+    
+    console.log('The params is', retailerlID);
+    console.log('The params is', storeID);
+
+    Retailer
+    .findById(retailerlID)
+    
+    .select('Stores')
+    .exec(function(err,stores){
+      var store=stores.Stores.id(storeID);
+      if(err){
+        res
+        .status(500)
+        .json(err);
+      }
+      else{
+        res
+        .status(200)
+        .json(store);
+       
+      }
+
+  })
+};
+
+
+  module.exports.ctrlUpdatetOne=function(req,res){
+
+    var retailerlID=req.params.retailerlID;	
+    var storeID=req.params.storeID;
+    
+    console.log('The params is', retailerlID);
+    console.log('The params is', storeID);
+
+    Retailer
+    .findById(retailerlID)
+    
+    .select('Stores')
+    .exec(function(err,stores){
+      var store=stores.Stores.id(storeID);
+      if(err){
+        res
+        .status(500)
+        .json(err);
+      }
+      else{
+        store.name= req.body.name;
+        store.location= req.body.location;
+       
+     }
+
+     stores.save(function(err,storeUpdate){
+      if(err){
+        res
+        .status(500)
+        .json(err)
+      }else{
+        res
+        .status(204)
+        .json();
+
+      }
+
+    });
+    });
+
+  };
+
+  
+module.exports.storeDeleteOne = function(req, res) {
+  var retailerlID=req.params.retailerlID;	
+  var storeID=req.params.storeID;
+  
+  console.log('The params is', retailerlID);
+  console.log('The params is', storeID);
+
+  Retailer
+    .findById(retailerlID)
+    .select('Stores')
+    .exec(function(err, stores) {
+      var thisStore;
+      var response = {
+        status : 200,
+        message : {}
+      };
+      if (err) {
+        console.log("Error finding retailer");
+        response.status = 500;
+        response.message = err;
+      } else if(!stores) {
+        console.log("Retailer id not found in database", retailerlID);
+        response.status = 404;
+        response.message = {
+          "message" : "Retailer ID not found " + retailerlID
+        };
+      } else {
+        // Get the review
+        thisStore = stores.Stores.id(storeID);
+        // If the review doesn't exist Mongoose returns null
+        if (!thisStore) {
+          response.status = 404;
+          response.message = {
+            "message" : "store ID not found " + storeID
+          };
+        }
+      }
+      if (response.status !== 200) {
+        res
+          .status(response.status)
+          .json(response.message);
+      } else {
+        stores.Stores.id(storeID).remove();
+        stores.save(function(err, hotelUpdated) {
+          if (err) {
+            res
+              .status(500)
+              .json(err);
+          } else {
+            res
+              .status(204)
+              .json();
+          }
+        });
+      }
+    });
+
+};

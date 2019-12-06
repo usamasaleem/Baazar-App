@@ -19,7 +19,7 @@ module.exports.test=function(req,res){
 
 /// VIEW STORES OF A SPECIFIC RETAILER////
 module.exports.ViewStores=function(req,res){
-  var ret='5de22dac4a05f01e10a5c618'; 
+  var ret='5de22dac4a05f01e10a5c618'; //session came when retailer loggin to the system.
 Retailers
 .findById(ret)  ////SESSION CONTROL HERE when login
 
@@ -55,7 +55,8 @@ Retailers
       Retailers
       
       
-    //   .find({"Contact_no": "0333512"})
+      // .find({"Contact_no": "03071177"}) HARD CODE TO SHOW THE RESULT DIRECTLY OR SEND A RETAILER REQUEST
+      ///////////////////////////////////////////////// TO GENERATE A SESSION TO CONTINUE ADDING STORE.s
       .findOneAndUpdate( {"Contact_no":sessRet}, {
           $push:{ Stores:{"name":req.body.name,"location":req.body.location}}
         }, { new: true},function(err,update){
