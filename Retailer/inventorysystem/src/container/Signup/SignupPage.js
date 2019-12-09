@@ -144,10 +144,11 @@ function SignupPage(props) {
                                                 'Accept': 'application/json',
                                                 'Content-Type': 'application/json'
                                             },
-                                            body: JSON.stringify({ F_name: F_name, L_name: L_name,Contact_no:formData.MobileNo,City:formData.City,Address:formData.Address,email:formData.Email})
+                                            body: JSON.stringify({ F_name: F_name, L_name: L_name,Contact_no:formData.MobileNo,city:formData.City,address:formData.Address,email:formData.Email})
                                         });
                                         seterrorMessage("Response sent")
                                         setformsent(true)
+                                        localStorage.mobileno = formData.MobileNo;
                                         props.history.push('/storeSignup')
                                     }
 

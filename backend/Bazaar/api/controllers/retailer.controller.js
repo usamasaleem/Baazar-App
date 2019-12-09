@@ -213,7 +213,8 @@ console.log(req.body.Verfication);
       
             }else{
               console.log("Retailer is added")
-              req.session.retailer=req.body.Contact_no;
+              // req.session.retailer=req.body.Contact_no;
+              console.log(req.session.retailer);
               res
               .status(201)
               .json({admin:"Retailer is added"  + " "  +ret});

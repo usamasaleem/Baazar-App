@@ -49,7 +49,8 @@ Retailers
       // console.log(req.session.retailer)
   
         var sessRet=req.session.retailer;
-        console.log(sessRet);
+        
+        console.log(res.body.mobileNo);
         
   
       Retailers
@@ -57,7 +58,7 @@ Retailers
       
       // .find({"Contact_no": "03071177"}) HARD CODE TO SHOW THE RESULT DIRECTLY OR SEND A RETAILER REQUEST
       ///////////////////////////////////////////////// TO GENERATE A SESSION TO CONTINUE ADDING STORE.s
-      .findOneAndUpdate( {"Contact_no":sessRet}, {
+      .findOneAndUpdate( {"Contact_no":res.body.mobileNo}, {
           $push:{ Stores:{"name":req.body.name,"location":req.body.location}}
         }, { new: true},function(err,update){
             if(err){
