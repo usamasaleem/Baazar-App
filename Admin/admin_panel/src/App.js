@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React,  { useState } from 'react';
 import './App.scss';
 import {
   BrowserRouter as Router,
@@ -8,13 +8,18 @@ import {
   Redirect,
 } from "react-router-dom";
 import HomePage from './Pages/HomePage/HomePage';
+import SplashScreen from "./components/SplashScreen/SplashScreen";
 
 
 
 
 function App() {
 
-  const isAuth = false;
+  const [isAuth,setIsAuth] = useState(false)
+
+  setTimeout(() => {
+    setIsAuth(true)
+  }, 2500);
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
 
@@ -31,23 +36,29 @@ function App() {
     />
   )
 
+  if (isAuth)
+
+    return (
+
+      <div className="App">
+        <Router>
+          <Switch>
+
+            <Route exact path="/" render={(routeProps) => <HomePage {...routeProps} />}></Route>
+
+            <PrivateRoute path='/home' component={SplashScreen} />
+
+          </Switch>
+
+        </Router>
+      </div>
+    );
 
 
+  else
+    return <SplashScreen />
 
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
 
-          <Route exact path="/" render={(routeProps) => <HomePage {...routeProps} />}></Route>
-
-          <PrivateRoute path='/home' component={HomePage} />
-
-        </Switch>
-
-      </Router>
-    </div>
-  );
 }
 
 export default App;
