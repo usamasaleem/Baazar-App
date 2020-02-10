@@ -37,10 +37,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 // START
 
 
-var company_router             =  require('./app_server/routes/company'           );
+var consumer_router             =  require('./app_server/routes/consumer'           );
+var category_router             =  require('./app_server/routes/category'           );
+var deliverer_router             =  require('./app_server/routes/deliverer'           );
+var order_router             =  require('./app_server/routes/order'           );
+var payment_router             =  require('./app_server/routes/payment'           );
+var product_router             =  require('./app_server/routes/product'           );
+var retailer_router             =  require('./app_server/routes/retailer'           );
+var request_router             =  require('./app_server/routes/request'           );
+var shoppingCart_router             =  require('./app_server/routes/shoppingCart'           );
+var store_router             =  require('./app_server/routes/store'           );
+var vehicle_router             =  require('./app_server/routes/vehicle'           );
 
-app.use('/company'         ,  company_router            );
-
+app.use('/consumer'         ,   consumer_router            );
+app.use('/category'         ,   category_router            );
+app.use('/deliverer'         ,  deliverer_router           );
+app.use('/order'         ,      order_router               );
+app.use('/payment'         ,    payment_router             );
+app.use('/product'         ,    product_router             );
+app.use('/retailer'         ,   retailer_router            );
+app.use('/request'         ,    request_router             );
+app.use('/shoppingCart'     ,   shoppingCart_router        );
+app.use('/store'         ,      store_router               );
+app.use('/vehicle'         ,    vehicle_router             );
 // END
 
 // ADD ROUTES AND THEIR ROUTES HERE //
