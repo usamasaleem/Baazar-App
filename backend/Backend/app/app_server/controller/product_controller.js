@@ -1,12 +1,12 @@
-var company_schema = require('../models/company_model')
+var product_schema = require('../models/product_model')
 
-var company_controller = {
+var product_controller = {
 
-    add_company: (req, res) => {
+    add_product: (req, res) => {
 
-        var company = new company_schema(req.body);
+        var product = new product_schema(req.body);
 
-        company.save((err) => {
+        product.save((err) => {
             if (err) {
                        res.status(500)
                        res.send("Failed to add");
@@ -21,9 +21,9 @@ var company_controller = {
 
     },
 
-    update_company: (req, res, next) => {
+    update_product: (req, res, next) => {
 
-        company_schema.findByIdAndUpdate(req.params.id,req.body,{ new: true },(err, todo) => {
+        product_schema.findByIdAndUpdate(req.params.id,req.body,{ new: true },(err, todo) => {
             
                 if (err)   { 
                             res.status(500);
@@ -32,7 +32,7 @@ var company_controller = {
 
                 if (!todo) {
                             res.status(404)
-                            res.end("company does not exist")
+                            res.end("product does not exist")
                            }
 
                 else       {
@@ -45,9 +45,9 @@ var company_controller = {
 
     },
 
-    delete_company: (req, res, next) => {
+    delete_product: (req, res, next) => {
 
-        company_schema.findByIdAndRemove(req.params.id,(err,doc)=>{
+        product_schema.findByIdAndRemove(req.params.id,(err,doc)=>{
 
             if(err)    {
                         res.status(500);
@@ -56,7 +56,7 @@ var company_controller = {
 
             if (!doc)  {
                         res.status(404);
-                        res.end("company does not exist");
+                        res.end("product does not exist");
                        } 
 
             else       {
@@ -68,9 +68,9 @@ var company_controller = {
 
     },
 
-    view_company: (req, res) => {
+    view_product: (req, res) => {
 
-        company_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
+        product_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
             
             if (err)  {
                        res.status("500");
@@ -79,7 +79,7 @@ var company_controller = {
 
             if (!doc) { 
                        res.status(404); 
-                       res.send("No company exist"); 
+                       res.send("No product exist"); 
                       }
 
             else      {
@@ -91,21 +91,21 @@ var company_controller = {
 
     },
 
-    view_all_company: (req, res, next) => {
+    view_all_product: (req, res, next) => {
 
         let sort_by = req.query.sort_by;
         if( sort_by== undefined) sort_by ='full_name';
 
-        company_schema.find({}, (err, doc) => {
+        product_schema.find({}, (err, doc) => {
 
             if (err)   {
                         res.status(500);
-                        res.end("Failed to get companys");
+                        res.end("Failed to get products");
                        } 
            
             if (!doc)  {
                         res.status(404);
-                        res.end("No company exist");
+                        res.end("No product exist");
                        }
            
             else       {
@@ -119,7 +119,7 @@ var company_controller = {
 
     login: (req, res, next) => {
 
-        company_schema.findOne({ 'email': req.body.email, 'password': req.body.password }, function (err, result) {
+        product_schema.findOne({ 'email': req.body.email, 'password': req.body.password }, function (err, result) {
 
             if (err)     {
                             res.status(500);
@@ -128,12 +128,12 @@ var company_controller = {
 
             if (!result)  {
                               res.status(404);
-                              res.send("company does not exist");
+                              res.send("product does not exist");
                           }
 
             else            {
                               res.status(200);
-                              res.send("company exist");
+                              res.send("product exist");
                             }
 
         });
@@ -144,4 +144,4 @@ var company_controller = {
 
 }
 
-module.exports = company_controller
+module.exports = product_controller
