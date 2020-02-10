@@ -37,21 +37,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // START
 
 
-var user_router                =  require('./app_server/routes/user'              );
 var company_router             =  require('./app_server/routes/company'           );
-var job_router                 =  require('./app_server/routes/job'               );
-var query_router               =  require('./app_server/routes/query'             );
-var review_router              =  require('./app_server/routes/review'            );
-var recent_contact_router      =  require('./app_server/routes/recent_contact'    );
-var recent_search_router       =  require('./app_server/routes/recent_search'     );
 
-app.use('/user'            ,  user_router               );
 app.use('/company'         ,  company_router            );
-app.use('/job'             ,  job_router                );
-app.use('/query'           ,  query_router              );
-app.use('/review'          ,  review_router             );
-app.use('/recent_contact'  ,  recent_contact_router     );
-app.use('/recent_search'   ,  recent_search_router      );
 
 // END
 
