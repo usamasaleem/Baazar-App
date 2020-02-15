@@ -39,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var company_router             =  require('./app_server/routes/company'           );
 
+app.use('/user'            ,  user_router               );
 app.use('/company'         ,  company_router            );
 
 // END

@@ -2,19 +2,19 @@ var express = require('express');
 var router = express.Router();
 
 
-var companyController  =   require('../controller/company_controller')
+var productController  =   require('../controller/product_controller')
 
-router.get   ('/'             ,    companyController.view_all_company);
+router.get   ('/'             ,    productController.view_all_product);
 
-router.get   ('/:name'        ,    companyController.view_company    );
+router.get   ('/:name'        ,    productController.view_product    );
 
-router.post  ('/add'          ,    companyController.add_company     );
+router.post  ('/add'          ,    productController.add_product     );
 
-router.put   ('/update/:id'   ,    companyController.update_company  );
+router.put   ('/update/:id'   ,    productController.update_product  );
 
-router.delete('/delete/:id'   ,    companyController.delete_company  );
+router.delete('/delete/:id'   ,    productController.delete_product  );
 
-router.post  ('/login'      ,      companyController.login           );
+router.post  ('/login'      ,      productController.login           );
 
 
 
