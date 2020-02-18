@@ -12,15 +12,16 @@ import NewComp from './NewComp';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-
+import Camera from 'react-native-camera';
+import barcode from "./barcode";
 
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+
       <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
+        onPress={() => navigation.navigate('BarCode')}
+        title="Go to BarCode"
       />
     </View>
   );
@@ -37,6 +38,7 @@ export default function App() {
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications" component={NewComp} />
+        <Drawer.Screen name="BarCode" component={barcode} />
       </Drawer.Navigator>
      
     </NavigationContainer>
