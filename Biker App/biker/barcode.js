@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import Camera from 'react-native-camera';
-import { RNCamera } from 'react-native-camera';
+import {RNCamera} from 'react-native-camera';
 import {
   StyleSheet,
   ScrollView,
@@ -10,12 +10,12 @@ import {
   Button,
   TouchableOpacity,
   Image,
-  Alert
+  Alert,
 } from 'react-native';
 export default class barcode extends Component {
   constructor() {
-    super()
-  //  this.handleTourch =this.handleTourch.bind(this);
+    super();
+    //  this.handleTourch =this.handleTourch.bind(this);
     this.state = {
       torchOn: false,
     };
@@ -26,7 +26,6 @@ export default class barcode extends Component {
       <View style={styles.container}>
         <RNCamera
           style={styles.preview}
-      
           onBarCodeRead={this.onBarCodeRead}
           ref={cam => (this.camera = cam)}>
           <Text
@@ -39,10 +38,7 @@ export default class barcode extends Component {
         <View style={styles.bottomOverlay}>
           <TouchableOpacity
             onPress={() => this.handleTourch(this.state.torchOn)}>
-            <Image
-              style={styles.cameraIcon}
-              
-            />
+            <Image style={styles.cameraIcon} />
           </TouchableOpacity>
         </View>
       </View>

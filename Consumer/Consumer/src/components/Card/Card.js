@@ -1,39 +1,69 @@
 import React, { Component } from 'react'
 import "./Card.scss";
-import Icon from "../../assets/images/Avatar.jpg";
 import ExpandedCard from "../ExpandedCard/ExpandedCard";
-
+import Img from "../../assets/images/slide-1.jpg";
+import { Icon } from '@material-ui/core';
 export default class Card extends Component {
 
-    constructor() {
-        super();
-        this.state = { isExpanded: false };
+    constructor(props) {
+        super(props);
     }
 
 
     render() {
-        return (
-            <>
-                <div className="Cardcontainer" onClick={() => { this.toggleExpanded() }}>
-                    <div className="CardimageContainer">
-                        <img src={Icon} className="Cardimage"></img>
+
+        if (this.props.detailCard)
+            return (
+                <>
+                    <div className="Card">
+
+                        <img src={Img} className="Card__img" />
+
+                        <div className="Card-content">
+                            <p className="Card__description">lprem lprem lprem lprem lprem  lprem lpremlprem lprem lprem lprem lprem lprem  lprem lpremlprem</p>
+                        </div>
+
                     </div>
-                    <p className="CardText">DriverName</p>
-                    <p className="CardText">Islamabad</p>
-                    <p className="CardText">0300 1234567</p>
-                    <p className="CardText info">Online</p>
+                </>
+            )
+
+        else if(this.props.categoryCard){
+            return (
+                <>
+                <div className="CateogryCard">
+                
+                <div className="CateogryCard-imgContainer">
+                <img className="CateogryCard__img" src={Img}/>
+                </div>
+
+                <div className="CategoryCard-infoContainer">
+                <p className="CategoryCard__infoTxt CategoryCard__nameTxt">Name</p>
+                <p className="CategoryCard__infoTxt CategoryCard__priceTxt">Price</p>
+                </div>
 
                 </div>
-                {this.state.isExpanded &&
-                    <ExpandedCard />    }
+                </>
+            )
+        }
 
 
-            </>
-        )
-    }
+        else 
+            return (
+                <>
+                    <div className="Card Card-simpleContainer">
 
-    toggleExpanded() {
-        this.setState({ isExpanded: !this.state.isExpanded });
+                        <img src={Img} className="Card__img" />
+
+                       
+
+                    </div>
+                </>
+            )
+        
+
+
+
+
     }
 
 

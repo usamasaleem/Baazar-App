@@ -1,10 +1,9 @@
-//
-import React from 'react';
+import React, {Component} from 'react';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import MapViewDirections from 'react-native-maps-directions';
-import {NavigationContainer} from '@react-navigation/native';
 
+// MAPS CONSTANTS
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
 const destination = {latitude: 33.550855, longitude: 73.062877};
 const {width, height} = Dimensions.get('window');
@@ -15,10 +14,29 @@ const LONGITUDE = -122.4053769;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-class NewComp extends React.Component {
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  map: {
+    width: width,
+  },
+  mapDrawerOverlay: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    opacity: 0.0,
+    height: Dimensions.get('window').height,
+    width: 30,
+  },
+});
+
+export default class MapComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      pad:20,
       flex: 1,
       coordinates: [
         {
@@ -32,18 +50,22 @@ class NewComp extends React.Component {
         },
       ],
     };
-
     this.mapView = null;
   }
 
   componentWillMount() {
-    // setTimeout(() => this.setState({ flex: 1 }), 500);
-    setTimeout(() => this.forceUpdate(), 500);
+  
+  
   }
+  componentDidMount() {
+    
+  }
+
+
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1,padding:this.state.pad}}>
         <MapView
           initialRegion={{
             latitude: LATITUDE,
@@ -51,11 +73,15 @@ class NewComp extends React.Component {
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }}
-          style={StyleSheet.absoluteFill}
+          style={{width:"100%",flex:1}}
           ref={c => (this.mapView = c)}
           onPress={this.onMapPress}
           showsUserLocation={true}
-          showsMyLocationButton={true}>
+          showsMyLocationButton={true}
+          onMapReady={()=>{
+            setTimeout(() => this.setState({pad:0}), 100);
+          }}
+          >
           {this.state.coordinates.map((coordinate, index) => (
             <MapView.Marker
               key={`coordinate_${index}`}
@@ -102,13 +128,10 @@ class NewComp extends React.Component {
               }}
             />
           )}
+        
         </MapView>
         <View style={styles.mapDrawerOverlay} />
       </View>
     );
   }
 }
-
-5
-
-export default NewComp;
