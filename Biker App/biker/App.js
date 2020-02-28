@@ -21,13 +21,15 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import MapComponent from './Components/MapComponent/MapComponent';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import DetailScreen from './Screens/DetailScreen';
-import OrderScreen from  './Screens/OrderScreen';
-import RecievingScreen from  './Screens/RecievingScreen';
-import OrderHistoryScreen from  './Screens/OrderHistoryScreen';
-import FindOrderScreen from  './Screens/FindOrderScreen';
-
+import OrderScreen from './Screens/OrderScreen';
+import RecievingScreen from './Screens/RecievingScreen';
+import OrderHistoryScreen from './Screens/OrderHistoryScreen';
+import FindOrderScreen from './Screens/FindOrderScreen';
+}
 
 function CustomDrawerContent(props) {
+
+
   return (
     <DrawerContentScrollView {...props}>
       <View style={{ flex: 1, margin: 20, flexDirection: 'row' }}>
@@ -55,13 +57,20 @@ function CustomDrawerContent(props) {
 
 const Drawer = createDrawerNavigator();
 
+
+
+
+
 export default function App() {
+
+
+
   return (
     <NavigationContainer>
       <Drawer.Navigator
         drawerContent={props => <CustomDrawerContent {...props} />}
         initialRouteName="Find Orders"
-        >
+      >
         <Drawer.Screen name="Find Orders" component={FindOrderScreen} />
         <Drawer.Screen name="My Orders" component={DetailScreen} />
         <Drawer.Screen name="Order Detail" component={OrderScreen} />
@@ -75,5 +84,5 @@ export default function App() {
 
 
 const styles = StyleSheet.create({
- 
+
 })

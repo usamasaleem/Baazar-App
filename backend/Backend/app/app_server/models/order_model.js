@@ -1,4 +1,8 @@
-var mongoose = require('mongoose');
+var mongoose           =require('mongoose');
+var consumerSchema     =require("./consumer_model");
+var retailerSchema     =require("./retailer_model");
+var delivererSchema    =require("./deliverer_model");
+var shoppingCartSchema =require("./shoppingCart_model");
 
 var order_schema = new mongoose.Schema({
 
@@ -8,20 +12,24 @@ var order_schema = new mongoose.Schema({
         unique: true
     },
     consumer: {
-        type: consumerSchema,
+        // type: consumerSchema,
+        type: String,
         required: true
     },
 
     retailer: {
-        type: retailerSchema,
+        // type: retailerSchema,
+        type: String,
         required: true
     },
     deliverer: {
         type: delivererSchema,
+        type: String,
         required: true
     },
     cart: {
         type: shoppingCartSchema,
+        type: String,
         required: true
     },
     status: {
