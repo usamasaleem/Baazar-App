@@ -16,16 +16,30 @@ export default class Navbar extends Component {
         return (
             <>
                 <div className="Navbar">
+                
 
-                    <div className="navbar-card">
-                        <h1 className="navbar-card__name">Walkin Orders</h1>
+                    <div className="navIconsContainer">
+                    
+                    <div className="iconLink">
+                    <img  src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png" className="icon" />
+                    <p className="icontext">Walk In</p>
                     </div>
-                    <div className="navbar-card">
-                        <h1 className="navbar-card__name">Online Orders</h1>
+                    
+                       
+                    <div className="iconLink">
+                    <img  src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png" className="icon" />
+                    <p className="icontext">Walk In</p>
                     </div>
-                    <div className="navbar-card">
-                        <h1 className="navbar-card__name">Sales Orders</h1>
+                    
+                       
+                    <div className="iconLink">
+                    <img  src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png" className="icon" />
+                    <p className="icontext">Walk In</p>
                     </div>
+                    
+                    
+                    </div>
+
 
                 </div>
             </>
