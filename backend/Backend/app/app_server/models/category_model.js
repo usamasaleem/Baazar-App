@@ -12,42 +12,17 @@ var category_schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    email: {
+    description: {
         type: String,
         required: true,
 
     },
-    password : {
+    image: {
         type: String,
         required: true,
-    },
-    city: {
-        type: String,
-        required: true,
-
-    },
-    address: {
-        type: String,
-        required: true,
-    },
-    number: {
-        type: String,
-        required: true,
-
-    },
-    loggedInStatus: {
-        type: Boolean,
-        required: true,
-    },
-    location: {
-        type: String,
-        required: true,
-    },
-    verified: {
-        type: Boolean,
-        required: true,
-
     }
+    
+
 });
 
 

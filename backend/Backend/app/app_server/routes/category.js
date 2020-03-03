@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 var categoryController  =   require('../controller/category_controller')
-
+//all working , login not tested yet
 router.get   ('/'             ,    categoryController.view_all_category);
 
 router.get   ('/:name'        ,    categoryController.view_category    );

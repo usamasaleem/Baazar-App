@@ -9,7 +9,7 @@ var deliverer_controller = {
         deliverer.save((err) => {
             if (err) {
                        res.status(500)
-                       res.send("Failed to add");
+                       res.send("Failed to add"+err);
                      }
 
             else     {
@@ -70,7 +70,7 @@ var deliverer_controller = {
 
     view_deliverer: (req, res) => {
 
-        deliverer_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
+        deliverer_schema.findOne({ 'name': req.params.name }, function (err, doc) {
             
             if (err)  {
                        res.status("500");

@@ -70,7 +70,7 @@ var payment_controller = {
 
     view_payment: (req, res) => {
 
-        payment_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
+        payment_schema.findOne({ 'name': req.params.name }, function (err, doc) {
             
             if (err)  {
                        res.status("500");

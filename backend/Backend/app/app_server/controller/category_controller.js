@@ -70,7 +70,7 @@ var category_controller = {
 
     view_category: (req, res) => {
 
-        category_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
+        category_schema.findOne({ 'name': req.params.name }, function (err, doc) {
             
             if (err)  {
                        res.status("500");

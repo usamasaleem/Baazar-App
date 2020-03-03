@@ -23,11 +23,12 @@ var consumer_controller = {
 
     update_consumer: (req, res, next) => {
 
-        consumer_schema.findByIdAndUpdate(req.params.id,req.body,{ new: true },(err, todo) => {
+        console.log(req.params.id)
+        consumer_schema.findByIdAndUpdate(req.params.id,req.body,(err, todo) => {
             
                 if (err)   { 
                             res.status(500);
-                            res.end("Failed to Update");
+                            res.end("Failed to Update"+err);
                            }
 
                 if (!todo) {
@@ -69,8 +70,9 @@ var consumer_controller = {
     },
 
     view_consumer: (req, res) => {
+        console.log("params"+req.params.name)
 
-        consumer_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
+        consumer_schema.findOne({ 'name': req.params.name }, function (err, doc) {
             
             if (err)  {
                        res.status("500");

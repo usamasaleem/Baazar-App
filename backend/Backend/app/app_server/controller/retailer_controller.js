@@ -9,7 +9,7 @@ var retailer_controller = {
         retailer.save((err) => {
             if (err) {
                        res.status(500)
-                       res.send("Failed to add");
+                       res.send("Failed to add"+err);
                      }
 
             else     {
@@ -70,7 +70,7 @@ var retailer_controller = {
 
     view_retailer: (req, res) => {
 
-        retailer_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
+        retailer_schema.findOne({ 'name': req.params.name }, function (err, doc) {
             
             if (err)  {
                        res.status("500");

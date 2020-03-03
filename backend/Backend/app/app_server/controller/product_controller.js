@@ -70,7 +70,7 @@ var product_controller = {
 
     view_product: (req, res) => {
 
-        product_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
+        product_schema.findOne({ 'name': req.params.name }, function (err, doc) {
             
             if (err)  {
                        res.status("500");

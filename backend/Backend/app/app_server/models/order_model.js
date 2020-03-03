@@ -23,12 +23,12 @@ var order_schema = new mongoose.Schema({
         required: true
     },
     deliverer: {
-        type: delivererSchema,
+       // type: delivererSchema,
         type: String,
         required: true
     },
     cart: {
-        type: shoppingCartSchema,
+       // type: shoppingCartSchema,
         type: String,
         required: true
     },

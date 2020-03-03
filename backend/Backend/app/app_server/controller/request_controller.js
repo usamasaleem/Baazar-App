@@ -70,7 +70,7 @@ var request_controller = {
 
     view_request: (req, res) => {
 
-        request_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
+        request_schema.findOne({ 'name': req.params.name }, function (err, doc) {
             
             if (err)  {
                        res.status("500");

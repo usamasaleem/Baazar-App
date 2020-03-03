@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 var consumerController  =   require('../controller/consumer_controller')
-
+//all working, login not tested yet
 router.get   ('/'             ,    consumerController.view_all_consumer);
 
 router.get   ('/:name'        ,    consumerController.view_consumer    );

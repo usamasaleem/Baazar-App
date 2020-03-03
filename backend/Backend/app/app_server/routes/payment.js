@@ -6,7 +6,7 @@ var paymentController  =   require('../controller/payment_controller')
 
 router.get   ('/'             ,    paymentController.view_all_payment);
 
-router.get   ('/:name'        ,    paymentController.view_payment    );
+router.get   ('/:name'        ,    paymentController.view_payment    ); //peding
 
 router.post  ('/add'          ,    paymentController.add_payment     );
 

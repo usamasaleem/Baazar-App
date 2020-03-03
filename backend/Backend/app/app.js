@@ -52,7 +52,7 @@ var vehicle_router              =  require('./app_server/routes/vehicle'        
 app.use('/consumer'         ,   consumer_router            );
 app.use('/category'         ,   category_router            );
 app.use('/deliverer'         ,  deliverer_router           );
-// app.use('/order'         ,      order_router               );
+app.use('/order'         ,      order_router               );
 app.use('/payment'         ,    payment_router             );
 app.use('/product'         ,    product_router             );
 app.use('/retailer'         ,   retailer_router            );
@@ -91,6 +91,11 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+app.set('port', 3000);
+var server=app.listen(app.get('port'),function(){
+    console.log("see magic on port in function" + " "+server.address().port);
+    
+}); 
 
 module.exports = app;
 

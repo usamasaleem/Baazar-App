@@ -35,7 +35,7 @@ var consumer_schema = new mongoose.Schema({
         required: true,
 
     },
-    loggedInStatus: {
+    loggedInStatus: {       //check kro
         type: Boolean,
         required: true,
     },
@@ -43,10 +43,13 @@ var consumer_schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    verified: {
+    verified: {                 //check kro
         type: Boolean,
         required: true,
 
+    },
+    photo:{
+        type:String
     }
 });
 

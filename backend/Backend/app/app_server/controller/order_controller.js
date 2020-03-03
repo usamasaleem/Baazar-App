@@ -70,7 +70,10 @@ var order_controller = {
 
     view_order: (req, res) => {
 
-        order_schema.findOne({ 'full_name': req.params.name }, function (err, doc) {
+        if(req.params.name=='pending'){
+            var pending=false;
+        }
+        order_schema.findOne({ 'status': pending}, function (err, doc) {
             
             if (err)  {
                        res.status("500");
