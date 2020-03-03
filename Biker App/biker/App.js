@@ -31,57 +31,77 @@ import Icon from 'react-native-ionicons'
 import SummaryScreen from './Screens/SummaryScreen';
 import { StackNav } from './Screens/StackNav';
 import ProfileScreen from './Screens/ProfileScreen';
+import LoginScreen from './Screens/LoginScreen';
+import { createStackNavigator } from '@react-navigation/stack';
+import SignupScreen from './Screens/SignupScreen';
+import PersonalInfoScreen from './Screens/PersonalInfoScreen';
+import PhoneVerificationScreen from './Screens/PhoneVerificationScreen';
 
 
 
 export default function App() {
 
-  
 
+  const Tab = createBottomTabNavigator();
+  const Stack = createStackNavigator();
 
-const Tab = createBottomTabNavigator();
+  const MainNavigator = () => {
+    return(
+    <Stack.Navigator>
+      <Stack.Screen name="Login"        component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Signup"       component={SignupScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="PersonalInfo" component={PersonalInfoScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="PhoneVerify"  component={PhoneVerificationScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Main"         component={StackNav} options={{ headerShown: false }} />
+    </Stack.Navigator>
+    )}
 
+  const DrawerNavigatorContainer = () => {
+    return(
+    <Tab.Navigator
+      barStyle={{ backgroundColor: '#ffffff', elevation: 10, }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color }) => {
+          let iconName;
+          if (route.name === 'Home') {
+            iconName = 'home'
+          } else if (route.name === 'Summary') {
+            iconName = 'compass'
+          }
+          else if (route.name === 'Profile') {
+            iconName = 'person'
+          }
 
-  return ( 
-    <Provider
-      store={store}
+          // You can return any component that you like here!
+          return <Icon name={iconName} size={26} color={color} />;
+        },
+      })}
+      activeColor='#4D7CFE'
+      inactiveColor='#BDBDBD'
+
+      tabBarOptions={{
+
+      }}
+
     >
-      <NavigationContainer>
-        <Tab.Navigator
-          barStyle={{ backgroundColor: '#ffffff',elevation:10, }}
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color }) => {
-              let iconName;
-              if (route.name === 'Home') {
-                iconName = 'home'
-              } else if (route.name === 'Summary') {
-                iconName = 'compass'
-              }
-              else if (route.name === 'Profile') {
-                iconName = 'person'
-              }
+      <Tab.Screen name="Home" component={StackNav} />
+      <Tab.Screen name="Summary" component={SummaryScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
 
-              // You can return any component that you like here!
-              return <Icon name={iconName} size={26} color={color} />;
-            },
-          })}
-          activeColor= '#4D7CFE'
-          inactiveColor='#BDBDBD'
-         
-          tabBarOptions={{
-            
-          }}
-        >
-          <Tab.Screen name="Home" component={StackNav} />
-        <Tab.Screen name="Summary" component={SummaryScreen} />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
 
-        </Tab.Navigator>
-      </NavigationContainer>
+    </Tab.Navigator>
+    )}
 
-    </Provider>
 
-          
+
+
+
+  return (
+
+    <NavigationContainer>
+      <MainNavigator />
+    </NavigationContainer>
+
   );
 }
 

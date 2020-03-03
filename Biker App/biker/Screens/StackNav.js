@@ -1,4 +1,4 @@
-import React, { Component,useState ,useEffect } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -26,6 +26,8 @@ import OrderScreen from './OrderScreen';
 import RecievingScreen from './RecievingScreen';
 import axios from 'axios';
 import sample from '../Constants/FakeApi.json';
+import LoginScreen from './LoginScreen';
+import SignupScreen from './SignupScreen';
 
 
 const Stack = createStackNavigator();
@@ -33,24 +35,38 @@ const Stack = createStackNavigator();
 const routeOption = {
     headerStyle: {
         backgroundColor: '#FDFDFF',
-        elevation:0,
+        elevation: 0,
     },
- 
-    headerTitleAlign:'center'
+
+    headerTitleAlign: 'center'
 }
 
 
-export function StackNav() {
+export function StackNav({ navigation }) {
 
-    
 
+    // GET Driver Verification
+    // const hasLogged = navigation.routes.parmas.loginStatus;
+    // const [isLoggedIn, SetLoggedIn] = useState(false);
+    // SetLoggedIn(hasLogged)
+    // GET Driver Verification
+
+
+    //   STATUS MESSAGE COMPONENT
+    // const StatusMessage = () => {
+    //     <View style={{ flex: 1 }}>
+    //         <Text style={{}}>Your'e Offline</Text>
+    //         <Text style={{}}>Go to Profile change status</Text>
+    //     </View>
+    // }
+    //   STATUS MESSAGE COMPONENT
 
 
     return (
         <Stack.Navigator
             initialRouteName="FindOrder">
             <Stack.Screen name="FindOrder" component={FindOrderScreen} options={{ headerShown: false }}
-            initialParams={{orders:sample}}
+                initialParams={{ orders: sample }}
             />
             <Stack.Screen name="Order Details" component={DetailScreen} options={routeOption} />
             <Stack.Screen name="Order" component={OrderScreen} options={{ headerShown: false }} />
