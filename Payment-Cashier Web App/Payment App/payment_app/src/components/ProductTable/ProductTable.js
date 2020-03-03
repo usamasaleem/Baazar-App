@@ -7,14 +7,63 @@ export default class ProductTable extends Component {
         return (
             <div className="ProductTable">
 
-            <div className="ProductTable-columns">
-            <p className="ProductTable__column">Name</p>
-            <p className="ProductTable__column">ID</p>
-            <p className="ProductTable__column">Price</p>
-            <p className="ProductTable__column">Quantity</p>
-            <p className="ProductTable__column">Total   </p>
-            <DeleteForeverIcon className="ProductTable__column"/>
+                <div className="ProductTable-columns">
+                    <p className="ProductTable__column">*</p>
+                    <p className="ProductTable__column">ID</p>
+                    <p className="ProductTable__column">Price</p>
+                    <p className="ProductTable__column">Quantity</p>
+                    <p className="ProductTable__column">Total   </p>
+                </div>
+
+
+                <div className="ProductTable-columns prod_rows">
+                    <p className="ProductTable__column c">Name</p>
+                    <p className="ProductTable__column prod_row">ID</p>
+                    <p className="ProductTable__column prod_row">Price</p>
+                    <p className="ProductTable__column prod_row">Quantity</p>
+                    <p className="ProductTable__column prod_rows">Total   </p>
+
+                </div>
+
+                <div className="ProductTable-columns prod_rows">
+                    <p className="ProductTable__column prod_row">Name</p>
+                    <p className="ProductTable__column prod_row">ID</p>
+                    <p className="ProductTable__column prod_row">Price</p>
+                    <p className="ProductTable__column prod_row">Quantity</p>
+                    <p className="ProductTable__column prod_rows">Total   </p>
+
+                </div>
+
+                <div className="ProductTable-columns prod_rows">
+                    <p className="ProductTable__column c">Name</p>
+                    <p className="ProductTable__column prod_row">ID</p>
+                    <p className="ProductTable__column prod_row">Price</p>
+                    <p className="ProductTable__column prod_row">Quantity</p>
+                    <p className="ProductTable__column prod_rows">Total   </p>
+
+                </div>
+
+
+                <div className="ProductTable-columns prod_rows">
+                <p className="ProductTable__column c">Name</p>
+                <p className="ProductTable__column prod_row">ID</p>
+                <p className="ProductTable__column prod_row">Price</p>
+                <p className="ProductTable__column prod_row">Quantity</p>
+                <p className="ProductTable__column prod_rows">Total   </p>
+
             </div>
+
+
+
+            <div className="ProductTable-columns prod_rows">
+            <p className="ProductTable__column c">Name</p>
+            <p className="ProductTable__column prod_row">ID</p>
+            <p className="ProductTable__column prod_row">Price</p>
+            <p className="ProductTable__column prod_row">Quantity</p>
+            <p className="ProductTable__column prod_rows">Total   </p>
+
+        </div>
+
 
 
             </div>

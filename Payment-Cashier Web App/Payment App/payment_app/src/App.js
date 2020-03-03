@@ -10,6 +10,8 @@ import {
 import SplashScreen from "./components/SplashScreen/SplashScreen";
 import Navbar from "./components/Navbar/Navbar";
 import HomePageContainer from "./containers/Homepage_container/Homepage_container";
+import OrderPageContaienr from './containers/Orderpage_container/Orderpage_container';
+import LoginPage from './Pages/LoginPage/LoginPage';
 
 
 
@@ -41,17 +43,19 @@ function App() {
     return (
       <div className="homepage-container">
         <Router>
-          <Route component={Navbar} />
-          <Route exact path="/" render={(routeProps) => <HomePageContainer {...routeProps} />}>
-          </Route>
+          <PrivateRoute component={Navbar} />
+          <Route exact path="/" render={(routeProps) => <HomePageContainer {...routeProps} />}/> 
+          <Route exact path="/OrderDetail" render={(routeProps) => <OrderPageContaienr {...routeProps} />}/> 
+
         </Router>
 
       </div>
+
     );
 
 
   else
-    return <SplashScreen />
+    return <LoginPage />
 
 
 }

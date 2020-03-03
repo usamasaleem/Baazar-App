@@ -60,14 +60,7 @@ export default class OrderHistoryScreen extends Component {
     return (<View style={styles.container} >
 
       <Header
-        leftComponent={{
-          icon: 'menu',
-          color: '#fff',
-          onPress: () => {
-            navigation.toggleDrawer();
-          },
-          underlayColor: 'none',
-        }}
+    
         centerComponent={{ text: 'ORDER HISTORY', style: { color: '#fff' } }}
         statusBarProps={{ translucent: true }}
         containerStyle={Platform.select({
