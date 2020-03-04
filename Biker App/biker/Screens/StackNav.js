@@ -28,6 +28,12 @@ import axios from 'axios';
 import sample from '../Constants/FakeApi.json';
 import LoginScreen from './LoginScreen';
 import SignupScreen from './SignupScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import SummaryScreen from '../Screens/SummaryScreen';
+import ProfileScreen from '../Screens/ProfileScreen';
+import Icon from 'react-native-ionicons'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 
 const Stack = createStackNavigator();
@@ -42,7 +48,26 @@ const routeOption = {
 }
 
 
+
+
 export function StackNav({ navigation }) {
+
+    const Tab = createMaterialBottomTabNavigator();
+    const Stack = createStackNavigator();
+
+
+    const InnerNavigator = () => {
+        return (<Stack.Navigator>
+            <Stack.Screen name="FindOrder" component={FindOrderScreen} options={{ headerShown: false }}
+                initialParams={{ orders: sample }}
+            />
+            <Stack.Screen name="OrderInfo" component={DetailScreen} options={routeOption} />
+            <Stack.Screen name="Order" component={OrderScreen} options={routeOption} />
+            <Stack.Screen name="Order Detail" component={RecievingScreen} options={routeOption} />
+        </Stack.Navigator >
+        )
+    }
+
 
 
     // GET Driver Verification
@@ -61,17 +86,47 @@ export function StackNav({ navigation }) {
     // }
     //   STATUS MESSAGE COMPONENT
 
+    const TabNavigatorContainer = () => {
+        return (
+            <Tab.Navigator
+                barStyle={{ backgroundColor: '#ffffff', elevation: 10, }}
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused, color }) => {
+                        let iconName;
+                        if (route.name === 'Home') {
+                            iconName = 'home'
+                        } else if (route.name === 'Summary') {
+                            iconName = 'compass'
+                        }
+                        else if (route.name === 'Profile') {
+                            iconName = 'person'
+                        }
+
+                        // You can return any component that you like here!
+                        return <Icon name={iconName} size={26} color={color} />;
+                    },
+                })}
+                activeColor='#4D7CFE'
+                inactiveColor='#BDBDBD'
+
+                tabBarOptions={{
+
+                }}
+
+            >
+                <Tab.Screen name="Home" component={InnerNavigator} />
+                <Tab.Screen name="Summary" component={SummaryScreen} />
+                <Tab.Screen name="Profile" component={ProfileScreen} />
+
+
+            </Tab.Navigator>
+        )
+    }
+
+
 
     return (
-        <Stack.Navigator
-            initialRouteName="FindOrder">
-            <Stack.Screen name="FindOrder" component={FindOrderScreen} options={{ headerShown: false }}
-                initialParams={{ orders: sample }}
-            />
-            <Stack.Screen name="Order Details" component={DetailScreen} options={routeOption} />
-            <Stack.Screen name="Order" component={OrderScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="Order Detail" component={RecievingScreen} options={routeOption} />
-        </Stack.Navigator>
+        <InnerNavigator />
     );
 }
 

@@ -99,6 +99,7 @@ export default class DetailScreen extends Component {
     return (<ScrollView>
       <View style={styles.container} >
 
+      
 
 
         <View style={styles.orderDetails}>

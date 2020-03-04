@@ -6,19 +6,50 @@ import {
     ScrollView,
     FlatList,
     StyleSheet,
-    Platform
+    Platform,
+    ToastAndroid,
+    AsyncStorage
 } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import firebase from 'react-native-firebase';
+
+
 
 
 export default class LoginScreen extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            phoneNumberInp: '',
+            isLoggedIn: false,
+        }
+        this.checkInput = this.checkInput.bind(this)
+    }
+
+
+    componentWillMount() {
+
+        AsyncStorage.getItem("isLoggedIn")
+            .then((val) => {
+                console.log(val)
+                if (val !== null) {
+                    if (val == "true") {
+                        this.setState({ isLoggedIn: true })
+                    }
+                    else{
+                        this.setState({ isLoggedIn: false })    
+                    }
+                }
+                else {
+                    this.setState({ isLoggedIn: false })
+                }
+
+            })
+
     }
 
 
@@ -26,33 +57,57 @@ export default class LoginScreen extends Component {
 
         const { navigation } = this.props;
 
-        return (
-            <View style={styles.container}>
+        if (!this.state.isLoggedIn) {
+            return (
+                <View style={styles.container}>
 
-                <Text style={styles.loginText}>Login</Text>
-                <View style={styles.inpContainer}>
-                    <Input style={styles.inp} placeholder="Phone Number" leftIcon={{ type: 'material', name: 'person', color: '#BDBDBD' }} />
+                    <Text style={styles.loginText}>Login</Text>
+                    <View style={styles.inpContainer}>
+                        <Input style={styles.inp} placeholder="Phone Number" leftIcon={{ type: 'material', name: 'person', color: '#BDBDBD' }}
+                            onChangeText={val => this.setState({ phoneNumberInp: val })}
+
+                        />
+                    </View>
+                    <Button
+                        title="LOGIN"
+                        containerStyle={styles.loginBtn}
+                        buttonStyle={{ backgroundColor: '#343847', padding: 14 }}
+                        onPress={() => {
+                            if (this.checkInput(this.state.phoneNumberInp))
+                                navigation.push('PhoneVerify', {
+                                    number: this.state.phoneNumberInp
+                                })
+                            else
+                                ToastAndroid.show("Invalid Phone Number", ToastAndroid.SHORT)
+                        }}
+                    />
+                    <View style={styles.linkContainer}>
+                        <TouchableOpacity
+                            onPress={() => { navigation.push('Signup') }}
+                        >
+                            <Text style={styles.link}>Create an Account</Text>
+                        </TouchableOpacity>
+                    </View>
+
+
                 </View>
-                <Button
-                    title="LOGIN"
-                    containerStyle={styles.loginBtn}
-                    buttonStyle={{ backgroundColor: '#343847', padding: 14 }}
-                    onPress={()=>{
-                        navigation.push('PhoneVerify')
-                    }}
-                />
-                <View style={styles.linkContainer}>
-                    <TouchableOpacity
-                    onPress={()=>{navigation.push('Signup')}}
-                    >
-                        <Text style={styles.link}>Create an Account</Text>
-                    </TouchableOpacity>
-                </View>
+
+            )
+        }
+        else{
+             navigation.push('Main')
+             return <View></View>
+        }
+        
 
 
-            </View>
+    }
 
-        )
+    checkInput(val) {
+        if (val === '' || val.length < 13)
+            return false
+        else
+            return true
     }
 
 }
@@ -82,12 +137,12 @@ const styles = StyleSheet.create({
     linkContainer: {
         marginTop: 30,
         flexDirection: "row",
-        justifyContent:"flex-start",
-        color:"#69718F",
+        justifyContent: "center",
+        color: "#69718F",
     },
-    link:{
-        fontSize:16,
-        textAlign:"center"
+    link: {
+        fontSize: 16,
+        textAlign: "center"
     }
 
 });

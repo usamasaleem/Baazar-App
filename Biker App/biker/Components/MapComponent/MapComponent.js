@@ -201,33 +201,93 @@ export default class MapComponent extends Component {
         latitude: 0,
         longitude: 0
       },
-      routes: []
+      routes: [],
+
 
     };
     this.mapView = null;
   }
 
   componentDidMount() {
-    Geolocation.getCurrentPosition((pos) => {
+    setTimeout(() => {
+      Geolocation.getCurrentPosition((pos) => {
 
-      this.setState({ currentLocation: pos.coords })
-      this.mapView.animateToRegion({
-        latitude: pos.coords.latitude,
-        longitude: pos.coords.longitude,
-        longitudeDelta: LONGITUDE_DELTA,
-        latitudeDelta: LATITUDE_DELTA,
-      }, 1000)
+        this.setState({ currentLocation: pos.coords })
+        this.mapView.animateToRegion({
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+          longitudeDelta: LONGITUDE_DELTA,
+          latitudeDelta: LATITUDE_DELTA,
+        }, 1000)
 
+        let tempArr = [
+          {
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+          },
+          {
+            latitude: 31.5204,
+            longitude: 74.3587,
+          },
+          {
+            latitude: 33.9070,
+            longitude: 73.3943,
+          }
+        ]
 
-    })
+        this.setState({ routes: tempArr })
 
+      })
+
+    }, 1000);
 
 
   }
 
 
 
+
+
+
   render() {
+
+
+    const Markers = () => this.state.routes.map((coordinate, index) => {
+      console.log(index)
+      if (index != 0) {
+        return (
+          <MapView.Marker
+            key={`coordinate_${index}`}
+            coordinate={coordinate}
+            title="Store Name"
+            pinColor="#69718F"
+          />)
+      }
+    }
+    )
+
+    const Routes = () => (this.state.routes.length >= 2) && (
+      <MapViewDirections
+        origin={this.state.routes[0]}
+
+        waypoints={(this.state.routes.length > 2) ? this.state.routes.slice(1, -1) : null}
+
+        destination={this.state.routes[this.state.routes.length - 1]}
+
+        strokeWidth={3}
+        strokeColor="#343847"
+
+        onReady={() => {
+          console.log("Direction is ready")
+        }}
+
+        apikey={GOOGLE_MAPS_APIKEY}
+
+      />
+
+    )
+
+
     return (
       <View style={{ flex: 1, padding: this.state.pad }}>
         <MapView
@@ -243,38 +303,27 @@ export default class MapComponent extends Component {
           showsUserLocation={true}
           showsMyLocationButton={true}
           customMapStyle={silverMapStyles}
+          userLocationPriority='high'
+          userLocationUpdateInterval={2000}
+          followsUserLocation={true}
+
           onMapReady={() => {
             setTimeout(() => this.setState({ pad: 0 }), 100);
           }}
         >
-          {
-            this.state.coordinates.length >= 2 &&
-            this.state.coordinates.map((coordinate, index) => (
-              <MapView.Marker
-                key={`coordinate_${index}`}
-                coordinate={coordinate}
-              />
-            ))
 
+          {this.props.showDirection &&
+            <Markers />
+            
           }
 
-          <MapViewDirections
-            origin={{
-              latitude: 37.798790,
-              longitude: -122.442753,
-            }}
+          {this.props.showDirection &&
+            <Routes />
+            
+          }
 
-            destination={{
-              latitude: 33.790651,
-              longitude: -122.422497,
-            }}
 
-            strokeWidth={3}
-            strokeColor="hotpink"
 
-            apikey={GOOGLE_MAPS_APIKEY}
-
-          />
 
         </MapView>
       </View>

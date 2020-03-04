@@ -6,45 +6,111 @@ import {
     ScrollView,
     FlatList,
     StyleSheet,
-    Platform
+    Platform,
+    ToastAndroid,
+    AsyncStorage
 } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import firebase from 'react-native-firebase';
+import { Surface, Shape } from '@react-native-community/art';
+import * as Progress from 'react-native-progress';
 
 export default class PhoneVerificationScreen extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {}
+        this.unsubscribe = null;
+        this.state = {
+            verificationCode: '',
+            verified: false,
+            enteredCode: "",
+            verifying: false,
+        }
+        this.verifiyNumber = this.verifiyNumber.bind(this)
     }
+
+
+    componentWillMount() {
+        const { navigation } = this.props;
+        let phoneNumber = this.props.route.params.number
+        firebase.auth().signInWithPhoneNumber(phoneNumber)
+            .then(confirmResult => this.setState({ verificationCode: confirmResult }))
+            .catch(error => console.log(error));
+    }
+
+
+
+
+
+
+
 
 
     render() {
 
         const { navigation } = this.props;
+        let phoneNumber = this.props.route.params.number
 
         return (
             <View style={styles.container}>
 
-                <Text style={styles.loginText}>Verify PhoneNumber</Text>
+                <Text style={styles.loginText}>Verify Phone Number</Text>
                 <View style={styles.inpContainer}>
-                    <Input containerStyle={styles.inp} placeholder="Enter Phone Number" />
+                    <Input containerStyle={styles.inp} placeholder="Enter Verification Code"
+                        onChangeText={(val) => this.setState({ enteredCode: val })}
+                        value={this.state.enteredCode}
+                    />
                 </View>
 
                 <Button
                     title="VERIFY"
                     containerStyle={styles.loginBtn}
                     buttonStyle={{ backgroundColor: '#343847', padding: 14 }}
-                    onPress={() => { navigation.push('Main') }}
+                    onPress={() => {
+                        this.setState({ verifying: true })
+                        this.verifiyNumber(phoneNumber)
+                        if (this.state.verified)
+                            navigation.push('Main')
+                    }}
                 />
+
+
 
             </View>
 
         )
     }
+
+    componentWillUnmount() {
+        if (this.unsubscribe) this.unsubscribe();
+    }
+
+
+    verifiyNumber(phoneNumber) {
+
+
+
+        if (this.state.verificationCode != undefined && this.state.enteredCode.length == 6) {
+            this.state.verificationCode.confirm(this.state.enteredCode)
+                .then(() => {
+                    this.setState({ verified: true })
+                    AsyncStorage.setItem("isLoggedIn", "true")
+                })
+                .catch((err) => {
+                    this.setState({ verified: false })
+                    console.log(err)
+                })
+        }
+        else {
+            ToastAndroid.show("Enter 6 digit code", ToastAndroid.LONG)
+        }
+    }
+
+
+
 }
 
 

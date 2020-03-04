@@ -15,16 +15,6 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import BottomSheet from 'reanimated-bottom-sheet';
-import MapComponent from './Components/MapComponent/MapComponent';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import DetailScreen from './Screens/DetailScreen';
-import OrderScreen from './Screens/OrderScreen';
-import RecievingScreen from './Screens/RecievingScreen';
-import OrderHistoryScreen from './Screens/OrderHistoryScreen';
-import FindOrderScreen from './Screens/FindOrderScreen';
-import { Provider } from 'mobx-react';
-import store from './store/TestStore';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-ionicons'
@@ -36,24 +26,31 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SignupScreen from './Screens/SignupScreen';
 import PersonalInfoScreen from './Screens/PersonalInfoScreen';
 import PhoneVerificationScreen from './Screens/PhoneVerificationScreen';
-
-
+import RecievingScreen from './Screens/RecievingScreen';
+import sample from './Constants/FakeApi.json';
+import DetailScreen from './Screens/DetailScreen';
+import FindOrderScreen from './Screens/FindOrderScreen';
 
 export default function App() {
 
 
-  const Tab = createBottomTabNavigator();
+  const Tab = createMaterialBottomTabNavigator();
   const Stack = createStackNavigator();
 
   const MainNavigator = () => {
     return(
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName ="Login"
+    >
+
       <Stack.Screen name="Login"        component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Signup"       component={SignupScreen} options={{ headerShown: false }} />
       <Stack.Screen name="PersonalInfo" component={PersonalInfoScreen} options={{ headerShown: false }} />
       <Stack.Screen name="PhoneVerify"  component={PhoneVerificationScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Main"         component={StackNav} options={{ headerShown: false }} />
-    </Stack.Navigator>
+      <Stack.Screen name="Recieving"    component={RecievingScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Main"         component={DrawerNavigatorContainer} options={{ headerShown: false }} />
+     
+      </Stack.Navigator>
     )}
 
   const DrawerNavigatorContainer = () => {
@@ -86,7 +83,7 @@ export default function App() {
     >
       <Tab.Screen name="Home" component={StackNav} />
       <Tab.Screen name="Summary" component={SummaryScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen}  />
 
 
     </Tab.Navigator>

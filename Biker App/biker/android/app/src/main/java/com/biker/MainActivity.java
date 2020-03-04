@@ -1,4 +1,4 @@
-package com.biker;
+package com.bazaarkabiker;
 
 import com.facebook.react.ReactActivity;
 

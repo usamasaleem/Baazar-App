@@ -21,8 +21,6 @@ import store from "../store/TestStore";
 import personIcon from '../assets/Icons/person.svg';
 
 
-inject('store')
-@observer
 export default class FindOrderScreen extends Component {
 
   constructor(props) {
@@ -55,15 +53,14 @@ export default class FindOrderScreen extends Component {
     let orders = route.params.orders;
 
 
+    const OrderCard = ({ orderId, name, totalDistance, totalPrice, items, Stops }) => {
 
-    const OrderCard = ({orderId,name,totalDistance,totalPrice,items,Stops}) => {
-      
 
       return <TouchableOpacity activeOpacity={1}
         onPress={() => {
-          navigation.push('Order Details',{
-            orderId:orderId
-          })
+        this.props.navigation.navigate('OrderInfo',{
+          orderId:orderId
+        })
         }}
       ><View
 
@@ -110,8 +107,8 @@ export default class FindOrderScreen extends Component {
           keyExtractor={item => item.id}
           onViewableItemsChanged={this.onViewableItemsChanged}
           viewabilityConfig={this.viewabilityConfig}
-          renderItem={({item}) => <OrderCard name={item.name} totalDistance={item.totalDistance} Stops={item.stops.length} totalPrice={item.totalPrice} orderId={item.id}/>
-        }
+          renderItem={({ item }) => <OrderCard name={item.name} totalDistance={item.totalDistance} Stops={item.stops.length} totalPrice={item.totalPrice} orderId={item.id} />
+          }
         />
       </View>
     }
@@ -129,7 +126,7 @@ export default class FindOrderScreen extends Component {
       <View style={styles.map}>
 
 
-        <MapComponent />
+        <MapComponent showDirection={false} />
       </View>
 
       <BottomSheet
