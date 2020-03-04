@@ -8,7 +8,8 @@ import {
     StyleSheet,
     Platform,
     TouchableOpacity,
-    Switch
+    Switch,
+    AsyncStorage
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import MapComponent from '../Components/MapComponent/MapComponent'
@@ -54,7 +55,7 @@ export default class ProfileScreen extends Component {
 
 
             <View style={styles.profileDetailContainer}>
-                <ProfileImage/>
+                <ProfileImage />
                 <Text style={[styles.profileDetailText, styles.nameText]}>Tahseen Riaz Abbasi</Text>
                 <Text style={[styles.profileDetailText, styles.infoText]}>Pink Metro Bike 125</Text>
                 <Text style={[styles.profileDetailText, styles.infoText]}>PND-420</Text>
@@ -73,6 +74,15 @@ export default class ProfileScreen extends Component {
                         <Text style={styles.reportInfoText}>4.5</Text>
                     </View>
 
+                    <View style={styles.reportRow}>
+                        <Button title="Logout" containerStyle={{ width: "80%", marginTop: 60 }}
+                            buttonStyle={{ padding: 15, backgroundColor: "#343847" }}
+                            onPress={() => {
+                                this.LogOut(navigation)
+                            }}
+                        />
+                    </View>
+
 
                 </View>
 
@@ -85,7 +95,13 @@ export default class ProfileScreen extends Component {
 
     }
 
-
+    LogOut(navigation) {
+        AsyncStorage.setItem("isLoggedIn", "false").then(() => {
+            console.log(this.props)
+            this.props.navigation.popToTop();
+            this.props.navigation.goBack(null);
+        })
+    }
 
 }
 
@@ -98,35 +114,35 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#FAFAFA",
-        paddingHorizontal:20
+        paddingHorizontal: 20
     },
-    profileDetailContainer:{
-        justifyContent:"center",
-        alignItems:"center"
+    profileDetailContainer: {
+        justifyContent: "center",
+        alignItems: "center"
     },
-    reportRow:{
-         flexDirection:"row",
-         width:"100%",
-         justifyContent:"space-evenly",
-         marginVertical:8
+    reportRow: {
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "space-evenly",
+        marginVertical: 8
     },
-    reportContainer:{
-        justifyContent:"center",
-        alignItems:"center"
+    reportContainer: {
+        justifyContent: "center",
+        alignItems: "center"
     },
-    reportInfoText:{
-        color:'#343847'
+    reportInfoText: {
+        color: '#343847'
     },
-    reportText:{
-        color:'#69718F'
+    reportText: {
+        color: '#69718F'
     },
-    profileDetailText:{
-        marginVertical:4
+    profileDetailText: {
+        marginVertical: 4
     },
-    infoText:{
-        color:'#69718F'
+    infoText: {
+        color: '#69718F'
     },
-    nameText:{
-        color:'#343847'
+    nameText: {
+        color: '#343847'
     }
 })

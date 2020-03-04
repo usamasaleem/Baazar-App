@@ -23,8 +23,7 @@ import DropdownIcon from '../assets/Icons/dropdown.svg';
 import MoneyIcon from '../assets/Icons/money.svg';
 import CircleDotIcon from '../assets/Icons/circledot.svg';
 
-inject('store')
-@observer
+
 export default class SummaryScreen extends Component {
 
     constructor(props) {
