@@ -26,6 +26,7 @@ export default class SignupScreen extends Component {
             city: "",
             address: "",
         }
+        this.verifiyInputs = this.verifiyInputs.bind(this)
     }
 
 
@@ -69,7 +70,24 @@ export default class SignupScreen extends Component {
                     buttonStyle={{ backgroundColor: '#343847', padding: 14 }}
                     onPress={() => {
                         if (this.verifiyInputs()) {
-                            navigation.push('PersonalInfo')
+                            let tempBiker = {
+                                lisenceNumber: this.state.lisenceNumber,
+                                name: this.state.name,
+                                phoneNumber: this.state.phoneNumber,
+                                city: this.state.city,
+                                address: this.state.address,
+                            }
+
+                            this.setState({ biker: tempBiker })
+                            console.log(tempBiker)
+                            if(this.state.biker)
+                            {
+                                navigation.navigate('PersonalInfo', {
+                                    biker: this.state.biker,
+                                    mydata: 'Usama'
+                                })
+                            }
+                            
                         }
                         else {
                             ToastAndroid.show("Invalid  Check your Inputs", ToastAndroid.LONG);
@@ -98,11 +116,14 @@ export default class SignupScreen extends Component {
             this.state.address == '' &&
             this.state.city == '' &&
             this.state.lisenceNumber == '' &&
-            this.state.phoneNumber == '') { return false }
-        else if ((this.state.phoneNumber.length < 13)) {
-            return false
-        }
+            this.state.phoneNumber == '' &&
+            this.state.phoneNumber.length >= 13) { return false }
         else {
+
+
+
+            console.log(this.state.biker)
+
             return true
         }
 

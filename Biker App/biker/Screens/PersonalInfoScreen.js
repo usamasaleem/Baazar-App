@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
 import { ToastAndroid } from 'react-native';
+import Axios from 'axios';
 
 
 
@@ -24,7 +25,11 @@ export default class SignupScreen extends Component {
         this.state = {
             selectedImageUri: "../assets/Images/blank-profile-picture.png",
             hasSelectedImage: false,
-            imageName: "blank-profile-picture.png"
+            imageName: "blank-profile-picture.png",
+            biker:{},
+            uri:'',
+            type:'',
+            name:'',
         }
     }
 
@@ -45,9 +50,20 @@ export default class SignupScreen extends Component {
                 console.log('ImagePicker Error: ', response.error);
             } else {
                 this.setState({ selectedImageUri: response.data })
+                this.setState({ name: response.fileName })
+                this.setState({ type: response.type })
+                this.setState({ uri: response.uri })
                 this.setState({ hasSelectedImage: true })
+                console.log(response)
             }
         });
+    }
+
+
+    componentWillMount(){
+        const biker =  this.props.route.params.biker
+        console.log(this.props)
+        this.setState({biker:biker})
     }
 
 
@@ -95,12 +111,12 @@ export default class SignupScreen extends Component {
 
                 {this.state.hasSelectedImage &&
                     <Button
-                        title="CONFIRM PROFILE"
+                        title="CREATE PROFILE"
                         containerStyle={styles.loginBtn}
                         buttonStyle={{ backgroundColor: '#343847', padding: 14, }}
                         onPress={() => {
                             ToastAndroid.show('Account Created', ToastAndroid.SHORT);
-                            navigation.push('Login')
+                            this.registerUser(navigation)
                         }}
                     />
                 }
@@ -114,6 +130,49 @@ export default class SignupScreen extends Component {
         )
     }
 
+
+registerUser(navigation){
+
+
+    let formData = new FormData();
+       formData.append('profilePic',{
+        uri:this.state.uri,
+        name:this.state.name,
+        type:this.state.type,
+    })
+    
+    console.log(formData)
+
+    let biker  = {
+
+        name:this.state.biker.name,
+        liscenceNumber:this.state.biker.lisenceNumber,
+        city:this.state.biker.city,
+        availability:false,
+        address:this.state.biker.address,
+        phoneNumber : this.state.biker.phoneNumber,
+        imageUrl:'http://10.113.50.45:3000/'+this.state.selectedImageUri,
+
+    }
+
+
+    
+    console.log(biker)
+
+    
+    Axios.post("http://192.168.100.65:3000/deliverer/add",biker).then(()=>{
+        ToastAndroid.show("Profile Added",ToastAndroid.LONG);
+        navigation.navigate('Login')
+    })
+
+    // Axios.post("http://192.168.100.65:3000/deliverer/saveImage",formData).then(()=>{
+        // ToastAndroid.show("Image Saved",ToastAndroid.LONG);
+        // navigation.navigate('Login')
+    // })
+
+
+
+}    
 
 
 }

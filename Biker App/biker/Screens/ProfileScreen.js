@@ -21,7 +21,7 @@ import { SvgUri } from 'react-native-svg';
 import { inject, observer } from "mobx-react";
 import store from "../store/TestStore";
 import personIcon from '../assets/Icons/person.svg';
-import ProfileImage from '../assets/Icons/NoPath - Copy (11).svg';
+import ProfileImage from '../assets/Icons/userplaceholder.svg';
 
 
 inject('store')
@@ -35,6 +35,12 @@ export default class ProfileScreen extends Component {
         }
 
     }
+
+
+    componentWillMount(){
+        console.log(this.props)
+    }
+
 
     render() {
 
@@ -55,9 +61,9 @@ export default class ProfileScreen extends Component {
 
 
             <View style={styles.profileDetailContainer}>
-                <ProfileImage />
-                <Text style={[styles.profileDetailText, styles.nameText]}>Tahseen Riaz Abbasi</Text>
-                <Text style={[styles.profileDetailText, styles.infoText]}>Pink Metro Bike 125</Text>
+                <ProfileImage width={80} height={80}  style={{marginVertical:30}} />
+                <Text style={[styles.profileDetailText, styles.nameText]}>Usama Saleem</Text>
+                <Text style={[styles.profileDetailText, styles.infoText]}>Metro Bike 125</Text>
                 <Text style={[styles.profileDetailText, styles.infoText]}>PND-420</Text>
                 <Switch />
                 <View style={styles.reportContainer}>

@@ -2,37 +2,16 @@ var mongoose = require('mongoose');
 
 var deliverer_schema = new mongoose.Schema({
 
-    id: {
-        type: String,
-        required: true,
-        unique: true
 
-    },
-    cnic: {
-        type: String,
-        required: true,
-        unique: true
-
-    },
     liscenceNumber: {
         type: String,
         required: true,
-        unique: true
-
     },
     availability: {
         type: Boolean,
+        required:false,
     },
     name: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-
-    },
-    password: {
         type: String,
         required: true,
     },
@@ -45,19 +24,30 @@ var deliverer_schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    number: {
+    phoneNumber: {
         type: String,
         required: true,
 
     },
     loggedInStatus: {
         type: Boolean,
-        required: true,
+        required:false
     },
     verified: {
         type: Boolean,
-        required: true,
-
+        required:false  
+    },
+    imageUrl: {
+        type: String,
+        required:false  
+    },
+    latitude: {
+        type: String,
+        required:false  
+    },
+    longitude: {
+        type: String,
+        required:false  
     },
 });
 

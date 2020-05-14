@@ -72,7 +72,7 @@ export default class PhoneVerificationScreen extends Component {
                     onPress={() => {
                         this.setState({ verifying: true })
                         this.verifiyNumber(phoneNumber)
-                        if (this.state.verified)
+                
                             navigation.push('Main')
                     }}
                 />
@@ -92,9 +92,7 @@ export default class PhoneVerificationScreen extends Component {
     verifiyNumber(phoneNumber) {
 
 
-
-        if (this.state.verificationCode != undefined && this.state.enteredCode.length == 6) {
-            this.state.verificationCode.confirm(this.state.enteredCode)
+        this.state.verificationCode.confirm(this.state.enteredCode)
                 .then(() => {
                     this.setState({ verified: true })
                     AsyncStorage.setItem("isLoggedIn", "true")
@@ -104,14 +102,26 @@ export default class PhoneVerificationScreen extends Component {
                     console.log(err)
                 })
         }
-        else {
-            ToastAndroid.show("Enter 6 digit code", ToastAndroid.LONG)
-        }
+
+
+        // if (this.state.verificationCode != undefined && this.state.enteredCode.length == 6) {
+        //     this.state.verificationCode.confirm(this.state.enteredCode)
+        //         .then(() => {
+        //             this.setState({ verified: true })
+        //             AsyncStorage.setItem("isLoggedIn", "true")
+        //         })
+        //         .catch((err) => {
+        //             this.setState({ verified: false })
+        //             console.log(err)
+        //         })
+        // }
+        // else {
+        //     ToastAndroid.show("Enter 6 digit code", ToastAndroid.LONG)
+        // }
     }
 
 
 
-}
 
 
 const styles = StyleSheet.create({
