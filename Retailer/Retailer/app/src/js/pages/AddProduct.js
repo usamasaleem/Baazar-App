@@ -89,6 +89,36 @@ const SecondCol = styled.div``;
 
 const File = styled.input``;
 
+const Select = styled.select`
+width:150px;
+border:none;
+border-bottom:solid 1px gray;
+outline:none;
+`;
+
+const Option = styled.option``;
+
+
+const RangeContainer = styled.div`
+margin:1rem;
+margin-bottom:2rem;
+`;
+
+
+const DropDown = () => {
+    return <Select>
+            <Option value="" disabled  selected >Select your option</Option>
+            <Option>a</Option>
+            <Option>b</Option>
+            <Option>c</Option>
+            <Option>d</Option>
+    </Select>
+}
+
+
+const Range = ()=>{
+return <Input  type="number" min="0" max="10" placeholder="0"  />
+}
 
 export default class AddProduct extends Component {
     render() {
@@ -123,18 +153,18 @@ export default class AddProduct extends Component {
 
                         <TwoColumn>
                             <Label>Category</Label>
-                            <Input placeholder="Enter or sort" />
+                            <DropDown/>
                         </TwoColumn>
 
 
                         <TwoColumn>
                             <Label>Size</Label>
-                            <Input placeholder="Enter or sort" />
+                            <DropDown/>
                         </TwoColumn>
 
                         <TwoColumn>
                             <Label>Brand</Label>
-                            <Input placeholder="Enter or sort" />
+                            <DropDown/>
                         </TwoColumn>
 
 
@@ -155,17 +185,17 @@ export default class AddProduct extends Component {
                         <TwoColumn>
                             <Label>Suggestion</Label>
                             <TagRow>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
-                            <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
+                                <Tag>ABC</Tag>
                             </TagRow>
                         </TwoColumn>
 
@@ -174,6 +204,40 @@ export default class AddProduct extends Component {
 
 
                 </Grid>
+
+
+                <Row>
+                <RangeContainer>
+                <Label>Product Per Carton</Label>
+                <Range/>
+                </RangeContainer>
+              
+                <RangeContainer>
+                <Label>Number Per Carton</Label>
+                <Range/>
+                </RangeContainer>
+              
+
+                <RangeContainer>
+                <Label>Seller Price</Label>
+                <Range/>
+                </RangeContainer>
+              
+
+                <RangeContainer>
+                <Label>Retail Price</Label>
+                <Range/>
+                </RangeContainer>
+              
+
+                <RangeContainer>
+                <Label>Product Per Carton</Label>
+                <Range/>
+                </RangeContainer>
+              
+              
+                </Row>
+
 
                 <Button>Add Product</Button>
 
