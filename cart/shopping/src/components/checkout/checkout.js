@@ -14,40 +14,68 @@ export default class classDetails extends Component {
         return (
             <>
 
-
-          
-<Progress />
               <Rox>
                  
-                    <Heading>Ronaldos</Heading>
+                    <Heading>Confirm</Heading>
+                    <p>Please confirm after carefully readinng the details</p>
                     <Icons>
                    
                     </Icons>
 
-                    <Form >
-                        <Label>Name</Label><br/>
-                        <Input type="text"  placeholder={"Name"}></Input>
-                        <br/>
-                        <Label>Phone</Label><br/>
-                        <Input placeholder={"Phone"} ></Input><br/>
+                    <ContainerDetail >
+                        <DIV>
+                        <Label>Name: </Label>
+                        <Text>Nauman Khalid Sheikh</Text>
+                        </DIV>
+                        <DIV>
+                        <Label>Contact: </Label>
+                        <Text>0307-5135138</Text>
+                        </DIV>
+                        <DIV>
+                        <Label>Address: </Label>
+                        <Text>st 12, house 12, Askari 20, Rawalpindi</Text>
+                        </DIV>
+                        <Border></Border>
 
-                        <Label>Address</Label><br/>
-                        <Input type="text" placeholder={"Address"} ></Input><br/>
-                        
-                        <Button style={{backgroundColor:'#292929'}}>Previous</Button>
-                        <Button >Next</Button>
+                        <DIV>
+                        <Label>Method: </Label>
+                        <Text>Credit Card</Text>
+                        </DIV>
+                        <DIV>
+                        <Label>Holder Name: </Label>
+                        <Text>Nauman Sheikh</Text>
+                        </DIV>
+                        <DIV>
+                        <Label>Card Number: </Label>
+                        <Text>123 213 1234</Text>
+                        </DIV>
+                        <DIV>
+                        <Label>CCV: </Label>
+                        <Text>123</Text>
+                        </DIV>
+                        <Border></Border>
 
-                    </Form>
+                        <Button style={{backgroundColor:'#292929'}} onClick = {this.props.action}>Previous</Button>
+                        <Button type="button"  >Done</Button>
+
+                    </ContainerDetail>
               </Rox>
             </>
         )
     }
 }
-
+const DIV = styled.div`
+display:inline-flex;
+height:30px;
+`
+const Border =styled.div`
+border-bottom:solid 2px rgb(189, 189, 189,.5);
+`
 const Button =styled.button`
 align-self:center;
 margin-top:15%;
 margin-left:5%;
+margin-bottom:10px;
 text-align:center;
 width:40%;
 height:40px;
@@ -63,7 +91,8 @@ const Label=styled.label`
     font-size:12px;
     font-family:"Poppins";
     margin:0;
-    margin-top:8px;
+
+    padding:10px;
   
 `
 const Expiration=styled.span`
@@ -87,12 +116,15 @@ margin-top:2%;
 margin-bottom:3%;
 width:70%;
 `
-const Form =styled.form`
-background-color:;
-height:40%;
-align-content:center;
-padding:5%;
+const ContainerDetail =styled.div`
+display:block;
+justify-content: space-between;
+font-size:12px;
+font-family:"Poppins";
 
+`
+const Text =styled.p`
+padding:10px;
 `
 const Icons =styled.div`
 display:inline-flex;
@@ -121,7 +153,7 @@ const Rox = styled.div`
 
 height:100%;
 width:100%;
-margin-top:25%;
+
 
 `
 

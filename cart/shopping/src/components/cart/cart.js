@@ -14,13 +14,25 @@ export default class Cart extends Component {
              {/* <smallText>Profile>Shopping Cart</smallText> */}
              
              <Text><FontAwesomeIcon icon={faMoneyBillAlt}/> Sopping Cart</Text>
-             <ProductTablecolumns className="ProductTable-columns">
-                    <ProductTable__column className="ProductTable__column">*</ProductTable__column>
+             {/* <ProductTablecolumns className="ProductTable-columns">
+                    <ProductTable__column className="ProductTable__column" >*</ProductTable__column>
                     <ProductTable__column className="ProductTable__column">Product Name</ProductTable__column>
                     <ProductTable__column className="ProductTable__column">Price</ProductTable__column>
                     <ProductTable__column className="ProductTable__column">Quantity</ProductTable__column>
                     <ProductTable__column className="ProductTable__column">Total   </ProductTable__column>
-                </ProductTablecolumns>
+                </ProductTablecolumns> */}
+                <Cardcontainer className="Cardcontainer" >
+                <CardText className="CardText">*</CardText>
+                    <CardimageContainer className="CardimageContainer">
+                        <Cardimage  className="Cardimage"></Cardimage>
+                    </CardimageContainer>
+                    
+                    <CardText className="CardText">Product Name</CardText>
+                    <CardText className="CardText">Quantity</CardText>
+                    <CardText className="CardText">Price</CardText>
+                    <CardText className="CardText info">Total</CardText>
+
+                </Cardcontainer>
             <Carts>
             
             
@@ -48,6 +60,46 @@ export default class Cart extends Component {
         )
     }
 }
+
+const Cardcontainer=styled.div`
+    font-family: 'Poppins',sans-serif;
+    letter-spacing: .5pt;
+    display: flex;
+    // width: 100%;
+    align-items: center;
+    padding: .6rem  1rem;
+    margin: 1rem 0rem;
+    justify-content: space-between;
+    background: #F6F9FC;
+    margin-top: .5rem;
+    overflow-x: auto;
+    cursor: pointer;
+    font-weight:bold;
+    @media ${devices.mobileM && devices.max }  { 
+        height:100px;
+      }
+`
+
+const CardText=styled.p`
+    font-weight: 900;
+    font-size: 10pt;
+    margin: 0 ;
+    padding: 0;
+    margin: .5rem 1rem;
+`
+
+const CardimageContainer=styled.div`
+  display: flex;  
+  border-radius: 50%;
+  background: rgb(221, 221, 221);
+//   padding:.5rem;
+  width: 36px;
+
+`
+
+const Cardimage=styled.img`
+  width:100%;
+`
 const P=styled.p`
 color:red;
 `
@@ -69,24 +121,24 @@ height:10%;
 left:60%;
 padding-top:5%;
 height:28%;
-width:40%;
+width:30%;
 @media ${devices.tablet}  { 
    
-    width:60%;
-    left:40%;
+    width:30%;
+    left:60%;
 }
 `
 const Container=styled.div`
 font-family:"Poppins";
 padding:0;
 margin:0;
-width:40%;
+width:60%;
 @media ${devices.mobileM && devices.max } { 
     width:100%;
     overflow-y:hidden;
   }
   @media ${devices.tablet}  { 
-    width:40%;
+    width:60%;
   
    
   }

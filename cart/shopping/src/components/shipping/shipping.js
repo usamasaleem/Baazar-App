@@ -16,7 +16,7 @@ export default class classDetails extends Component {
 
 
           
-<Progress />
+{/* <Progress /> */}
               <Rox>
                  
                     <Heading>Shipping</Heading>
@@ -34,7 +34,7 @@ export default class classDetails extends Component {
                         <Label>Address</Label><br/>
                         <Input type="text" placeholder={"Address"} ></Input><br/>
                         
-                        <Button style={{backgroundColor:'#292929'}}>Previous</Button>
+                        <Button style={{backgroundColor:'#292929'}}   onClick = {this.props.back}>Previous</Button>
                         <Button type="button"  onClick = {this.props.action}>Next</Button>
                         
 
