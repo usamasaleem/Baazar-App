@@ -2,31 +2,53 @@ var mongoose = require('mongoose');
 
 var product_schema = new mongoose.Schema({
 
-    id: {
-        type: String,
-        required: true,
-        unique: true
-    },
+    // id: {
+    //     type: String,
+    //     required: true,
+    //     unique: true
+    // },
     name: {
         type: String,
         required: true
     },
-    stock: {
-        type: String,
-        required: true,
-        unique: true
-
-    },
-    price: {
-        type: String,
-        required: true,
-    },
     category: {
-        type: Object,
-        required: true
+       type:String,
+    //    required:true
+    },
+    size:{
+        type: String,
+        required: true,
+       
 
     },
-    description: {
+    brand:{
+        type: String,
+        // required: true,
+       
+
+    },
+    product_per_carton: {
+        type: String,
+        required: true,
+       
+
+    },
+    number_of_carton: {
+        type: String,
+        required: true,
+       
+
+    },
+    Seller_price: {
+        type: String,
+        required: true,
+    },
+    Retail_price: {
+        type: String,
+        required: true,
+    },
+  
+    details: {
         type: String,
         required: true
 

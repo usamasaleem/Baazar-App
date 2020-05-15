@@ -20,7 +20,9 @@ export default class Payment extends Component {
 
         super();
         this.handler = this.handler.bind(this);
-        this.nauman=this.nauman.bind(this)
+        this.nauman=this.nauman.bind(this);
+        this.back=this.back.bind(this);
+        this.backToPayment=this.backToPayment.bind(this)
         this.state = { isExpanded: false,
             screentwo: false ,
             screenthree: false,
@@ -55,10 +57,10 @@ export default class Payment extends Component {
 
 
                  {this.state.screentwo && !this.state.isExpanded &&
-                    <Shipping action={this.nauman} />    }
+                    <Shipping action={this.nauman} back={this.backToPayment} />    }
 
                 {!this.state.screentwo && !this.state.isExpanded && this.state.screenthree &&
-                    <Checkout />    }
+                    <Checkout action={this.back} />    }
 
               </Box>
             </>
@@ -73,6 +75,12 @@ export default class Payment extends Component {
     }
     nauman() {
         this.setState({screenthree: !this.state.screenthree,isExpanded:false,screentwo:false, });;
+    }
+    back() {
+        this.setState({screenthree: !this.state.screenthree,isExpanded:false,screentwo:true, });;
+    }
+    backToPayment() {
+        this.setState({screentwo: !this.state.screentwo,isExpanded:true,screenthree:false, });;
     }
 }
 const Button =styled.button`

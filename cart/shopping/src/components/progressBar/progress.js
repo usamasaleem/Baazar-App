@@ -25,7 +25,7 @@ export default class Progress extends Component {
        
         <One class=""><In></In></One>
 
-        <Two class="" style={{backgroudColor: this.props.valueFromParent}}></Two>
+        <Two ></Two>
         <Three class=""></Three>
         <Four class=""></Four>
         <Text><SmallText style={{color: "#2196F3", marginLeft:"0"}}>Cart</SmallText><SmallText style={{marginLeft: "20%"}}>Payment</SmallText><SmallText style={{marginLeft: "15%"}}>Shipping</SmallText><SmallText style={{marginLeft: "8%"}}>Checkout</SmallText></Text>
@@ -61,7 +61,7 @@ const Progresss=styled.div`
 
 position:absolute;
 margin-top:10px;
-margin-left:2.5%;
+
 background-color:#BDBDBD;
 height:2px;
 border-radius:10px;

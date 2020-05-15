@@ -3,13 +3,13 @@ var product_schema = require('../models/product_model')
 var product_controller = {
 
     add_product: (req, res) => {
-
-        var product = new product_schema(req.body);
+        console.log(req.body);
+        var product = new product_schema(req.body.data);
 
         product.save((err) => {
             if (err) {
                        res.status(500)
-                       res.send("Failed to add");
+                       res.send("Failed to add"+err);
                      }
 
             else     {
