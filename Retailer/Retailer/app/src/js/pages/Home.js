@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import SearchBar from '../components/SearchBar';
-import { Bar, Pie } from "react-chartjs-2";
+import { Bar, Pie,Doughnut } from "react-chartjs-2";
 import Card from '../components/Card';
-
+import {get} from 'axios';
 
 const Grid = styled.div`
     display:grid;
@@ -128,54 +128,189 @@ height:40px;
 
 
 class Home extends Component {
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            data:{},
+            leb:[],
+            dat:[],
+            salesData:{},
+            Sales:[],
+            Months:[]
+            
+           
+            
+          }
+        
+            
+            this.getData = this.getData.bind(this)
+            this.getDataAvgSales = this.getDataAvgSales.bind(this)
+           
+            this.getGraph = this.getGraph.bind(this)
+            this.getSalesGraph = this.getSalesGraph.bind(this)
+    }
+
+    componentDidMount() {
+        this.getData().then((response)=>{
+            
+            this.setState({
+              leb: response.data.labels,
+              dat: response.data.values,
+            });
+            console.log(response.data.values)
+            console.log(response.data.labels)
+            var va=this.getGraph(this.state.leb,this.state.dat)
+            // this.dat=response.data.values
+            // this.label=response.data.labels
+            this.setState({
+                data: va
+            })
+            // console.log("my values are"+ this.state.data[1].datasets)
+          });
+
+          this.getDataAvgSales().then((response)=>{
+            
+            this.setState({
+              Months: response.data.labels,
+              Sales: response.data.values,
+            });
+            console.log(response.data.values)
+            console.log(response.data.labels)
+            var va=this.getSalesGraph(this.state.Months,this.state.Sales)
+            // this.dat=response.data.values
+            // this.label=response.data.labels
+            this.setState({
+                salesData: va
+            })
+            // console.log("my values are"+ this.state.data[1].datasets)
+          });
+
+        //   this.getDataAvgSales().then((response)=>{
+
+
+
+        //   })
+        
+
+      
+      }
+
+getGraph(labels,values){
+       let object = {
+            labels: labels,
+            datasets: [
+              {
+                label: 'Top',
+                backgroundColor: 'rgba(75,192,192,1)',
+                borderColor: 'rgba(0,0,0,1)',
+                borderWidth: 2,
+                backgroundColor: [
+                    '#B21F00',
+                    '#C9DE00',
+                    '#2FDE00',
+                    '#00A6B4',
+                    '#6800B4'
+                  ],
+                  hoverBackgroundColor: [
+                  '#501800',
+                  '#4B5000',
+                  '#175000',
+                  '#003350',
+                  '#35014F'
+                  ],
+                data: values
+              }
+            ]
+          }
+          return object
+}
+
+getSalesGraph(labels,values){
+    let object = {
+         labels: labels,
+         datasets: [
+           {
+             label: 'Unit Sales per Month',
+             backgroundColor: '#512DA8',
+             borderColor: 'rgba(0,0,0,1)',
+             borderWidth: 2,
+             
+             data: values
+           }
+         ]
+       }
+       return object
+}
+
+
+getData(){
+        const url = 'http://127.0.0.1:5000/simple_chart';
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return  get(url,config)
+      }
+getDataAvgSales(){
+    const url = 'http://127.0.0.1:5000/line_chart';
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return  get(url,config)
+}
     render() {
 
-        let data = {
+        // let data = {
 
-            datasets: [
-                {
-                    backgroundColor: ["#512DA8"],
+        //     datasets: [
+        //         {
+        //             backgroundColor: ["#512DA8"],
 
-                    data: [1]
-                },
-                {
-                    backgroundColor: ["#D32F2F"],
+        //             data: [1]
+        //         },
+        //         {
+        //             backgroundColor: ["#D32F2F"],
 
-                    data: [2]
-                }
-            ],
-            labels: ["Jan", "Fed", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        }
+        //             data: [2]
+        //         }
+        //     ],
+        //     labels: ["Jan", "Fed", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        // }
 
-        const options = {
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    stacked: true
-                }]
-            },
-            legend: {
-                display: false,
-            },
-            tooltips: {
-                callbacks: {
-                    label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
-                    title: () => null,
-                }
-            },
-        }
+        // const options = {
+        //     scales: {
+        //         xAxes: [{
+        //             stacked: true
+        //         }],
+        //         yAxes: [{
+        //             stacked: true
+        //         }]
+        //     },
+        //     legend: {
+        //         display: false,
+        //     },
+        //     tooltips: {
+        //         callbacks: {
+        //             label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
+        //             title: () => null,
+        //         }
+        //     },
+        // }
 
 
-        let pieChartData = {
-            labels: ["Flour", "Rice", "Tea", "Hand Wash"],
-            datasets: [{
-                label: "Population (millions)",
-                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
-                data: [2478, 5267, 734, 784]
-            }]
-        }
+        // let pieChartData = {
+        //     labels: ["Flour", "Rice", "Tea", "Hand Wash"],
+        //     datasets: [{
+        //         label: "Population (millions)",
+        //         backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+        //         data: [2478, 5267, 734, 784]
+        //     }]
+        // }
 
 
         return (
@@ -193,18 +328,32 @@ class Home extends Component {
                             <BoxTitle>Sales Chart</BoxTitle>
                             <Center>
                                 <LabelContainer>
-                                    <ColorBox />
-                                    <Label>Sales</Label>
+                                    {/* <ColorBox />
+                                    <Label>Sales</Label> */}
                                 </LabelContainer>
 
                                 <LabelContainer>
-                                    <ColorBox purple />
-                                    <Label>Profit</Label>
+                                    {/* <ColorBox purple />
+                                    <Label>Profit</Label> */}
                                 </LabelContainer>
                             </Center>
 
                             <Center>
-                                <Bar data={data} options={options} />
+                                {/* <Bar data={data} options={options} /> */}
+                                <Bar
+                        data={this.state.salesData}
+                        options={{
+                            title:{
+                            display:true,
+                            
+                            fontSize:20
+                            },
+                            legend:{
+                            display:true,
+                            position:'right'
+                            }
+                        }}
+                        />
                             </Center>
 
                         </Box>
@@ -281,7 +430,22 @@ class Home extends Component {
 
                             <Center>
                                 <TwoColumnGrid>
-                                    <Pie data={pieChartData} />
+                                <Doughnut
+                        data={this.state.data}
+                        options={{
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            title:{
+                            display:true,
+                            text:'Top 5',
+                            fontSize:20
+                            },
+                            legend:{
+                            display:true,
+                            position:'right'
+                            }
+                        }}
+                        />
                                 </TwoColumnGrid>
                             </Center>
 

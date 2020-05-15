@@ -10,11 +10,11 @@ function App() {
   return (
     <div id='app'>
     
-    <Home_container />
+   {/* <Home_container /> */}
            {/* <ProductDetail />
            <Dashboard /> */}
-{/* <Expand /> */}
-{/* <AddProduct /> */}
+{/* <Expand /> */} 
+<AddProduct />
 
     </div>
   );

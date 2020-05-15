@@ -186,7 +186,7 @@ class AddProduct extends Component {
                         </InputContainer>
                         <InputContainer>
                             <Label >Product Name:</Label>
-                            <Input type="text" value={this.state.name} name="name" className="inpu" id="name" onChange={e => this.setState({name:e.target.value})}></Input>
+                            <Input type="text" value={this.state.name} name="name" className="inpu" id="name" ></Input>
                         </InputContainer>
                         <InputContainer>
                             <Label>Category</Label>
