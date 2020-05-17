@@ -183,6 +183,8 @@ export default class AddProduct extends Component {
 
     }
     componentDidMount() {
+      
+
         this._handleClick();
     }
 
@@ -371,7 +373,11 @@ addProduct(){
 console.log(this.state)
 
 if(this.state.prod_name != ''  &&  this.state.barcode!=''  && this.state.category!='' && this.state.size !=''&& this.state.brand!='' && this.state.details!='' && this.state.product_per_carton!='' && this.state.no_per_carton !=''&& this.state.seller_price!='' && this.state.retail_price!='' ){ 
-let product = {
+
+    let date = new Date();
+    let curr_date = date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
+
+    let product = {
     name                    :this.state.prod_name,
     category                :this.state.category,
     size                    :this.state.size,
@@ -382,8 +388,9 @@ let product = {
     Retail_price            :this.state.retail_price,
     details                 :this.state.details,
     barcode                 :this.state.barcode,
+    sku                     :curr_date,
 }
-Axios.post("http://localhost:4000/product/add",product).then(()=>{
+Axios.post("add",product).then(()=>{
     alert('Product Added')
 })
 }

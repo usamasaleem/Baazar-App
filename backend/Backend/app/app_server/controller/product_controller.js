@@ -4,7 +4,7 @@ var product_controller = {
 
     add_product: (req, res) => {
         console.log(req.body);
-        var product = new product_schema(req.body.data);
+        var product = new product_schema(req.body);
 
         product.save((err) => {
             if (err) {
@@ -47,7 +47,7 @@ var product_controller = {
 
     delete_product: (req, res, next) => {
 
-        product_schema.findByIdAndRemove(req.params.id,(err,doc)=>{
+        product_schema.findOneAndDelete(req.params.name,(err,doc)=>{
 
             if(err)    {
                         res.status(500);
