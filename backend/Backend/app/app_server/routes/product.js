@@ -12,9 +12,7 @@ router.post  ('/add'          ,    productController.add_product     );
 
 router.put   ('/update/:id'   ,    productController.update_product  );
 
-router.delete('/delete/:id'   ,    productController.delete_product  );
-
-router.post  ('/login'      ,      productController.login           );
+router.delete('/delete/:name' ,    productController.delete_product  );
 
 
 

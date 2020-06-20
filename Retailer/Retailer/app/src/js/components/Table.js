@@ -42,15 +42,6 @@ export default class Table extends Component {
     render() {
 
 
-        let product = {
-            name: "Potatoes",
-            sku: '123-456',
-            category: "Vegetables",
-            size: '2Kg',
-            price: '200 PKR',
-            stock: "200 Kg",
-        }
-
 
         let { products,heading } = this.props;
 

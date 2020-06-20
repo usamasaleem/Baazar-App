@@ -45,6 +45,10 @@ var product_schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    sku: {
+        type: String,
+        required: true
+    },
 
 
 

@@ -4,6 +4,8 @@ import SearchBar from '../components/SearchBar';
 import { Bar, Pie,Doughnut } from "react-chartjs-2";
 import Card from '../components/Card';
 import {get} from 'axios';
+import Table from '../components/Table';
+import Axios from  'axios';
 
 const Grid = styled.div`
     display:grid;
@@ -138,8 +140,10 @@ class Home extends Component {
             dat:[],
             salesData:{},
             Sales:[],
-            Months:[]
-         
+            Months:[],
+            products:[]
+           
+            
           }
         
             
@@ -187,7 +191,9 @@ class Home extends Component {
 
         //   this.getDataAvgSales().then((response)=>{
 
-
+          Axios.get('http://localhost:4000/product/').then((resp)=>{
+              this.setState({products:resp.data})
+          })
 
         //   })
         
@@ -310,6 +316,11 @@ getDataAvgSales(){
         //     }]
         // }
 
+
+        let products = this.state.products;
+
+
+        console.log(this.state.products)
 
         return (
             <div>
@@ -464,6 +475,8 @@ getDataAvgSales(){
                 </Grid>
 
 
+
+                <Table products={products}/>
 
             </div>
         );

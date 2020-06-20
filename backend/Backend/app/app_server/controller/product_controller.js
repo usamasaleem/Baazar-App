@@ -47,7 +47,7 @@ var product_controller = {
 
     delete_product: (req, res, next) => {
 
-        product_schema.findByIdAndRemove(req.params.id,(err,doc)=>{
+        product_schema.findOneAndDelete(req.params.name,(err,doc)=>{
 
             if(err)    {
                         res.status(500);

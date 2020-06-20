@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Dots from '../assets/images/shapes-and-symbols.svg';
 import ExpandedCard from "./ExpandedCard";
-
+import Axios from 'axios';
 
 const ActiveColor ='#2196F3';
 
@@ -80,7 +80,7 @@ export default class ProductCard extends Component {
     
     render() {
 
-
+    
     let {showImage,Product} = this.props;
     
 
@@ -97,8 +97,8 @@ export default class ProductCard extends Component {
                 <Text active={this.state.showExpandedCard}>{Product.sku}</Text>
                 <Text active={this.state.showExpandedCard}>{Product.category}</Text>
                 <Text active={this.state.showExpandedCard}>{Product.size}</Text>
-                <Text active={this.state.showExpandedCard}>{Product.price}</Text>
-                <Text active={this.state.showExpandedCard}>{Product.stock}</Text>
+                <Text active={this.state.showExpandedCard}>{Product.Retail_price}</Text>
+                <Text active={this.state.showExpandedCard}>{Product.number_of_carton}</Text>
                 <MenuContainer>
                 <Icon src={Dots}  onClick={(e)=>{
                     e.stopPropagation()
@@ -106,7 +106,11 @@ export default class ProductCard extends Component {
                 {this.state.showMenu && 
                     <Menu>
                     <Options>Edit</Options>
-                    <Options>Delete</Options>
+                    <Options onClick={()=>{
+                        Axios.delete('http://localhost:4000/product/delete/'+Product.name).then(()=>{
+                            window.location.reload(false);
+                        })  
+                    }}>Delete</Options>
                     </Menu>
                 } 
                 </MenuContainer>
