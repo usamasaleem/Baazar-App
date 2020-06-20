@@ -8,7 +8,10 @@ export default class inventoryCard extends Component {
 
     constructor() {
         super();
-        this.state = { isExpanded: false };
+        this.state = { isExpanded: false ,
+        
+        };
+
     }
 
 
@@ -17,17 +20,15 @@ export default class inventoryCard extends Component {
             <>
                 <Cardcontainer className="Cardcontainer"  onClick={() => { this.toggleExpanded() }}>
                 <CardText className="CardText">1</CardText>
-                    <CardimageContainer className="CardimageContainer">
-                        <Cardimage className="Cardimage"></Cardimage>
-                    </CardimageContainer>
+                 
                     
-                    <CardText className="CardText">Corn Flakes</CardText>
-                    <CardText className="CardText">12334</CardText>
-                    <CardText className="CardText">Category</CardText>
-                    <CardText className="CardText info">Size</CardText>
-                    <CardText className="CardText info">Stock</CardText>
-                    <CardText className="CardText info">..</CardText>
-
+                    <CardText className="CardText">{this.props.item.name}</CardText>
+                    <CardText className="CardText">{this.props.item.Retail_price}</CardText>
+                    <CardText className="CardText">{this.props.item.category}</CardText>
+                    <CardText className="CardText info">{this.props.item.size}</CardText>
+                    <CardText className="CardText info">{this.props.item.number_of_carton}</CardText>
+                    <CardText className="CardText info">{this.props.item.number_of_carton*this.props.item.product_per_carton*this.props.item.Retail_price}</CardText>
+                   
                 </Cardcontainer>
                
         </ >
@@ -39,8 +40,8 @@ export default class inventoryCard extends Component {
 const Cardcontainer=styled.div`
     font-family: 'Poppins',sans-serif;
     letter-spacing: .5pt;
-    display: flex;
-    
+    display: inline-flex;
+    width:95%;
     align-items: center;
     padding: .6rem  1rem;
     margin: 1rem 0rem;
@@ -49,7 +50,7 @@ const Cardcontainer=styled.div`
     margin-top: .5rem;
     overflow-x: auto;
     cursor: pointer;
-  
+    word-break:break-word;
 `
 
 const CardText=styled.p`
@@ -58,8 +59,8 @@ const CardText=styled.p`
     margin: 0 ;
     padding: 0;
     margin: .5rem 1rem;
+    width:80px;
 `
-
 const CardimageContainer=styled.div`
   display: flex;  
   border-radius: 50%;

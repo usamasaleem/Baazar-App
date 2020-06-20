@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartLine,faBoxOpen,faCog} from '@fortawesome/free-solid-svg-icons';
+import { faChartLine,faBoxOpen,faCog,faDollarSign} from '@fortawesome/free-solid-svg-icons';
 // import SearchBar from '../SearchBar/SearchBar'
  import {devices} from '../../assets/devices/devices'
 
-
+ import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 class navbar extends Component {
 
     constructor(props) {
@@ -23,14 +28,14 @@ class navbar extends Component {
             <NavBartitleContainer className="NavBar-titleContainer">
            
             <NavBar__logo className="NavBar__logo">Baazar.</NavBar__logo>
-            <DashBoard><Icon><FontAwesomeIcon icon={faChartLine}></FontAwesomeIcon></Icon><Route href="#">Dashboard</Route></DashBoard>
-            <Products><Icon><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></Icon><Route href="#">Products </Route></Products>
+            <StyledLink to={{pathname: `/`}} > <DashBoard><Icon><FontAwesomeIcon icon={faChartLine}></FontAwesomeIcon></Icon>Dashboard</DashBoard></StyledLink>
+            <StyledLink to={{pathname: `/products`}} ><Products><Icon><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></Icon>Products </Products></StyledLink>
             </NavBartitleContainer>
 
             <SubNavContent>
            
-            <Sales><Icon><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></Icon><Route href="#">Sales</Route></Sales>
-            <Analytics><Icon><FontAwesomeIcon icon={faCog}></FontAwesomeIcon></Icon><Route href="#">Analytics </Route></Analytics>
+            <StyledLink to={{pathname: `/order`}} >  <Sales><Icon><FontAwesomeIcon icon={faDollarSign}></FontAwesomeIcon></Icon>Payment</Sales></StyledLink>
+            
             </SubNavContent>
         </Navbar>
              
@@ -40,11 +45,17 @@ class navbar extends Component {
 
     }
 }
+const StyledLink = styled(Link)`
+    text-decoration: none;
 
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`
 const Icon =styled.i
 `
 position:relative;
-top:10px;
+top:5px;
 margin-right:10px;
 font-size:1.5rem;
 `
@@ -103,10 +114,10 @@ padding-right:12px;
 font-size:18px;
 font-weight:lighter;
 `
-const Route=styled.a
+const Routes=styled.a
 `
 position:relative;
-top:10px;
+top:6px;
 text-decoration:none;
 text-align:center;
 &:visited{
@@ -123,7 +134,7 @@ text-align:center;
 `
 const Sales=styled.div
 `
-margin-top:45%;
+margin-top:60%;
 
 height:60px;
 color:white;

@@ -4,7 +4,7 @@ var product_controller = {
 
     add_product: (req, res) => {
         console.log(req.body);
-        var product = new product_schema(req.body.data);
+        var product = new product_schema(req.body);
 
         product.save((err) => {
             if (err) {

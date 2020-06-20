@@ -139,9 +139,7 @@ class Home extends Component {
             salesData:{},
             Sales:[],
             Months:[]
-            
-           
-            
+         
           }
         
             

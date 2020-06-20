@@ -4,9 +4,10 @@ import Navbar from '../Navbar/navbar';
 import Search from '../SearchBar/SearchBar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen,faPlus,faArrowLeft,faUpload} from '@fortawesome/free-solid-svg-icons';
-import {post} from 'axios';
+import {post,put} from 'axios';
 import $ from 'jquery'
-
+import {reactLocalStorage} from 'reactjs-localstorage';
+import { Link, Redirect,  } from 'react-router-dom'
 class AddProduct extends Component {
   
     constructor(props) {
@@ -35,6 +36,7 @@ class AddProduct extends Component {
           this.onFormSubmit = this.onFormSubmit.bind(this)
           this.onChange = this.onChange.bind(this)
           this.fileUpload = this.fileUpload.bind(this)
+
           this.handleChange = this.handleChange.bind(this)
           this.handleSubmit = this.handleSubmit.bind(this)
 
@@ -43,7 +45,7 @@ class AddProduct extends Component {
     onFormSubmit(e){
         e.preventDefault() // Stop form submit
         this.fileUpload(this.state.file).then((response)=>{
-          
+            console.log(this.state.file.name)
           this.setState({
             data: response.data,
             Names: response.data.match_path,
@@ -53,10 +55,46 @@ class AddProduct extends Component {
           console.log(this.state.data)
           
         })
+        // this.fileUploadToNode(this.state.file).then((res)=>{
+        //     console.log(res)
         
+          
+        // })
+        // this.fileUploadToCustomer(this.state.file).then((resp)=>{
+        //     console.log(resp)
+         this.fileUploadToCustomer(this.state.file).then((res)=>{
+            console.log(res)
         
+          
+        })
+          
+        // })
+        // const config = {
+        //     headers: {
+        //         'Accept': 'multipart/form-data',
+        //         'Content-Type': 'multipart/form-data',
+                
+        // }}
+        // const formData = new FormData();
+        // formData.append('photo',this.state.file)
+
+        // post(`http://localhost:4000/upload`,  formData ,config)
+        // .then(res => {
+        //  console.log("node "+res)
+        // })
+
+        // post(`http://localhost:4000/upload/customer`,  formData ,config)
+        // .then(res => {
+        //  console.log("node "+res)
+        // })
+      
+    }
+        
+    
        
-       
+      toServer(e){
+        e.preventDefault();
+        
       }
       componentDidMount() {
         this._handleClick();
@@ -72,18 +110,45 @@ class AddProduct extends Component {
             Seller_price: event.target.Seller_price,
             Retail_price: event.target.Retail_price,
             details: event.target.details
+            
         });
         console.log(this.state);
       }
 
       onChange(e) {
-        this.setState({file:e.target.files[0]})
+        this.setState({
+            file:e.target.files[0]
+        })
         console.log(e.target.files[0])
+       
       }
       fileUpload(file){
         const url = 'http://127.0.0.1:5000/upload';
         const formData = new FormData();
         formData.append('image',file,file.name)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return  post(url, formData,config)
+      }
+
+      fileUploadToNode(file){
+        const url = 'http://localhost:4000/upload';
+        const formData = new FormData();
+        formData.append('photo',file)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return  post(url, formData,config)
+      }
+      fileUploadToCustomer(file){
+        const url = 'http://localhost:4000/upload/customer';
+        const formData = new FormData();
+        formData.append('photo',file)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -106,7 +171,8 @@ class AddProduct extends Component {
             number_of_carton: this.state.number_of_carton,
             Seller_price: this.state.Seller_price,
             Retail_price: this.state.Retail_price,
-            details: this.state.details
+            details: this.state.details,
+            fileName:this.state.file.name,
         };
         console.log(data)
         const config = {
@@ -116,8 +182,17 @@ class AddProduct extends Component {
         }
         post(`http://localhost:4000/product/add`,  {data} ,config)
           .then(res => {
+            const up = {
+                products:res.data._id
+
+            };
+            const storeUp={
+                stores:reactLocalStorage.get('nauman')
+            }
+            put(`http://localhost:4000/store/update/`+reactLocalStorage.get('nauman'),  {up} ,config).then(res=>{console.log(res.data)});
+            put(`http://localhost:4000/product/update/`+res.data._id,  {stores:reactLocalStorage.get('nauman')} ,config).then(res=>{console.log(res.data)});
             console.log(res);
-            console.log(res.data);
+            console.log(res.data._id);
           })
           console.log(this.state);
       }
@@ -151,6 +226,9 @@ class AddProduct extends Component {
     }
     
     render() {
+        if (!reactLocalStorage.get('loginRetailer')) {
+            return <Redirect to='/login'/>;
+          }
 
         return (
        
@@ -186,12 +264,14 @@ class AddProduct extends Component {
                         </InputContainer>
                         <InputContainer>
                             <Label >Product Name:</Label>
-                            <Input type="text" value={this.state.name} name="name" className="inpu" id="name" ></Input>
+                            <Input type="text" value={this.state.name} name="name" className="inpu" id="name" onChange={e => this.setState({name:e.target.value})}></Input>
                         </InputContainer>
                         <InputContainer>
                             <Label>Category</Label>
                             <Select value={this.state.category} name="category" onChange={e => this.setState({category:e.target.value})}>
                                 <Option>Category</Option>
+                                <Option>Snacks</Option>
+                                <Option>Dairy</Option>
                             {this.state.catego.map((item,i) => 
                                 <Option className="cat" id={"1"+i} >{item}</Option>)
                             }
@@ -219,6 +299,9 @@ class AddProduct extends Component {
                                 <Option>
                                     Brand
                                 </Option>
+                                <Option>
+                                    Pepsico
+                                </Option>
                             </Select>
 
                         </InputContainer>
@@ -229,8 +312,9 @@ class AddProduct extends Component {
                     <Right>
                     <InputContainer>
                             <Label>Product Image</Label>
-                            <SelectFile type="file" onChange={this.onChange}></SelectFile>
-                            <UploadButton onClick={this.onFormSubmit}><FontAwesomeIcon icon={faUpload}></FontAwesomeIcon></UploadButton>
+                            <SelectFile type="file" name="photo" onChange={this.onChange}></SelectFile>
+                            <UploadButton value="upload" onClick={this.onFormSubmit}><FontAwesomeIcon icon={faUpload}></FontAwesomeIcon></UploadButton>
+                            
                     </InputContainer>
 
                         <InputContainer>
@@ -242,7 +326,7 @@ class AddProduct extends Component {
                             <Label>Suggestion</Label>
                             <Suggest id="Name">
                             {this.state.Names.map((item,i) => 
-                                <button className="name"  id={i} >
+                                <button  style={{ color: "black", padding: '.3rem .6rem', borderRadius: '8px', margin: '.3rem', fontSize: '.9rem', backgroundColor: 'grey' }} value={item} onClick={e => this.setState({name:e.target.value})} className="name"  id={i} >
                                     {item}
                                 </button>)
                                 
@@ -307,7 +391,14 @@ class AddProduct extends Component {
     }
 }
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color:black;
 
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`
 const TopContainer=styled.div`
 display:inline-flex;
 width:100%;
@@ -350,7 +441,9 @@ const Input=styled.input`
 width:200px;
 border: none;
 border-bottom: 1px solid #343847;
-
+&:focus{
+    outline: none;
+}
 `
 const SelectFile=styled.input`
 width:160px;

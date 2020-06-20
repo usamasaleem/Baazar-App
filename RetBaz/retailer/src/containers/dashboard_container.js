@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-import Card from '../components/cards/cards'
+import InventoryCard from '../components/lowstock/lowstock'
+import Logout from '../components/profiling/logout'
 import styled from 'styled-components';
 import Navbar from '../components/Navbar/navbar';
 import Search from '../components/SearchBar/SearchBar';
@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen,faPlus} from '@fortawesome/free-solid-svg-icons';
 import {Bar,Pie,Doughnut} from 'react-chartjs-2';
 import {get} from 'axios';
-
+import {reactLocalStorage} from 'reactjs-localstorage';
+import { Link, Redirect,  } from 'react-router-dom'
 class dashboard_container extends Component {
 
 
@@ -21,25 +22,75 @@ class dashboard_container extends Component {
             dat:[],
             salesData:{},
             Sales:[],
-            Months:[]
-            
-           
+            Months:[],
+            stock:0,
+            isExpanded:false,
+            TotalProducts:0,
+            invoices:[],
+            lowstock:[],
+            monthInt:1,shift:false
             
           }
         
             
             this.getData = this.getData.bind(this)
             this.getDataAvgSales = this.getDataAvgSales.bind(this)
-            this.onChange = this.onChange.bind(this)
+            this.change = this.change.bind(this)
             this.getGraph = this.getGraph.bind(this)
             this.getSalesGraph = this.getSalesGraph.bind(this)
     }
-    onChange(e) {
+    toggleExpanded() {
+        this.setState({ isExpanded: !this.state.isExpanded });
+    }
+    change(e) {
         // this.state.datasets[0]=this.state.dat
         // this.state.bar.labels=this.state.leb
         // console.log(this.state.bar.datasets[4])
+        this.setState({
+            monthInt: e.target.value
+        }, () => {
+
+             this.getData().then((response)=>{
+            
+            this.setState({
+              leb: response.data.labels,
+              dat: response.data.values,
+            });
+            console.log(response.data.values)
+            console.log(response.data.labels)
+            var va=this.getGraph(this.state.leb,this.state.dat)
+            // this.dat=response.data.values
+            // this.label=response.data.labels
+            this.setState({
+                data: va
+            })
+            // console.log("my values are"+ this.state.data[1].datasets)
+          });
+            
+        });
+        
+
+       
+        // this.getData().then((response)=>{
+            
+        //     this.setState({
+        //       leb: response.data.labels,
+        //       dat: response.data.values,
+        //     });
+        //     console.log(response.data.values)
+        //     console.log(response.data.labels)
+        //     var va=this.getGraph(this.state.leb,this.state.dat)
+        //     // this.dat=response.data.values
+        //     // this.label=response.data.labels
+        //     this.setState({
+        //         data: va
+        //     })
+        //     // console.log("my values are"+ this.state.data[1].datasets)
+        //   });
       }
     componentDidMount() {
+        const DATE_OPTIONS = {year: 'numeric', month: 'short', day: 'numeric' };
+        console.log(new Date().toISOString().slice(0, 10).split('-').reverse().join('/'));
         this.getData().then((response)=>{
             
             this.setState({
@@ -80,8 +131,25 @@ class dashboard_container extends Component {
 
         //   })
         
-
+        this.stock().then((response)=>{
+            
+            this.setState({
+              stock:response.data.length,
+              lowstock:response.data,
+            });
+            console.log(response.data.length)
+           
+          });
       
+          this.getProducts().then((response)=>{
+            
+            this.setState({
+             invoices:response.data,
+              TotalProducts:response.data.length
+            });
+            console.log(this.state.invoices)
+           
+          });
       }
 
 getGraph(labels,values){
@@ -94,10 +162,10 @@ getGraph(labels,values){
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
                 backgroundColor: [
-                    '#B21F00',
-                    '#C9DE00',
-                    '#2FDE00',
-                    '#00A6B4',
+                    '#F53C56',
+                    '#11CDEF',
+                    '#FB6340',
+                    '#2DCE98',
                     '#6800B4'
                   ],
                   hoverBackgroundColor: [
@@ -120,7 +188,7 @@ getSalesGraph(labels,values){
          datasets: [
            {
              label: 'Unit Sales per Month',
-             backgroundColor: 'rgba(75,192,192,1)',
+             backgroundColor: 'rgba(251,99,64,1)',
              borderColor: 'rgba(0,0,0,1)',
              borderWidth: 2,
              
@@ -133,7 +201,7 @@ getSalesGraph(labels,values){
 
 
 getData(){
-        const url = 'http://127.0.0.1:5000/simple_chart';
+        const url = 'http://127.0.0.1:5000/month?id='+this.state.monthInt;
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -150,9 +218,30 @@ getDataAvgSales(){
         }
         return  get(url,config)
 }
+getProducts(){
+    const url = 'http://localhost:4000/product/storeProducts/'+reactLocalStorage.get('nauman');
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return  get(url,config)
+}
+stock(){
+        
+    const url = 'http://localhost:4000/product/outOfStock';
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return  get(url,config)
+}
     render() {
        
-        
+        if (!reactLocalStorage.get('loginRetailer')) {
+            return <Redirect to='/login'/>;
+          }
 
         return (
             
@@ -166,8 +255,10 @@ getDataAvgSales(){
                         <Search />
                         <NavBar_iconContainer className="NavBar-iconContainer">
                         <Shopping_cart ><FontAwesomeIcon icon={ faBell }/></Shopping_cart>
-                            <User ><FontAwesomeIcon icon={ faUser }/></User> 
+                            <User onClick={() => { this.toggleExpanded() }} ><FontAwesomeIcon icon={ faUser }/></User> 
                         </NavBar_iconContainer>
+                        {this.state.isExpanded &&
+                <Logout />    }
                     </SearchBar>
 
                     <MainTitle>
@@ -206,6 +297,23 @@ getDataAvgSales(){
                     <Top5>
                     <SmallSubheadings>Overview</SmallSubheadings>
                         <SmallHeading>Top 5 Selling items</SmallHeading>
+                        <Select name="month" onChange={this.change} value={this.state.value}  >
+                                 <Option >Month</Option>
+                                <Option value='1' >January</Option>
+                                <Option value='2' > February</Option>
+                                <Option value='3'>March</Option>
+                                <Option value='4' >April</Option>
+                                <Option value='5' > May</Option>
+                                <Option value='6'>June</Option>
+                                <Option value='7' >July</Option>
+                                <Option value='8' > August</Option>
+                                <Option value='9'>September</Option>
+                                <Option value='10' >October</Option>
+                                <Option value='11' > November</Option>
+                                <Option value='12'>December</Option>
+                                        
+                            </Select>
+                            
                         <Doughnut
                         data={this.state.data}
                         options={{
@@ -213,12 +321,13 @@ getDataAvgSales(){
                             maintainAspectRatio: true,
                             title:{
                             display:true,
-                            text:'top 5',
+                            text:'Top 5',
                             fontSize:20
                             },
                             legend:{
                             display:true,
-                            position:'right'
+                            position:'right',
+                            boxWidth:20
                             }
                         }}
                         />
@@ -235,30 +344,49 @@ getDataAvgSales(){
 
                     <ProductSummary>
                             <AddProduct>
-                            <IconCircle><FontAwesomeIcon icon={faPlus}></FontAwesomeIcon></IconCircle>
-                            <VerySmallHeadings>Add Product</VerySmallHeadings>
+                            <IconCircle> <StyledLink to={{pathname: `/addproducts`}} ><FontAwesomeIcon icon={faPlus}></FontAwesomeIcon></StyledLink></IconCircle>
+                            <StyledLink to={{pathname: `/addproducts`}} ><VerySmallHeadings>Add Product</VerySmallHeadings></StyledLink>
                             </AddProduct>
 
                             <AddProduct>
                                 <TotalProducts>Total Products</TotalProducts>
                                 <IconContainer>
-                            <Value>69</Value>
+                                <Value>{this.state.TotalProducts}</Value>
                             <FontAwesomeIcon className="fa-2x" icon={faBoxOpen}></FontAwesomeIcon>
                             </IconContainer>
 
                             </AddProduct>
 
                             <AddProduct>
-                            <TotalProducts>Out of Stock</TotalProducts>
+                            <TotalProducts style={{color: "red"}}>Out of Stock</TotalProducts>
                             
                             <IconContainer>
-                            <Value >69</Value>
+                            <Value style={{color: "red"}}>{this.state.stock}</Value>
                             <FontAwesomeIcon className="fa-2x" icon={faBoxOpen}></FontAwesomeIcon>
                             </IconContainer>
                             </AddProduct>
                     </ProductSummary>
 
                     <LowStock>
+                    <Title>
+                            <Heading  style={{color: "red", paddingTop:"20px"}}>Low Stock Items</Heading>
+                           
+                        </Title>
+
+                    <Cardcontainer className="Cardcontainer" >
+                    <CardText className="CardText">#</CardText>
+                
+                    <CardText className="CardText">Name</CardText>
+                    <CardText className="CardText">SKU</CardText>
+                    <CardText className="CardText">Qunatity</CardText>
+                   
+                    
+                    
+                </Cardcontainer>
+                    {this.state.lowstock.map((item) => 
+                      <InventoryCard  item={item} ></InventoryCard>)
+                            }
+
 
                     </LowStock>
                 </Div>
@@ -268,7 +396,24 @@ getDataAvgSales(){
 
     }
 }
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color:black;
 
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`
+const Select=styled.select`
+width:max-content;
+border: none;
+border-bottom: 1px solid #343847;
+outline:none;
+
+`
+const Option=styled.option`
+
+`
 const ProductSummary=styled.div`
 width:100%;
 height:30%;
@@ -285,6 +430,7 @@ const IconCircle=styled.i`
     left: 38%;
    
 `
+
 const AddProduct=styled.div`
 width:10%;
 background-color:#FDFDFF;
@@ -304,7 +450,7 @@ const IconContainer=styled.div
 `
 justify-content: space-between;
 display:flex;
-margin-top:50px;
+margin-top:40px;
 `
 const Div=styled.div`
 width:100%;
@@ -402,13 +548,13 @@ font-size:3rem;
 const Value= styled.p   
 `
 color:black;
-font-size:24px;
+font-size:32px;
 font-family:"Poppins";
 font-weight:400;
 paddding-bottom:30px;
 padding-left:10px;
 position:relative;
-top: -22px;
+top: -40px;
 
 `
 const SubDiv=styled.div
@@ -462,7 +608,8 @@ margin-top:3%;
 border-radius:2%;
 margin-left:4%;
 box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-overflow-x: auto;
+overflow-x: hidden;
+
 `
 const InventoryDetail = styled.div
 `
@@ -533,7 +680,7 @@ cursor: pointer
 const Cardcontainer=styled.div`
     font-family: 'Poppins',sans-serif;
     letter-spacing: .5pt;
-    display: flex;
+    display: inline-flex;
     
     align-items: center;
     padding: .6rem  1rem;
@@ -543,7 +690,8 @@ const Cardcontainer=styled.div`
     margin-top: .5rem;
     overflow-x: auto;
     cursor: pointer;
-  
+    word-break:break-all;
+  width:95%;
 `
 
 const CardText=styled.p`
@@ -553,6 +701,7 @@ const CardText=styled.p`
     padding: 0;
     margin: .5rem 1rem;
     color:#BDBDBD;
+    width:25%;
 `
 
 const CardimageContainer=styled.div`
