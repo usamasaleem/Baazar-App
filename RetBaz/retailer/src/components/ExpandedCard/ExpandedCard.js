@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import ProductDetails from '../ProductDetail/details'
 
-import { BrowserRouter as Router, Route,Switch, Redirect} from 'react-router-dom'
+import { BrowserRouter as Router, Route,Switch, Redirect,Link} from 'react-router-dom'
 
 export default class ExpandedCard extends Component {
 
@@ -30,22 +30,25 @@ export default class ExpandedCard extends Component {
         return (
             <>
                 <ExpandedCardContainer >
-              
+                <StyledLink to={{pathname: `product/detail/${this.props.value._id}`}} >
                     <ImageContainer className="ImageContainer">
 
-                        <ExpandedCardImage className="ExpandedCardImage" src={Icon}></ExpandedCardImage>
+                        <ExpandedCardImage className="ExpandedCardImage" src={ `/uploads/${this.props.value.fileName}`} ></ExpandedCardImage>
                     </ImageContainer>
 
-
+                    </StyledLink>
+                    <StyledLink to={{pathname: `product/detail/${this.props.value._id}`}} >
              <ExpandedCardDetailContainer className="ExpandedCardDetailContainer">
 
                         <DetailInnerContainer className="DetailInnerContainer">
+                        
                             <Heading className="heading">
                                 <p>Product Name</p>
                             </Heading>
                             <Content className="content">
                                 <p>{this.props.value.name}</p>
                             </Content>
+                           
 
 
                         </DetailInnerContainer>
@@ -124,13 +127,20 @@ export default class ExpandedCard extends Component {
 
 
             </ExpandedCardDetailContainer>
-
+            </StyledLink>
                 </ExpandedCardContainer>
 
             </>
         )
     }
 }
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`
 const ExpandedCardContainer =styled.div`
 display: grid;
 padding: 1rem 0;

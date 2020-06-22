@@ -22,16 +22,14 @@ export default class Cards extends Component {
             <>
                 <Cardcontainer value={this.props.item._id} className="Cardcontainer"   onClick={() => { this.toggleExpanded() }}>
                 <CardText className="CardText">1</CardText>
-                    <CardimageContainer className="CardimageContainer">
-                        <Cardimage className="Cardimage"></Cardimage>
-                    </CardimageContainer>
+                    
                     
                     <CardText className="CardText">{this.props.item.name}</CardText>
                     <CardText className="CardText">22</CardText>
                     <CardText className="CardText">{this.props.item.category}</CardText>
                     <CardText className="CardText info">{this.props.item.size}</CardText>
                     <CardText className="CardText info">{this.props.item.number_of_carton}</CardText>
-                    <CardText className="CardText info"></CardText>
+                    
 
                 </Cardcontainer>
                {this.state.isExpanded &&
@@ -67,6 +65,7 @@ const CardText=styled.p`
     margin: 0 ;
     padding: 0;
     margin: .5rem 1rem;
+    width:20%;
 `
 
 const CardimageContainer=styled.div`

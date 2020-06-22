@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link, Redirect,  } from 'react-router-dom'
 import Card from '../components/cards/cards'
 import styled from 'styled-components';
 import Navbar from '../components/Navbar/navbar';
@@ -7,8 +7,8 @@ import Search from '../components/SearchBar/SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen} from '@fortawesome/free-solid-svg-icons';
 import {get} from 'axios';
-
-
+import {reactLocalStorage} from 'reactjs-localstorage';
+import Logout from '../components/profiling/logout'
 class home_container extends Component {
 
 
@@ -16,27 +16,60 @@ class home_container extends Component {
         super(props);
 
         this.state = {
-            data:[]
-       
+            data:[],
+            TotalProducts:0,
+            stock:0,
+            timeout:false,
+            logout:false,
+            isExpanded:false
           }
+          this.logout=this.logout.bind(this);
     }
 
 
     componentDidMount() {
-        this.getProducts();
+
+        let hours = 2
+        let saved = localStorage.getItem('saved')
+        if (saved && (new Date().getTime() - saved > hours * 60 * 60 * 1000)) {
+            this.setState({
+                timeout:true
+            })
+        localStorage.clear()
+        }
+
+        console.log(new Date().toDateString())
+       
 
         this.getProducts().then((response)=>{
             
             this.setState({
-              data:response.data
+              data:response.data,
+              TotalProducts:response.data.length
             });
             console.log(response.data)
            
           });
+
+          this.stock().then((response)=>{
+            
+            this.setState({
+              stock:response.data.length
+            });
+            console.log(response.data.length)
+           
+          });
+      }
+      logout(){
+        localStorage.clear();
+        this.setState({
+            logout:true
+        })
+        
       }
 
       getProducts(){
-        const url = 'http://localhost:4000/product';
+        const url = 'http://localhost:4000/product/storeProducts/'+reactLocalStorage.get('nauman');
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data'
@@ -44,7 +77,29 @@ class home_container extends Component {
             }
             return  get(url,config)
     }
+    stock(){
+        
+        const url = 'http://localhost:4000/product/outOfStock';
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            return  get(url,config)
+    }
+    toggleExpanded() {
+        this.setState({ isExpanded: !this.state.isExpanded });
+    }
     render() {
+        if (!reactLocalStorage.get('loginRetailer')) {
+            return <Redirect to='/login'/>;
+          }
+
+        const timeout = this.state.logout;
+
+        if (timeout) {
+          return <Redirect to='/login'/>;
+        }
 
         return (
        
@@ -55,33 +110,34 @@ class home_container extends Component {
                 <Div>
                     <SearchBar>
                         <Search />
+                        
                         <NavBar_iconContainer className="NavBar-iconContainer">
                         <Shopping_cart ><FontAwesomeIcon icon={ faBell }/></Shopping_cart>
-                            <User ><FontAwesomeIcon icon={ faUser }/></User> 
+                            <User  onClick={() => { this.toggleExpanded() }} ><FontAwesomeIcon icon={ faUser }/></User> 
                         </NavBar_iconContainer>
+                        {this.state.isExpanded &&
+                <Logout />    }
                     </SearchBar>
                     <SubDiv>
                 <Products>
                         <Title>
                             <Heading>Products</Heading>
                             <Filter>Filter</Filter>
-                            <Button>Add Product</Button>
+                            <Button><StyledLink to="/addproducts">Add Product</StyledLink></Button>
                         
                         </Title>
 
                     <Cardcontainer className="Cardcontainer" >
                     <CardText className="CardText">#</CardText>
-                    <CardimageContainer className="CardimageContainer">
-                        <Cardimage className="Cardimage"></Cardimage>
-                    </CardimageContainer>
+                 
                     
                     <CardText className="CardText">Product Name</CardText>
                     <CardText className="CardText">SKU</CardText>
                     <CardText className="CardText">Category</CardText>
                     <CardText className="CardText info">Size</CardText>
                     <CardText className="CardText info">Stock</CardText>
-                    <CardText className="CardText info"></CardText>
-
+                   
+                 
                 </Cardcontainer>
                 {this.state.data.map((item) => 
                       <Card  item={item} ></Card>)
@@ -94,14 +150,14 @@ class home_container extends Component {
                 <InventoryDetail>
                     <TotalProducts>
                         <SmallHeading>Total Products</SmallHeading>
-                        <Value>69</Value>
+                        <Value>{this.state.TotalProducts}</Value>
                        <Icon><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></Icon> 
 
                     </TotalProducts>
 
                     <OutofStock>
-                    <SmallHeading>Total Products</SmallHeading>
-                        <Value>69</Value>
+                    <SmallHeading style={{color: "red"}}>Out of Stock</SmallHeading>
+                        <Value style={{color: "red"}}>{this.state.stock}</Value>
                        <IconOut><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></IconOut> 
                     </OutofStock>
 
@@ -113,6 +169,14 @@ class home_container extends Component {
 
     }
 }
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color:black;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`
 const Div=styled.div`
 width:100%;
 display:block;
@@ -126,8 +190,10 @@ padding-top: 30px;
 `
 const Button=styled.button
 `
+position:absolute;
+left:57%;
 align-self: center;
-    margin-left: 330px;
+    // margin-left: 330px;
     margin-top: 20px;
     border-radius: 50px;
     background-color: white;
@@ -143,7 +209,7 @@ const Icon=styled.i
 `
 position:relative;
 top:-90px;
-left:120px;
+left:100px;
 font-size:3rem;
 
 `
@@ -151,7 +217,7 @@ const IconOut=styled.i
 `
 position:relative;
 top:-80px;
-left:120px;
+left:100px;
 font-size:3rem;
 
 `
@@ -250,12 +316,17 @@ margin-top:3%;
 border-radius:2%;
 margin-left:4%;
 box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-overflow: hidden;
+overflow-x: auto;
+
+display:flex;
+flex-direction:column;
+overflow:hidden;
 `
 const Title =styled.div
 `
 height:15%;
 display: inline-flex;
+width:100%;
 
 `
 const Heading=styled.p
@@ -306,6 +377,7 @@ const CardText=styled.p`
     padding: 0;
     margin: .5rem 1rem;
     color:#BDBDBD;
+    width:20%;
 `
 
 const CardimageContainer=styled.div`
