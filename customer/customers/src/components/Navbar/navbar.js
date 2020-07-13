@@ -33,9 +33,9 @@ class navbar extends Component {
                    
         return (<>
     <Navbar className="App">
-        <NavBartitleContainer className="NavBar-titleContainer">
+        <NavBartitleContainer className="NavBar-titleContainer" >
         <ICON><FontAwesomeIcon icon={ faBars }/></ICON>
-        <StyledLink to={{pathname: `/`}} > <NavBar__logo className="NavBar__logo">Baazar.</NavBar__logo></StyledLink>
+        <StyledLink to={{pathname: `/5km`}} > <NavBar__logo className="NavBar__logo">Baazar.</NavBar__logo></StyledLink>
 
         </NavBartitleContainer>
             {/* <Category><FontAwesomeIcon icon={ faAlignRight }/> Categries </Category> */}

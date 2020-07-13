@@ -44,14 +44,14 @@ export default class Login extends Component {
                 'Content-Type':'application/json'
             }
         }
-        post(`http://localhost:4000/authentication/users/login`,  data ,config)
+        post(`http://localhost:4000/admin/login`,  data ,config)
           .then(res => {
             
             
            
               console.log(res.data.user)
-              reactLocalStorage.set('nauman', res.data.user.stores);
-              reactLocalStorage.set('loginRetailer', true);
+            
+              reactLocalStorage.set('loginAdmin', true);
               localStorage.setItem('saved', new Date().getTime())
                 
               this.setState({

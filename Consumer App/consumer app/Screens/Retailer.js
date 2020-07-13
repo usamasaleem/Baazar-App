@@ -8,17 +8,32 @@ import { Input } from 'react-native-elements';
 import Icon from 'react-native-ionicons'
 import Product from '../Components/Product/Product';
 import ReatilerCard from '../Components/RetailerCard/RetailerCard';
-
+import {get} from 'axios';
 export default class Retailer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            stores:[]
         }
     }
 
 
     componentWillMount() {
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        
+        get('http://192.168.100.64:4000/store/location', config)
+        .then((response) => {
+            console.log(response.data)
+            this.setState({
+                stores:response.data
+            })
+          
+        })
 
     }
 
@@ -30,13 +45,18 @@ export default class Retailer extends Component {
 
         return <ScrollView style={styles.container}>
 
-            <View style={styles.retailers}>
+                    {this.state.stores.map((item) => 
+                      <View style={styles.retailers}>
+                    
+                    <ReatilerCard stackNavigation={navigation} item={item} value={item._id}  />
+                    
+                      </View>)
+                            }
+
+            {/* <View style={styles.retailers}>
                 <ReatilerCard />
-                <ReatilerCard />
-                <ReatilerCard />
-                <ReatilerCard />
-                <ReatilerCard />
-            </View>
+                
+            </View> */}
         </ScrollView>
 
             ;

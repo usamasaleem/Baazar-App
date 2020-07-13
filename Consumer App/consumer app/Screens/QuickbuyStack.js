@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import HomeScreen from "./HomeScreen";
 import ProductDetail from './ProductDetail';
 import Cart from './Cart';
+import QuickBuy from './QuickBuy';
 
 
 const routeOption = ({ route, navigation }) => {
@@ -25,22 +26,6 @@ const routeOption = ({ route, navigation }) => {
 }
 
 
-const routeOptionProdDetail = ({ route, navigation }) => {
-    return {
-        headerStyle: {
-            backgroundColor: '#FDFDFF',
-            elevation: 0,
-        },
-        headerTitleAlign: 'center',
-        headerRight: (props) => {
-            return <Icon name={'cart'} size={26} color={'#000000'} onPress={() => { navigation.push('Cart') }} />
-        },
-        headerRightContainerStyle: {
-            paddingRight: 40
-        },
-        title: route.params.prodName,
-    }
-}
 
 
 
@@ -53,8 +38,8 @@ export function QuickbuyStack() {
 
     const InnerNavigator = () => {
         return (<Stack.Navigator>
-            <Stack.Screen name="Baazar" component={HomeScreen} options={routeOption} />
-            <Stack.Screen name="ProductDetail" component={ProductDetail} options={routeOptionProdDetail} />
+            <Stack.Screen name="QuickBuy" component={QuickBuy} options={routeOption} />
+            
             <Stack.Screen name="Cart" component={Cart} options={routeOption} />
         </Stack.Navigator >
         )

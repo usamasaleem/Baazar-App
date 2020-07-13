@@ -8,6 +8,10 @@ import {post,put} from 'axios';
 import $ from 'jquery'
 import {reactLocalStorage} from 'reactjs-localstorage';
 import { Link, Redirect,  } from 'react-router-dom'
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 class AddProduct extends Component {
   
     constructor(props) {
@@ -172,6 +176,7 @@ class AddProduct extends Component {
             Seller_price: this.state.Seller_price,
             Retail_price: this.state.Retail_price,
             details: this.state.details,
+            quantity:this.state.number_of_carton*this.state.product_per_carton,
             fileName:this.state.file.name,
         };
         console.log(data)
@@ -193,6 +198,8 @@ class AddProduct extends Component {
             put(`http://localhost:4000/product/update/`+res.data._id,  {stores:reactLocalStorage.get('nauman')} ,config).then(res=>{console.log(res.data)});
             console.log(res);
             console.log(res.data._id);
+            toast("Product is successfuly added to your store", { type: "success" });
+            // window.location.reload()
           })
           console.log(this.state);
       }

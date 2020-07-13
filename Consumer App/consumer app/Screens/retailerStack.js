@@ -4,6 +4,7 @@ import Retailer from './Retailer';
 
 import Icon from 'react-native-ionicons'
 import Cart from './Cart';
+import Store from './storesProduct'
 
 const routeOption = ({ route, navigation }) => {
 
@@ -31,6 +32,7 @@ export function retailerStack() {
     return <Stack.Navigator initialRouteName="Retailer">
         <Stack.Screen name="Retailer" component={Retailer} options={routeOption} />
         <Stack.Screen name="Cart" component={Cart} options={routeOption} />
+        <Stack.Screen name="Store" component={Store} options={routeOption} />
         
     </Stack.Navigator>
 

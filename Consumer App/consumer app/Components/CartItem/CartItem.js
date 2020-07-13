@@ -8,33 +8,89 @@ import {
 import Icon from 'react-native-ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
-
-
+import Dialog, {  DialogFooter, DialogButton, DialogContent} from 'react-native-popup-dialog';
+import axios from 'axios';
 export default class CartItem extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            visible:false,
+            delete:false
         }
+        this.dialog=this.dialog.bind(this)
+        this.deleteCartItem=this.deleteCartItem.bind(this)
     }
 
 
     componentWillMount() {
-        console.log()
+        console.log(this.props.item)
     }
+
+    dialog(){
+        this.setState({
+            visible:true
+        })
+    }
+    deleteCartItem(id){
+        const config = {
+          headers: {
+             
+              'Authorization': '***'
+          }
+      }
+        axios.delete('http://192.168.100.64:4000/shoppingcart/deleteCartItem/'+id,config).then(res=>{
+  
+          console.log(res.data)
+          this.setState({
+              deleted:true,
+              visible:false
+          })
+          this.props.navigation.navigate('Cart')
+          })
+      }
 
     render() {
 
 
         return <View style={styles.container}>
 
-            <Image style={styles.prodImage} source={require('../../assets/Images/tomato.png')}/>
-            <Text  style={styles.prodName}>Tomato</Text>
-            <Text  style={styles.prodPrice}>RS60</Text>
+            <Image style={styles.prodImage} source={{uri:`http://192.168.100.64:4000/uploads/${this.props.item.products.fileName}`}}/>
+            <Text  style={styles.prodName}>{this.props.item.products.name}</Text>
+            <Text  style={styles.prodPrice}>RS. {this.props.item.products.Seller_price}</Text>
+            <Icon name={'trash'} size={24} color={'red'} onPress={this.dialog}></Icon>
 
+                        <View style={styles.dialog}>
+
+                        <Dialog
+                    visible={this.state.visible}
+                    width={300}
+
+                    footer={
+                    <DialogFooter>
+                        <DialogButton
+                        text="CANCEL"
+                        onPress={() => {this.setState({
+                            visible: false
+                        })}}
+                        />
+                        <DialogButton
+                        text="OK"
+                        onPress={() => {this.deleteCartItem(this.props.item._id)}}
+                        />
+                    </DialogFooter>
+                    }
+                >
+                    <DialogContent>
+                    <Text style={styles.dialog}>Are you sure, you want to delete this item from the cart</Text>
+                    </DialogContent>
+                </Dialog>
+
+
+                        </View>
+                
         </View>
 
-            ;
 
     }
 
@@ -49,14 +105,19 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',
-        borderRadius:16
+        borderRadius:16,
+       
     },
+    dialog:{
+      paddingTop:10
+    },
+
     prodImage:{
-        width:90,
-        height:90
+        width:50,
+        height:50
     },
     prodPrice: {
-        marginTop: 8,
+        marginTop: 0,
         fontWeight: 'bold',
         fontSize: 16,
         color: '#4CAF50'

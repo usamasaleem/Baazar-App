@@ -18,6 +18,7 @@ import {
   } from "react-router-dom";
  import Expanded from './expanded'
  import ExpandedCategory from './expendCategory'
+ import {devices} from '../../assets/devices/devices'
 class filterProducts extends Component {
 
     constructor(props) {
@@ -31,7 +32,7 @@ class filterProducts extends Component {
     }
 
     componentDidMount(){
-       
+       console.log(this.props)
     }
 
     StoreExpanded() {
@@ -83,7 +84,7 @@ class filterProducts extends Component {
             <Icon src={add}></Icon>
             </StoreFilter>
             {this.state.isExpandedCategory &&
-                <ExpandedCategory />    }
+                <ExpandedCategory action={this.props.action}/>    }
             <StoreFilter onClick={() => { this.BrandExpanded() }}>
             <SmallHeadings>Brand</SmallHeadings>
             <Icon src={add}></Icon>
@@ -111,6 +112,11 @@ border-top: 2px solid #BDBDBD;
 margin-left: 9%;
 display: inline-flex;
 flex-direction: row;
+@media ${devices.mobileM && devices.max } { 
+    width:80%;
+    
+   
+  }
 `
 const Icon=styled.img`
 width: 18px;
@@ -119,6 +125,10 @@ left: 25%;
 top: 5px;
 cursor: pointer;
 margin-left:35%;
+@media ${devices.mobileM && devices.max } { 
+   
+    margin-left:55%;
+  }
 `
 export default filterProducts;
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect,  } from 'react-router-dom'
-import Card from '../components/cards/cards'
+import Card from '../components/requestCard./requestCard'
 import styled from 'styled-components';
 import Navbar from '../components/Navbar/navbar';
 import Search from '../components/SearchBar/SearchBar';
@@ -16,13 +16,20 @@ class home_container extends Component {
         super(props);
 
         this.state = {
-            
+            data:[]
           }
         
     }
 
 
     componentDidMount() {
+        this.getRequests().then((response)=>{
+            this.setState({
+                data:response.data
+            })
+            console.log(response.data)
+        })
+
 
         
        
@@ -30,15 +37,25 @@ class home_container extends Component {
       
 
       }
+
+      getRequests(){
+        const url = 'http://localhost:4000/request/';
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return  get(url,config)
+      }
     
         
       
 
 
     render() {
-        // if (!reactLocalStorage.get('loginRetailer')) {
-        //     return <Redirect to='/login'/>;
-        //   }
+        if (!reactLocalStorage.get('loginAdmin')) {
+            return <Redirect to='/login'/>;
+          }
 
         // const timeout = this.state.logout;
 
@@ -67,28 +84,25 @@ class home_container extends Component {
                 <Products>
                         <Title>
                             <Heading>Requests</Heading>
-                            {/* <Filter>Filter</Filter> */}
+                            <Filter>Delete Stores</Filter>
                             {/* <Button><StyledLink to="/addproducts">Add Product</StyledLink></Button> */}
                         
                         </Title>
 
                     <Cardcontainer className="Cardcontainer" >
                     <CardText className="CardText">#</CardText>
-                    <CardimageContainer className="CardimageContainer">
-                        <Cardimage className="Cardimage"></Cardimage>
-                    </CardimageContainer>
                     
-                    <CardText className="CardText">Product Name</CardText>
-                    <CardText className="CardText">SKU</CardText>
-                    <CardText className="CardText">Category</CardText>
-                    <CardText className="CardText info">Size</CardText>
-                    <CardText className="CardText info">Stock</CardText>
+                    
+                    <CardText className="CardText">Retailer Name</CardText>
+                    <CardText className="CardText">Store</CardText>
+                    <CardText className="CardText">Status</CardText>
                     <CardText className="CardText info"></CardText>
                     
                 </Cardcontainer>
-                {/* {this.state.data.map((item) => 
-                      <Card  item={item.pid} ></Card>)
-                            } */}
+                {this.state.data.map((item) => 
+                      <Card  val={item} ></Card>)
+                            }
+               
 
                         {/* <Card /> */}
                        
@@ -97,14 +111,14 @@ class home_container extends Component {
                 <InventoryDetail>
                     <TotalProducts>
                         <SmallHeading>Total Products</SmallHeading>
-                        <Value>{this.state.TotalProducts}</Value>
+                        <Value>0</Value>
                        <Icon><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></Icon> 
 
                     </TotalProducts>
 
                     <OutofStock>
                     <SmallHeading>Total Products</SmallHeading>
-                        <Value style={{color: "red"}}>{this.state.stock}</Value>
+                        <Value style={{color: "red"}}>0</Value>
                        <IconOut><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></IconOut> 
                     </OutofStock>
 
@@ -129,11 +143,10 @@ width:100%;
 display:block;
 padding-left:20%;
 `
-const Filter=styled.div
+const Filter=styled.p
 `
-padding: 10px;
-align-self: center;
-padding-top: 30px;
+font-family:'Poppins';
+font-weight:bold;
 `
 const Button=styled.button
 `
@@ -272,7 +285,7 @@ overflow:hidden;
 const Title =styled.div
 `
 height:15%;
-display: inline-flex;
+display: block;
 width:100%;
 
 `
@@ -305,7 +318,7 @@ const Cardcontainer=styled.div`
     font-family: 'Poppins',sans-serif;
     letter-spacing: .5pt;
     display: flex;
-    
+    // width: 100%;
     align-items: center;
     padding: .6rem  1rem;
     margin: 1rem 0rem;
@@ -314,16 +327,17 @@ const Cardcontainer=styled.div`
     margin-top: .5rem;
     overflow-x: auto;
     cursor: pointer;
-  
+    font-weight:bold;
+
 `
 
 const CardText=styled.p`
-    font-weight: 600;
+    font-weight: 900;
     font-size: 10pt;
     margin: 0 ;
     padding: 0;
     margin: .5rem 1rem;
-    color:#BDBDBD;
+    width:150px;
 `
 
 const CardimageContainer=styled.div`

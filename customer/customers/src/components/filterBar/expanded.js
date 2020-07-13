@@ -7,6 +7,7 @@ import { Alert } from '@material-ui/lab';
 import { BrowserRouter as Router, Route,Switch, Redirect,Link} from 'react-router-dom'
 import { Checkbox } from '@material-ui/core';
 import {reactLocalStorage} from 'reactjs-localstorage';
+import {devices} from '../../assets/devices/devices'
 export default class Expanded extends Component {
 
     constructor() {
@@ -149,6 +150,9 @@ display: block;
 
 
 margin-left: 9%;
-
+@media ${devices.mobileM && devices.max } { 
+   
+    width:60%;
+  }
 
 `

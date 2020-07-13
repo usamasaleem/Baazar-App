@@ -444,7 +444,7 @@ padding:0;
 margin:0;
 width:60%;
 @media ${devices.mobileM && devices.max } { 
-    width:100%;
+    width:90%;
     overflow-y:hidden;
   }
   @media ${devices.tablet}  { 
@@ -516,7 +516,10 @@ width:25%;
 padding-bottom:5px;
 margin-top:3%;
 box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+@media ${devices.mobileM && devices.max } { 
+  width:90%
 
+}
 `
 const ProductTable__column=styled.div` 
 

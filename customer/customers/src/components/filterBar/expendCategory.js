@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route,Switch, Redirect,Link} from 'react-route
 import { Checkbox } from '@material-ui/core';
 import {reactLocalStorage} from 'reactjs-localstorage';
 import {get,post,put} from 'axios';
+import {devices} from '../../assets/devices/devices'
 export default class Expanded extends Component {
 
     constructor() {
@@ -15,7 +16,8 @@ export default class Expanded extends Component {
         this.state = { isExpanded: false,
             storeDefault:false,
             redirectToCategory:false,
-            data:[]
+            data:[],
+            store5km:false
            
         }
 
@@ -26,6 +28,7 @@ export default class Expanded extends Component {
       
        
     componentDidMount() {
+        console.log(this.props)
         this.getProducts().then((response)=>{
             this.setState({
                 data:response.data
@@ -88,24 +91,34 @@ export default class Expanded extends Component {
     render() {
         
           if (this.state.redirectToCategory) {
-              if(reactLocalStorage.get('redirect')){
-                window.location.reload();
-              if(reactLocalStorage.get('login')){
-                return <Redirect to='/category'/>;
+            
+            window.location.reload()
+          }
+        //       if(reactLocalStorage.get('redirect')){
+            
+        //         if(reactLocalStorage.get('refresh') ){
+        //             if(!reactLocalStorage.get('home5km')){
+        //                 window.location.reload()
+        //             }
+                   
+        //         }
+                
+        //       if(reactLocalStorage.get('login')){
+        //         return <Redirect to='/category'/>;
 
-              }
-            }
-              return <Alert severity="info">Please Login, to proceed.</Alert>
+        //       }
+        //     }
+        //       return <Alert severity="info">Please Login, to proceed.</Alert>
 
            
               
-          }
+        //   }
         return (
             <>
                 <ExpandedContainer >
                 <TagContainer>
                 {this.state.data.map((item) => 
-                      <Tags onClick={() => { this.filterCategory(item.name) }} >{item.name}</Tags>
+                      <Tags onClick={() => { this.props.action(item.name)}} >{item.name}</Tags>
                       
                       )
                       
@@ -113,7 +126,7 @@ export default class Expanded extends Component {
        
                 </TagContainer> 
         
-               <Button  >Fitler</Button>
+      
 
                 </ExpandedContainer>
 
@@ -188,6 +201,11 @@ display: block;
 
 
 margin-left: 9%;
+@media ${devices.mobileM && devices.max } { 
+    width:70%;
+    
+   
+  }
 
 
 `

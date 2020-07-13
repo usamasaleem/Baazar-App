@@ -13,6 +13,7 @@ import  FilterProducts from '../filterBar/filterProducts'
 import {get} from 'axios';
 import {reactLocalStorage} from 'reactjs-localstorage';
 import Search from '../SearchBar/SearchBar2'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -26,19 +27,32 @@ class filter extends Component {
         super(props);
         this.state = {
             data:[],
-            products:[]
+            products:[],
+            category:[]
        
           }
           this.print = this.print.bind(this)
+          
+        this.getProductsCat = this.getProductsCat.bind(this);
+        this.search = this.search.bind(this);
     }
 
     componentDidMount() {
+        console.log(this.props.history)
+        if(this.props.history==null){
+            reactLocalStorage.set("refresh",false);
+        }
+        reactLocalStorage.set("home5km",true);
         this.getProducts();
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         }
+        // if(reactLocalStorage.get('redirect')){
+    
+        // }
+
         this.getProducts().then((response)=>{
             
             this.setState({
@@ -80,6 +94,70 @@ class filter extends Component {
             }
             return  get(url,config)
     }
+    getProductsCat(name){
+        const url = 'http://localhost:4000/store/location';
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            
+            get(url,config).then(response=>{
+                this.setState({
+                           
+                    products:[]
+                })
+
+                
+            for (let i = 0; i < response.data.length; i++) {
+
+                get(`http://localhost:4000/product/getProsCat/?id=${response.data[i]._id}&&category=${name}`,config).then(res=>{
+                    console.log(res.data)
+                    
+                    this.setState({ products: this.state.products.concat(res.data) }
+                    )
+                      
+                    
+                    // this.setState(prevState => ({
+                    //     products: [
+                    //         ...prevState.products, 
+                    //         res.data
+                    //     ]
+                    // })
+    
+                      
+                    
+                  console.log(this.state.category)
+            
+                })
+               
+              
+            }
+                
+
+              
+               
+            } )
+        console.log("pounch  gaya"+name)
+    }
+
+    search(search){
+        
+    
+            const url = 'http://localhost:4000/product/search/'+search;
+                const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                }
+                get(url,config).then(res=>{
+                    this.setState({ products: res.data})
+                })
+        
+        console.log("in search "+search)
+       
+
+    }
 
    
 
@@ -100,7 +178,7 @@ class filter extends Component {
                             
                         
                         </Title>
-            <FilterProducts />
+            <FilterProducts action={this.getProductsCat} />
             </InnerContainer>
 
             </FilterContainer>
@@ -112,8 +190,8 @@ class filter extends Component {
 
                 
                     <Title>
-                    <Heading>Near You</Heading>
-                    <Search />
+                    <Heading style={{marginRight:"30%"}}>Near You</Heading>
+                    <Search action={this.search}  />
                     </Title>
                     
                     <Row>
@@ -159,6 +237,11 @@ const DIV=styled.div
 width:100%;
 display: flex;
 height:90%;
+@media ${devices.mobileM && devices.max } { 
+    width:100%;
+    display:block
+  }
+ 
 `
 const Heading=styled.p
 `
@@ -171,7 +254,13 @@ height:5%;
 display: inline-flex;
 width:100%;
 margin-left:9%;
-justify-content:space-evenly;
+
+align-items:center;
+@media ${devices.mobileM && devices.max } { 
+    display:block;
+   
+  }
+
 `
 const InnerContainer =styled.div
 `
@@ -182,6 +271,11 @@ height:max-content;
 
 overflow: hidden;
 display:block;
+@media ${devices.mobileM && devices.max } { 
+    width:80%;
+    margin:auto;
+   
+  }
 `
 
 
@@ -190,7 +284,10 @@ width:15%;
 justify-content: space-between;
 align-items: center;
 height:100%;
-
+@media ${devices.mobileM && devices.max } { 
+    width:90%;
+    display:inline;
+  }
 
 `
 const StoreFilter = styled.div`
@@ -236,7 +333,12 @@ const Products=styled.div`
 width: 60%;
 height:70%;
 margin-left: 10%;
-}
+@media ${devices.mobileM && devices.max } { 
+    width:100%;
+    margin-left:0;
+   
+  }
+
 `
 
 const CoverImage=styled.img`
@@ -245,6 +347,12 @@ height:300px;
 width:100%;
 border-radius:13px;
 margin-top:40px;
+@media ${devices.mobileM && devices.max } { 
+    height:100px;
+    margin-top:20px;
+    
+   
+  }
 `
 
 
@@ -259,6 +367,13 @@ justify-content:center;
 overflow:hidden;
 padding-bottom:20px;
 border-top:1px solid #BDBDBD;
+@media ${devices.mobileM && devices.max } { 
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    border-top:2px solid #BDBDBD;
+  }
+
 `
 export default filter;
 

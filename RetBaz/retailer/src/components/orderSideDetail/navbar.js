@@ -46,6 +46,7 @@ class navbar extends Component {
             })
 
             const bill={
+                id:reactLocalStorage.get('retailer-acc'),
                 amount:this.props.total
               }
         post(`http://localhost:4000/order/v1/transfers`,  bill ,config)

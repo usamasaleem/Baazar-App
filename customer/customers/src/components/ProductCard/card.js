@@ -123,7 +123,7 @@ class card extends Component {
             
             <ProductsCard  value={this.props.item._id} >
                <StyledLink to={{pathname: `customer/${this.props.item._id}`}} >
-                <ImageContainer src={ `/uploads/${this.props.item.fileName}`}>
+                <ImageContainer src={`http://localhost:4000/uploads/${this.props.item.fileName}`}>
 
                 </ImageContainer>
                 </StyledLink>
@@ -142,11 +142,11 @@ class card extends Component {
                     </Added>   }
 
                     {this.state.addedToQuick &&
-                    <FontAwesomeIcon  style={{color:"red" , fontSize:'16px', cursor:"pointer" , position:"absolute"}} icon={faRocket} ></FontAwesomeIcon>
+                    <FontAwesomeIcon  style={{color:"red" , fontSize:'16px', cursor:"pointer" , position:"absolute",paddingBottom:"25px"  }} icon={faRocket} ></FontAwesomeIcon>
                     }
 
                     {!this.state.addedToQuick && !this.state.outofstock &&
-                    <FontAwesomeIcon style={{color:"grey" , fontSize:'16px' , cursor:"pointer" , position:"absolute"}} icon={faRocket}  onClick={() => this.addToQuickBuy(this.props.item._id)}></FontAwesomeIcon>
+                    <FontAwesomeIcon style={{color:"grey" , fontSize:'16px' , cursor:"pointer" , position:"absolute",paddingBottom:"25px"  }} icon={faRocket}  onClick={() => this.addToQuickBuy(this.props.item._id)}></FontAwesomeIcon>
                     }
                     
                     {!this.state.isAdded && !this.state.outofstock &&
@@ -196,6 +196,17 @@ border: solid 0 #707070;
     height:270px;
 
 }
+@media ${devices.mobileM && devices.max } { 
+    width:50%;
+    height:70%;
+
+    &:hover{
+      
+    
+    }
+
+   
+  }
 `
 const ImageContainer =styled.img`
 height:65%;
@@ -239,6 +250,12 @@ font-size:16px;
 color:White;
 border-radius:8px;
 outline:none;
+@media ${devices.mobileM && devices.max } { 
+  
+    margin-top:20%;
+    width:100%;
+   
+  }
 `
 const Added=styled.button`
 margin-top:15px;

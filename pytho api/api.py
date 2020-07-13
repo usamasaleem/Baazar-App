@@ -30,12 +30,12 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 # cors = CORS(app)
 # app.config['CORS_HEADERS'] = 'Content-Type'
-# dir_ = os.path.dirname(os.path.realpath(__file__))
-dir_path = os.path.abspath("C:\\FYP Code\\Baazar-App\\customer\\customers\\public\\uploads")
-print(dir_path)
-# UPLOAD_FOLDER = dir_path + '/uploads'
+dir_path = os.path.dirname(os.path.realpath(__file__))
+# dir_path = os.path.abspath("/")
+
+UPLOAD_FOLDER = dir_path + '/uploads'
 # STATIC_FOLDER = dir_path + '/static'
-UPLOAD_FOLDER = dir_path
+# UPLOAD_FOLDER = dir_path
 
 STATIC_FOLDER = 'lays'
 
@@ -171,6 +171,40 @@ def line_chart():
         Sales.append(values[x])
         print(values[x])
     return jsonify({'labels': Month,'values':Sales})
+
+@app.route("/month",methods=['GET'])
+def month():
+    id=request.args.get('id')
+    print(id)
+    linkname = '/Users/Salman Sheikh/desktop/ml AND data/monthly.csv'
+    train = pd.read_csv(linkname, sep = ',')
+    
+    train['date'] = pd.to_datetime(train['date']) - pd.to_timedelta(7, unit='d')
+    df=train.groupby(['family', pd.Grouper(key='date', freq='W')])['unit_sales'].sum().sort_values(ascending=False).reset_index()
+    df['Month']=df['date'].dt.month
+    df['Year']=df['date'].dt.year
+    yearly=df['Year']==2011 
+    monthly=df['Month']==int(id)
+    filtered=df.where(yearly & monthly).dropna().reset_index()
+
+    label=[]
+    su=[]
+    
+    cleaned=filtered.groupby('family')['unit_sales'].sum().sort_values(ascending=False)
+    name=cleaned.index
+    values=cleaned
+    for x in range(5):
+        label.append(name[x])
+    for x in range(5):
+        su.append(values[x])
+    
+    print(label)
+    return jsonify({'labels': label,'values':su})
+
+
+# average_sales = strain.groupby('date')["unit_sales"].mean()
+# print(average_sales)
+
 
 
 CORS(app, expose_headers='Authorization')

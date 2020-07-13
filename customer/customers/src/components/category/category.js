@@ -32,7 +32,12 @@ class category extends Component {
     }
 
     componentDidMount() {
-        this.getProducts();
+       if(this.props.history.location.pathname=='/category'){
+           reactLocalStorage.set('refresh',true)
+           reactLocalStorage.set('home5km',false)
+       }
+      
+
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'

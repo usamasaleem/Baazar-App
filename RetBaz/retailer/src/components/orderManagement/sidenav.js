@@ -33,13 +33,14 @@ class AddProduct extends Component {
         return (
        
           <SideNav>
-              <Icon style={{marginTop:"250px"}}>
+             <StyledLink to='/walkin'  ><Icon style={{marginTop:"250px"}}>
                   <Img src={onspot}>
                   </Img>
                   <Label>
                         Walk in
                   </Label>
               </Icon>
+              </StyledLink>
             <StyledLink to='/order'  ><Icon>
                   <Img src={online}>
                   </Img>
@@ -111,7 +112,7 @@ height:100%;
 border-radius:2%;
 margin-left:2%;
 box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-overflow-x: hidden;
+overflow: hidden;
 display:block;
 `
 
