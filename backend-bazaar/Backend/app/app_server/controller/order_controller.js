@@ -1,5 +1,6 @@
 var order_schema = require('../models/order_model')
 var session = require('express-session');
+var mongoose = require('mongoose');
 var order_controller = {
 
     add_order: (req, res) => {
@@ -111,16 +112,17 @@ console.log(req.body)
 
     },
 
-  
+
 
     todaySale: (req, res, next) => {
+        var id = mongoose.Types.ObjectId(session.StoreID.toString());
 console.log(session.StoreID)
         order_schema
    
        
         .aggregate([
            
-            {$match:{stores: {$eq:session.StoreID.toString()},
+            {$match:{stores: {$eq:id},
             checkout: {$eq:false}
         
         }}
@@ -147,15 +149,17 @@ console.log(session.StoreID)
     
 
     order: (req, res, next) => {
+        var user=mongoose.Types.ObjectId(req.query.id.toString());
+        var store=mongoose.Types.ObjectId(session.StoreID.toString());
 
         console.log(req.query)
-        order_schema.find({"userID":req.query.id.toString(),
+        order_schema.find({"userID":user,
         "date":req.query.date.toString(),
-        "stores":session.StoreID.toString(),
+        "stores":store,
         "checkout":false,
         "orderID":req.query.orderID.toString()
         
-    }).exec(function(error, results) {
+    }).populate('stores').populate('userID').exec(function(error, results) {
             if (error) {
                 return next(error);
             }
@@ -168,6 +172,127 @@ console.log(session.StoreID)
 
     },
 
+
+
+    ///////////// Delivery APP HANDLING ////////////////////
+    deliverOrder: (req, res, next) => {
+        console.log(session.StoreID)
+                order_schema
+           
+               
+                .aggregate([
+                   
+                //     {$match:{stores: {$eq:session.StoreID.toString()},
+                //     checkout: {$eq:false}
+                
+                // }}
+                // ,
+                 {$group:{_id:{
+                     date:"$date",
+                     userID:"$userID",
+                     userName:"$userName",
+                     orderID:"$orderID",
+                     bill:{ $sum: "$bill" },
+                    //  doc:{"$first":"$$ROOT"}
+                 },
+                
+                }},
+                {
+                    $project: {
+                      
+                        stores: '$storesr',
+                        
+                    }}
+                // {$replaceRoot:{"newRoot":"$doc"}}
+                
+                
+                  
+                   ],function(error, results) {
+                    if (error) {
+                        return next(error);
+                    }
+        
+                    
+                   
+                    // Respond with valid data
+                    res.json(results);
+                })
+        
+            },
+  
+
+    orderRetailer: (req, res, next) => {
+           
+        order_schema.aggregate([
+           
+            {$match:{orderID: {$eq:'kcoi9or8'},
+            // checkout: {$eq:false}
+        
+        }}
+        ,
+         {$group:{_id:{
+            
+             stores:"$stores"
+         }}},
+      
+         
+          
+           ],function(error, results) {
+            if (error) {
+                return next(error);
+            }
+
+            var stores=[]
+            for (let i = 0; i < results.length; i++) {
+               
+               stores.push(results[i]._id)
+            }
+            console.log("ethay"+stores)
+            order_schema.populate(stores, {path: "stores"} ,function(err,stores){
+                console.log(stores)
+                res
+                .status(200)
+                .json(stores);
+            }
+            )
+
+           
+            // Respond with valid data
+            // res.json(results[0]._id);
+        })
+
+
+    },
+
+    orderProducts: (req, res, next) => {
+        var orderID='kcoi9or8'
+        var store='5f0ac3e21b634b2c1c3ff30b'
+
+        console.log(req.query)
+        order_schema.find({
+        "date":"16/07/2020",
+        "stores":store,
+        
+        "orderID":orderID
+        
+    }).populate('stores').populate('userID').exec(function(error, results) {
+            if (error) {
+                return next(error);
+            }
+
+            console.log(results.length)
+           
+            // Respond with valid data
+            res.json(results);
+        })
+
+
+    },
+
+       ///////////// Delivery APP HANDLING ////////////////////
+
+
+       
     stripe: (req,res)=>{
 
         const stripe = require("stripe")("sk_test_HCShLCTnWQZR5ewTwaA9FihA00h40oO8oS");

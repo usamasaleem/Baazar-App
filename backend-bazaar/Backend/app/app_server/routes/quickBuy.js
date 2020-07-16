@@ -9,7 +9,7 @@ router.get   ('/'             ,    quickBuyController.view_all_quickBuy);
 
 router.get   ('/qty'             ,    quickBuyController.viewQty);
 
-router.get   ('/:name'        ,    quickBuyController.view_quickBuy    );
+router.get   ('/list'        ,    quickBuyController.view_quickBuy    );
 
 router.post  ('/add'          ,    quickBuyController.add_quickBuy     );
 

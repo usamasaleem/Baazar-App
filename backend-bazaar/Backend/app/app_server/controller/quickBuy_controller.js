@@ -92,7 +92,11 @@ console.log(req.params)
 
     view_quickBuy: (req, res) => {
 
-        quickBuy_schema.find({ 'userID': req.params.name }).populate('products').exec(function (err, doc) {
+        console.log("query"+req.query.schedule.toLowerCase())
+
+        quickBuy_schema.find({ 'userID': req.query.id.toString(),'schedule': req.query.schedule.toLowerCase()
+    
+    }).populate('products').exec(function (err, doc) {
             
             if (err)  {
                        res.status("500");
@@ -114,7 +118,7 @@ console.log(req.params)
     },
 
     view_all_quickBuy: (req, res, next) => {
-
+        console.log("query"+req.query.id)
         quickBuy_schema.find({}).populate('products').exec(function(error, results) {
             if (error) {
                 return next(error);

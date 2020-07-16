@@ -10,12 +10,15 @@ var order_schema = new mongoose.Schema({
         
     },
     stores: {
-        type: String
-       
+        type: mongoose.Types.ObjectId,
+        ref: 'stores'
     },
-    userID:{
-        type:String
+
+    userID: {
+        type: mongoose.Types.ObjectId,
+        ref: 'consumers'
     },
+
     orderID:{
         type:String
     },

@@ -50,6 +50,7 @@ var retailer_router             =  require('./app_server/routes/retailer'       
 var request_router              =  require('./app_server/routes/request'            );
 var shoppingCart_router         =  require('./app_server/routes/shoppingCart'       );
 var quickbuy_router         =  require('./app_server/routes/quickBuy'       );
+var schedule_router         =  require('./app_server/routes/schedule'       );
 var store_router                =  require('./app_server/routes/store'              );
 var vehicle_router              =  require('./app_server/routes/vehicle'            );
 app.use(require('./app_server/routes/authIndex.js'));
@@ -65,6 +66,7 @@ app.use('/retailer'         ,   retailer_router            );
 app.use('/request'         ,    request_router             );
 app.use('/shoppingCart'     ,   shoppingCart_router        );
 app.use('/quickbuy'         ,   quickbuy_router              );
+app.use('/schedule'         ,   schedule_router              );
 app.use('/store'         ,      store_router               );
 app.use('/vehicle'         ,    vehicle_router             );
 // END

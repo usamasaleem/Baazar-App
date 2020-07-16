@@ -37,6 +37,7 @@ class Details extends Component {
     }
 
     componentDidMount() {
+        
         this.getProducts();
 
         this.getProducts().then((response)=>{

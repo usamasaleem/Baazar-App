@@ -141,14 +141,14 @@ class card extends Component {
                      Out of Stock
                     </Added>   }
 
-                    {this.state.addedToQuick &&
+                    {/* {this.state.addedToQuick &&
                     <FontAwesomeIcon  style={{color:"red" , fontSize:'16px', cursor:"pointer" , position:"absolute",paddingBottom:"25px"  }} icon={faRocket} ></FontAwesomeIcon>
                     }
 
                     {!this.state.addedToQuick && !this.state.outofstock &&
                     <FontAwesomeIcon style={{color:"grey" , fontSize:'16px' , cursor:"pointer" , position:"absolute",paddingBottom:"25px"  }} icon={faRocket}  onClick={() => this.addToQuickBuy(this.props.item._id)}></FontAwesomeIcon>
                     }
-                    
+                     */}
                     {!this.state.isAdded && !this.state.outofstock &&
                     
                     <Button  onClick={() => this.addToCart(this.props.item._id)}>

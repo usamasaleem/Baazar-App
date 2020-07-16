@@ -12,7 +12,9 @@ var quickBuy_schema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'products'
     },
-    
+    schedule:
+    {type:String
+    },
     quantity: {
     type: Number,
     // required: true,

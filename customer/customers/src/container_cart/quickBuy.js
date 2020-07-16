@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import QuickBuy from "../components_cart/quickBuy/quickBuy";
+import QuickBuy from "../components_cart/quickBuy/landing";
 import Navbar from '../components/Navbar/navbar'
 
 import Footer from '../components_cart/Footer/Footer'

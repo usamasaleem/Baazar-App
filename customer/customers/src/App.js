@@ -8,6 +8,8 @@ import Products from "./container/products";
 import Landing from "./container/landing";
 import Home_container from "./container_cart/home_container";
 import Quick from "./container_cart/quickBuy";
+import Inside from "./container_cart/insideQuick";
+
 import AllProducts from "./components/allStores/alldata";
 import Category from "./components/category/category";
 import Login from "./components/profiling/login";
@@ -48,6 +50,8 @@ function App() {
             <Route exact path="/category" strict render={(routeProps) => <Category {...routeProps} />}/> 
           
             <Route exact path="/search" strict render={(routeProps) => <Search {...routeProps} />}/> 
+
+            <Route exact path="/inside/:id" strict render={(routeProps) => <Inside {...routeProps} />}/> 
         </Switch>
       
       </Router>
