@@ -24,7 +24,7 @@ export default class lowstock extends Component {
                     
                     <CardText className="CardText">{this.props.item.name}</CardText>
                     <CardText className="CardText">{this.props.item.Retail_price}</CardText>
-                    <CardText className="CardText">{this.props.item.category}</CardText>
+                    <CardText className="CardText">{this.props.item.quantity}</CardText>
                   
                    
                 </Cardcontainer>

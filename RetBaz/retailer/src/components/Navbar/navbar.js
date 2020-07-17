@@ -2,22 +2,52 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartLine,faBoxOpen,faCog,faDollarSign} from '@fortawesome/free-solid-svg-icons';
+import { faChartLine,faBoxOpen,faCog,faDollarSign,faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 // import SearchBar from '../SearchBar/SearchBar'
  import {devices} from '../../assets/devices/devices'
+ import Popup from "reactjs-popup";
+ import {post} from 'axios';
 
+ import {reactLocalStorage} from 'reactjs-localstorage';
  import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
   } from "react-router-dom";
+  import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 class navbar extends Component {
 
     constructor(props) {
         super(props);
+        this.state={
+            confirmation:false
+        }
+        this.sendDeleteRequest=this.sendDeleteRequest.bind(this)
     }
 
+
+    sendDeleteRequest(){
+        const data = {
+            type:'Delete',
+            retailer:reactLocalStorage.get('reailerID'),
+            stores:reactLocalStorage.get('nauman')
+        };
+        console.log(data)
+        const config = {
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }
+    
+    post(`http://localhost:4000/request/add`,  data ,config).then(res => {
+        toast("Your request to delete the store has been send to the Bazaar administration", { type: "info" });
+
+      })
+    }
 
  
 
@@ -35,7 +65,8 @@ class navbar extends Component {
             <SubNavContent>
            
             <StyledLink to={{pathname: `/order`}} >  <Sales><Icon><FontAwesomeIcon icon={faDollarSign}></FontAwesomeIcon></Icon>Payment</Sales></StyledLink>
-            
+            <Analytics onClick={(e) => { if (window.confirm('Are you sure you wish to delete your store from Bazaar?')) this.sendDeleteRequest(e) } }  ><Icon><FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon></Icon>Delete Store</Analytics>
+    
             </SubNavContent>
         </Navbar>
              
@@ -148,89 +179,116 @@ const Analytics=styled.div
 `
 
 height:60px;
-color:white;
+color:red;
 font-family:'Poppins';
 text-decoration:none;
 font-size:12px;
 font-weight:lighter;
 `
 
-// const NavBartitleContainer = styled.div`
-// width: 25%;
-// display: flex;
-// align-items: center;
-// @media ${devices.mobileM && devices.max }  { 
-//     width:100%;
-//   }
-// `
-// const ICON=styled.i
-// ` font-size: 1.5rem;
-// margin-right: 1.2rem;
-// margin-left: 1.5rem;
-// cursor: pointer;
-// color:white
-// `
+const Edit=styled.div`
+position:relative;
 
-// const NavBar__logo=styled.p
-// ` margin: 0;
+`
 
-// padding: 0;
-// cursor: pointer;
-// color:white;
-// font-family: 'Poppins';
-// font-size:2.875rem;
+const DeleteButton=styled.button`
+border:none;
+background:none;
+cursor:pointer;
+outline:none;
+`
+const Cardcontainer=styled.div`
+    font-family: 'Poppins',sans-serif;
+    letter-spacing: .5pt;
+    display: flex;
+    // width: 100%;
+    align-items: center;
+    padding: .6rem  1rem;
+    margin: 1rem 0rem;
+    justify-content: space-between;
+    background: #F6F9FC;
+    margin-top: .5rem;
+    overflow-x: auto;
+    cursor: pointer;
+    @media ${devices.mobileM && devices.max }  { 
+        height:100px;
+      }
+`
+
+const CardText=styled.p`
+    font-weight: 600;
+    font-size: 10pt;
+    margin: 0 ;
+    padding: 0;
+    margin: .5rem 1rem;
+    width:100px;
+`
+
+const CardimageContainer=styled.div`
+  display: flex;  
+  border-radius: 50%;
+  background: rgb(221, 221, 221);
+//   padding:.5rem;
+  width: 36px;
+
+`
+
+const Cardimage=styled.img`
+  width:100%;
+`
 
 
-// `
-// const Search=styled.div
-// ` 
-// position:relative;
-// left:10%;
-// @media ${devices.mobileM && devices.max }  { 
-//     position:relative;
-//     left:0%;
-//   }
-// `
-// const NavBar_iconContainer=styled.div`
-//     width: 10%;
-//     display: flex;
-//     justify-content: flex-start;
-//     align-items: center;
-//     @media ${devices.mobileM && devices.max } { 
-//         position:relative;
-//         left:70%;
-//         top:-40px;
-//         width:fit-content;
-//       }
-//     `
-// const Shopping_cart  =styled.i`
-// margin: 0 1rem;
-// font-size: 1.5rem;
-// color:#BDBDBD;
-// cursor: pointer
-// `
-// const User  =styled.i`
-// margin: 0 1rem;
-// font-size: 1.5rem;
-// color:#BDBDBD;
+const Modal=styled.div `
+    font-size: 12px;
+  `
+  const Header=styled.div `
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+  `
 
-// cursor: pointer
-// `
-// const Category=styled.i`
-// // @import pop url('https://fonts.googleapis.com/css?family=Poppins:200&displ');
-// margin: 0 1rem;
-// font-size: 1.125rem;
-// // font-family:"pop";
-// color:#BDBDBD;
-// width:10%;
-// cursor: pointer
-// font-weight:lighter;
-// justify-content:flex-center;
-// @media ${devices.mobileM && devices.max }  { 
-//     align-self:center;
-//   }
+  const Content=styled.div `
+    width: 100%;
+    padding: 10px 5px;
+  `
+  const Action =styled.div`
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+  `
+  const Close=styled.a`
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+  `
 
-// `
+
+  const Title =styled.div
+  `
+  height:15%;
+  display: inline-flex;
+  width:100%;
+  
+  `
+  const Heading=styled.p
+  
+
+
+
+
+
+
 export default navbar;
 
 

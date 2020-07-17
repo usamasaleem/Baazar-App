@@ -87,15 +87,18 @@ export default class Store extends Component {
             console.log(res.data)
             put(`http://localhost:4000/retailer/update/`+reactLocalStorage.get('RetailerID'),  {retailerUpdate} ,config).then(res=>{console.log(res.data)});
             toast("Thankyou for showing interest in Bazaar! Your request will be verified, you will be notified when the process is done", { type: "info" });
+            this.setState({
+                redirect:true
+            })
           })
           console.log(this.state);
       }
     render() {
-        // const { redirect } = this.state;
+        const { redirect } = this.state;
 
-        // if (redirect) {
-        //   return <Redirect to='/store'/>;
-        // }
+        if (redirect) {
+          return <Redirect to='/login'/>;
+        }
 
         return (
            

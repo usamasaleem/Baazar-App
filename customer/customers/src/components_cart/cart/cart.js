@@ -159,7 +159,7 @@ addToQuickBuy(){
 
 handleToken(token) {
   const product=this.state.SubTotal
-
+  console.log("this is payment token"+" "+token)
   const config = {
       headers: {
           'Content-Type':'application/json',
@@ -342,7 +342,8 @@ handleToken(token) {
               stripeKey="pk_test_g4nL9bOh7cQZ9LJoZOjTbb9x005ihzs4Fb"
               style={{width:"100px;"}}
              token={this.handleToken}
-             amount={5 * 100}
+             currency="pkr"
+             amount={ (this.state.SubTotal+Number(121))* 100}
 
              billingAddress
              shippingAddress
@@ -545,6 +546,12 @@ width:25%;
 padding-bottom:5px;
 margin-top:3%;
 box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+@media ${devices.mobileM && devices.max } { 
+  width:90%
+
+}
+
 
 `
 const ProductTable__column=styled.div` 

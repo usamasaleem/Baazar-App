@@ -12,6 +12,7 @@ import  Footer from '../Footer/Footer'
 import {get} from 'axios';
 import ProductFilters from '../filterBar/filterProducts'
 import {reactLocalStorage} from 'reactjs-localstorage';
+import Search from '../SearchBar/SearchBar2'
 import {
     BrowserRouter as Router,
     Switch,
@@ -29,6 +30,8 @@ class alldata extends Component {
        
           }
           this.print = this.print.bind(this)
+          this.getProductsCat = this.getProductsCat.bind(this)
+          this.search = this.search.bind(this)
     }
 
     componentDidMount() {
@@ -63,6 +66,37 @@ class alldata extends Component {
             return  get(url,config)
     }
 
+    getProductsCat(name){
+        const url = 'http://localhost:4000/product/category/'+name;
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            
+            get(url,config).then(res=>{
+                this.setState({ data: res.data})
+                console.log(res.data)
+            } )
+        console.log("pounch  gaya"+name)
+    }
+    search(search){
+        
+    
+        const url = 'http://localhost:4000/product/search/'+search;
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            get(url,config).then(res=>{
+                this.setState({ data: res.data})
+            })
+    
+    console.log("in search "+search)
+   
+
+}
 
 
     render() {
@@ -77,12 +111,12 @@ class alldata extends Component {
 
             <InnerContainer>
             <Title>
-                            <Heading>Filter</Heading>
+                            <Heading >Filter</Heading>
                             
-                        
+                           
                         </Title>
             
-            <ProductFilters />
+            <ProductFilters action={this.getProductsCat} />
             </InnerContainer>
 
             </FilterContainer>
@@ -94,7 +128,8 @@ class alldata extends Component {
 
                 
                     <Title>
-                    <Heading>Products</Heading>
+                    <Heading style={{marginRight:"30%"}}>Products</Heading>
+                    <Search  action={this.search}  />
                     </Title>
 
                     <Row>
@@ -140,6 +175,11 @@ const DIV=styled.div
 width:100%;
 display: flex;
 height:90%;
+@media ${devices.mobileM && devices.max } { 
+    width:100%;
+    display:block
+  }
+ 
 `
 const Heading=styled.p
 `
@@ -153,6 +193,12 @@ display: inline-flex;
 width:100%;
 margin-left:9%;
 
+align-items:center;
+@media ${devices.mobileM && devices.max } { 
+    display:block;
+   
+  }
+
 `
 const InnerContainer =styled.div
 `
@@ -163,6 +209,11 @@ height:max-content;
 
 overflow: hidden;
 display:block;
+@media ${devices.mobileM && devices.max } { 
+    width:80%;
+    margin:auto;
+   
+  }
 `
 
 
@@ -171,7 +222,10 @@ width:15%;
 justify-content: space-between;
 align-items: center;
 height:100%;
-
+@media ${devices.mobileM && devices.max } { 
+    width:90%;
+    display:inline;
+  }
 
 `
 const StoreFilter = styled.div`
@@ -217,7 +271,12 @@ const Products=styled.div`
 width: 60%;
 height:70%;
 margin-left: 10%;
-}
+@media ${devices.mobileM && devices.max } { 
+    width:100%;
+    margin-left:0;
+   
+  }
+
 `
 
 const CoverImage=styled.img`
@@ -226,6 +285,12 @@ height:300px;
 width:100%;
 border-radius:13px;
 margin-top:40px;
+@media ${devices.mobileM && devices.max } { 
+    height:100px;
+    margin-top:20px;
+    
+   
+  }
 `
 
 
@@ -240,6 +305,13 @@ justify-content:center;
 overflow:hidden;
 padding-bottom:20px;
 border-top:1px solid #BDBDBD;
+@media ${devices.mobileM && devices.max } { 
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    border-top:2px solid #BDBDBD;
+  }
+
 `
 export default alldata;
 

@@ -8,7 +8,7 @@ import {post,put} from 'axios';
 import Icon from "../../assets/icons/Union 1.svg"
 import {reactLocalStorage} from 'reactjs-localstorage';
 import IconPassword from "../../assets/icons/password.svg"
-
+import { Alert } from '@material-ui/lab';
 
 import { toast } from "react-toastify";
 export default class Register extends Component {
@@ -22,6 +22,7 @@ export default class Register extends Component {
              cpassword:"",
              number:null,
              name:"",
+             alert:false
 
            
         }
@@ -49,6 +50,16 @@ export default class Register extends Component {
                 'Content-Type':'application/json'
             }
         }
+
+        if(this.state.name==""&&this.state.email==""&&this.state.number==null && this.state.password=="" ){
+            this.setState({
+                alert:true
+            })
+        }
+
+
+        if(this.state.name!=""&&this.state.email!=""&&this.state.number!=null && this.state.password!="" ){
+
         post(`http://localhost:4000/authentication/users/`,  data ,config)
           .then(res => {
             
@@ -59,7 +70,7 @@ export default class Register extends Component {
               })
              
           })
-         
+        }
       }
     render() {
         const { redirect } = this.state;
@@ -73,6 +84,7 @@ export default class Register extends Component {
             <Section>
                 <Logincontainer >
                     <Text>Personal Information</Text>
+                    {this.state.alert && <Alert severity="error">Please fill all the fields to continue</Alert>}
                     <InputContainer>
                             {/* <Label>Barcode:</Label> */}
                             <Input type="text" placeholder="Full Name"  value={this.state.name} name="name" onChange={e => this.setState({name:e.target.value})}></Input>
@@ -107,8 +119,8 @@ export default class Register extends Component {
                     </InputContainer>
 
                     <Extra>
-                        <SmallText>Sign Up</SmallText>
-                        <SmallText>Forgot Password</SmallText>
+                       <StyledLink to='/login'><SmallText>Already have an account</SmallText></StyledLink> 
+                        
                     </Extra>
                    
 
@@ -124,6 +136,13 @@ export default class Register extends Component {
     }
 }
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`
 const Button=styled.button
 `
     align-self: center;

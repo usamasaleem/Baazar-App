@@ -12,7 +12,9 @@ import Store from './components/profiling/store'
 import Order from './components/orderManagement/orders.'
 import OrderDetails from './components/orderManagement/ordersDetail'
 import Sales from './components/orderManagement/sales'
+import Walk from './components/walkIn/walkin'
 import {Helmet} from "react-helmet";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -45,6 +47,7 @@ function App() {
 
             <Route exact path="/store" strict render={(routeProps) => <Store {...routeProps} />}/> 
             <Route exact path="/order" strict render={(routeProps) => <Order {...routeProps} />}/> 
+            <Route exact path="/walkin" strict render={(routeProps) => <Walk {...routeProps} />}/> 
             <Route exact path="/orderDetails" strict render={(routeProps) => <OrderDetails {...routeProps} />}/> 
             <Route exact path="/order/sales" strict render={(routeProps) => <Sales {...routeProps} />}/>
         </Switch>

@@ -36,6 +36,7 @@ target 'biker' do
 
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+
   target 'bikerTests' do
     inherit! :search_paths
     # Pods for testing

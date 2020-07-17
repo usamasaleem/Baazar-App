@@ -33,7 +33,7 @@ export default class ExpandedCard extends Component {
                 <StyledLink to={{pathname: `product/detail/${this.props.value._id}`}} >
                     <ImageContainer className="ImageContainer">
 
-                        <ExpandedCardImage className="ExpandedCardImage" src={ `/uploads/${this.props.value.fileName}`} ></ExpandedCardImage>
+                        <ExpandedCardImage className="ExpandedCardImage" src={`http://localhost:4000/uploads/${this.props.value.fileName}`} ></ExpandedCardImage>
                     </ImageContainer>
 
                     </StyledLink>

@@ -7,7 +7,8 @@ import {
   Image,
   Switch,
   Platform,
-  FlatList
+  FlatList,
+  AsyncStorage
 } from 'react-native';
 import {
   createDrawerNavigator,
@@ -25,20 +26,38 @@ import { categoryStack } from './Screens/categoryStack'
 import { retailerStack } from './Screens/retailerStack';
 import QuickBuy from './Screens/QuickBuy';
 
-
+import {LoginStack} from './Screens/LoginStack';
+import Login from './Screens/login';
+import Camera from './Screens/camera';
+import { QuickbuyStack } from './Screens/QuickbuyStack';
+import Signup from './Screens/signup';
+import Init from './Screens/logout'
 
 export default function App() {
+
+  
 
 
   const Tab = createMaterialBottomTabNavigator();
   const Stack = createStackNavigator();
 
   const MainNavigator = () => {
+    
     return (
+
       <Stack.Navigator
-        initialRouteName="Main"
+      
+        initialRouteName="Init"
+
       >
 
+
+
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+        <Stack.Screen name="Camers" component={Camera} options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={StackNav} options={{ headerShown: false }} />
+        <Stack.Screen name="Init" component={Init} options={{ headerShown: false }} />
         <Stack.Screen name="Main" component={DrawerNavigatorContainer} options={{ headerShown: false }} />
       </Stack.Navigator>
     )
@@ -60,7 +79,10 @@ export default function App() {
               iconName = 'archive'
             }
                 else if (route.name === 'QuickBuy') {
-              iconName = 'archive'
+              iconName = 'rocket'
+            }
+            else if (route.name === 'Login') {
+              iconName = 'person'
             }
 
             // You can return any component that you like here!
@@ -78,8 +100,8 @@ export default function App() {
         <Tab.Screen name="Home" component={StackNav} />
         <Tab.Screen name="Categories" component={categoryStack} />
         <Tab.Screen name="Retailer" component={retailerStack} />
-        <Tab.Screen name="QuickBuy" component={QuickBuy} />
-
+        <Tab.Screen name="QuickBuy" component={QuickbuyStack} />
+        {/* <Tab.Screen name="Login" component={LoginStack} /> */}
 
       </Tab.Navigator>
     )

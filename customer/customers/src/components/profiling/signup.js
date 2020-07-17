@@ -8,7 +8,7 @@ import {reactLocalStorage} from 'reactjs-localstorage';
 import IconPassword from "../../assets/icons/password.svg"
 import Map from './map'
 import Geocode from "react-geocode";
-
+import { Alert } from '@material-ui/lab';
 export default class Register extends Component {
 
     constructor() {
@@ -23,7 +23,8 @@ export default class Register extends Component {
              address:"",
              lng:73.047882,
              lat:33.684422,
-             zoom:10
+             zoom:10,
+             alert:false
            
         }
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -35,6 +36,7 @@ export default class Register extends Component {
     }
 
     handleSubmit = event => {
+
         event.preventDefault();
     
         const data = {
@@ -54,6 +56,14 @@ export default class Register extends Component {
                 'Content-Type':'application/json'
             }
         }
+        if(this.state.name=="" || this.state.email==""||this.state.number==null || this.state.password=="" || this.state.address=="" ){
+            this.setState({
+                alert:true
+            })
+        }
+
+
+        if(this.state.name!=""&&this.state.email!=""&&this.state.number!=null && this.state.password!="" && this.state.address!="" ){
         post(`http://localhost:4000/authentication/customer/`,  data ,config)
           .then(res => {
               
@@ -66,6 +76,7 @@ export default class Register extends Component {
              
           })
           console.log(this.state);
+        }
       }
 
 
@@ -105,17 +116,22 @@ export default class Register extends Component {
         if (redirect) {
           return <Redirect to='/login'/>;
         }
+     
+        
 
         return (
            
             <Section>
                 <Logincontainer >
                     <Text>Personal Information</Text>
+                    {this.state.alert && <Alert severity="error">Please fill all the fields to continue</Alert>}
                     <InputContainer>
                             {/* <Label>Barcode:</Label> */}
                             <Input type="text" placeholder="Full Name"  value={this.state.name} name="name" onChange={e => this.setState({name:e.target.value})}></Input>
                             <IconInput className="SearchIcon" src={Icon}></IconInput>
+                           
                     </InputContainer>
+                    
                     <InputContainer>
                             {/* <Label>Barcode:</Label> */}
                             <Input type="email" placeholder="Email"  value={this.state.email} name="email" onChange={e => this.setState({email:e.target.value})}></Input>
@@ -137,12 +153,7 @@ export default class Register extends Component {
                             <Input type="password" placeholder="Password" value={this.state.password} name="password" onChange={e => this.setState({password:e.target.value})}></Input>
                             <IconInput className="SearchIcon" src={IconPassword}></IconInput>
                     </InputContainer>
-                    <InputContainer>
-                            {/* <Label>Barcode:</Label> */}
-                            <Input type="password" placeholder=" Confirm Password" value={this.state.cpassword} name="cpassword" onChange={e => this.setState({cpassword:e.target.value})}></Input>
-                            <IconInput className="SearchIcon" src={IconPassword}></IconInput>
-                    </InputContainer>
-
+              
                     <InputContainer style={{marginBottom:"5px"}}>
                     <Button onClick={this.handleSubmit} >Sign up</Button>
 
@@ -279,13 +290,14 @@ box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 overflow-x: auto;
 margin-bottom:20px;
 margin:auto;
+overflow:hidden;
 `
 const Text= styled.p`
 color:#343847;
 font-size:24px;
 font-weight:regular;
 font-family:'Poppins';
-margin-top:20%;
+margin-top:10%;
 margin-left:20%;
 
 `

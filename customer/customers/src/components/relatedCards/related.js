@@ -58,7 +58,7 @@ class related extends Component {
 
 const ProductsCard=styled.div`
 height:250px;
-width:20%;
+width:10%;
 margin-left:10px;
 background-color: #FDFDFF;
 border: solid 0 #707070;
@@ -75,6 +75,10 @@ overflow:hidden;
     height:270px;
 
 }
+ @media ${devices.mobileM && devices.max } { 
+        width:40%
+
+    }
 `
 const ImageContainer =styled.img`
 height:65%;

@@ -9,7 +9,8 @@ export default class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state={
-            isExpanded:false
+            isExpanded:false,
+            search:""
         }
     }
 
@@ -23,9 +24,9 @@ export default class SearchBar extends Component {
             
                 <div className="Search">
                     <SearchBarContainer className="SearchBarContainer">
-                        <SearchInput placeholder="Search" className="SearchInput">
+                        <SearchInput placeholder="Search" className="SearchInput" onChange={e => this.setState({search:e.target.value})}>
                         </SearchInput>
-                        <SearchIcon className="SearchIcon" src={Icon}></SearchIcon>
+                        <SearchIcon className="SearchIcon" src={Icon } onClick={() => this.props.action(this.state.search)} ></SearchIcon>
                     </SearchBarContainer>
                 </div>
 

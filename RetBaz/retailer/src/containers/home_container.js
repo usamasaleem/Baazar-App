@@ -9,6 +9,7 @@ import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen} from 
 import {get} from 'axios';
 import {reactLocalStorage} from 'reactjs-localstorage';
 import Logout from '../components/profiling/logout'
+import {devices} from '../assets/devices/devices'
 class home_container extends Component {
 
 
@@ -24,6 +25,7 @@ class home_container extends Component {
             isExpanded:false
           }
           this.logout=this.logout.bind(this);
+          this.search = this.search.bind(this);
     }
 
 
@@ -90,16 +92,34 @@ class home_container extends Component {
     toggleExpanded() {
         this.setState({ isExpanded: !this.state.isExpanded });
     }
+
+    search(search){
+        
+    
+        const url = 'http://localhost:4000/product/search/'+search;
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            get(url,config).then(res=>{
+                this.setState({ data: res.data})
+            })
+    
+    console.log("in search "+search)
+   
+
+}
     render() {
         if (!reactLocalStorage.get('loginRetailer')) {
             return <Redirect to='/login'/>;
           }
 
-        const timeout = this.state.logout;
+        // const timeout = this.state.logout;
 
-        if (timeout) {
-          return <Redirect to='/login'/>;
-        }
+        // if (timeout) {
+        //   return <Redirect to='/login'/>;
+        // }
 
         return (
        
@@ -109,7 +129,7 @@ class home_container extends Component {
                 <Navbar/>
                 <Div>
                     <SearchBar>
-                        <Search />
+                        <Search action={this.search} />
                         
                         <NavBar_iconContainer className="NavBar-iconContainer">
                         <Shopping_cart ><FontAwesomeIcon icon={ faBell }/></Shopping_cart>
@@ -132,12 +152,13 @@ class home_container extends Component {
                  
                     
                     <CardText className="CardText">Product Name</CardText>
-                    <CardText className="CardText">SKU</CardText>
+                   
                     <CardText className="CardText">Category</CardText>
                     <CardText className="CardText info">Size</CardText>
-                    <CardText className="CardText info">Stock</CardText>
+                    <CardText className="CardText info">Cartons</CardText>
+                    <CardText className="CardText">Qty</CardText>
+                    <CardText className="CardText info"></CardText>
                    
-                 
                 </Cardcontainer>
                 {this.state.data.map((item) => 
                       <Card  item={item} ></Card>)
@@ -358,7 +379,7 @@ const Cardcontainer=styled.div`
     font-family: 'Poppins',sans-serif;
     letter-spacing: .5pt;
     display: flex;
-    
+    // width: 100%;
     align-items: center;
     padding: .6rem  1rem;
     margin: 1rem 0rem;
@@ -367,17 +388,19 @@ const Cardcontainer=styled.div`
     margin-top: .5rem;
     overflow-x: auto;
     cursor: pointer;
-  
+    font-weight:bold;
+    @media ${devices.mobileM && devices.max }  { 
+        height:100px;
+      }
 `
 
 const CardText=styled.p`
-    font-weight: 600;
+    font-weight: 900;
     font-size: 10pt;
     margin: 0 ;
     padding: 0;
     margin: .5rem 1rem;
-    color:#BDBDBD;
-    width:20%;
+    width:110px;
 `
 
 const CardimageContainer=styled.div`

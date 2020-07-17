@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {devices} from '../assets/devices/devices'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartLine,faBoxOpen,faCog} from '@fortawesome/free-solid-svg-icons';
@@ -30,12 +30,14 @@ class Details extends Component {
             store:[],
             isAdded:false,
             qty:1,
+            outOfStock:false
             
           }
           this.addToCart = this.addToCart.bind(this);
     }
 
     componentDidMount() {
+        
         this.getProducts();
 
         this.getProducts().then((response)=>{
@@ -45,6 +47,14 @@ class Details extends Component {
               store:response.data.stores
             });
             console.log(this.state.store)
+            if(this.state.data.quantity<0){
+                
+                this.setState(
+                    {
+                        outOfStock:true
+                    }
+                )
+            }
            
           });
         
@@ -108,7 +118,7 @@ class Details extends Component {
                     <Navbar />
                     <MainContainer>
                         <ProductsDetails>
-                            <ItemImage src={ `/uploads/${this.state.data.fileName}`} >
+                            <ItemImage src={`http://localhost:4000/uploads/${this.state.data.fileName}`}>
 
                             </ItemImage>
 
@@ -149,11 +159,17 @@ class Details extends Component {
                                     </DetailHeading>
                                   <Text>{this.state.data.details}</Text>
                                  
+
+                                  {this.state.outOfStock &&
+                     <Added  disabled>
+                     Out  of Stock
+                    </Added>   }
+
                                   {this.state.isAdded &&
                      <Added  disabled>
                      Added
                     </Added>   }
-                    {!this.state.isAdded &&
+                    {!this.state.isAdded && !this.state.outOfStock &&
                      <Button onClick={() => this.addToCart(this.state.data._id)}>Add to Cart</Button>
     }
                                     <Quantity placeholder="1" type='number' value={this.state.qty} name="quantity" onChange={e => this.setState({qty:e.target.value})}></Quantity>
@@ -203,6 +219,10 @@ class Details extends Component {
     width:50px;
     margin-left:50px;
     height:20px;
+    @media ${devices.mobileM && devices.max } { 
+        width:60px;
+       
+    }
     `
     const Text=styled.p
     `
@@ -232,6 +252,10 @@ class Details extends Component {
     // background-color:blue;
     display:inline-flex;
     flex-direction:row;
+    @media ${devices.mobileM && devices.max } { 
+        flex-direction:column
+        
+    }
     `
     const RelatedProducts=styled.div
     `
@@ -249,6 +273,12 @@ class Details extends Component {
     width:20%;
     height:70%;
     margin:auto;
+    @media ${devices.mobileM && devices.max } { 
+        width:70%;
+        margin-top:20%;
+        margin-bottom:20%;
+
+    }
     `
     const TopDescription=styled.div`
 display:block;
@@ -260,6 +290,11 @@ height:20%
     height:100%;
     margin-top:6%;
     text-align:start;
+    @media ${devices.mobileM && devices.max } { 
+        width:90%;
+        margin:auto;
+
+    }
     `
     const ItemHeading =styled.p`
     font-size:24px;
@@ -282,6 +317,11 @@ height:20%
     const BottomDescription=styled.div`
     height:40%;
     width:50%;
+    @media ${devices.mobileM && devices.max } { 
+        width:90%;
+       
+
+    }
     `
     const DetailHeading=styled.p`
     font-family:"Poppins";
@@ -292,9 +332,16 @@ height:20%
     width:50%;
     `
     const CardContainer=styled.div`
-    width:70%;
+    width:100%;
     display:inline-flex;
     justify-content:center;
+     @media ${devices.mobileM && devices.max } { 
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+
+    }
+  
     `
     const Button=styled.button`
 margin-top:15px;
@@ -312,6 +359,11 @@ font-family:"Poppins";
 font-size:16px;
 color:White;
 border-radius:8px;
+@media ${devices.mobileM && devices.max } { 
+    width:40%;
+    
+
+}
 `
 const Added=styled.button`
 margin-top:15px;

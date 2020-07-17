@@ -30,12 +30,12 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 # cors = CORS(app)
 # app.config['CORS_HEADERS'] = 'Content-Type'
-# dir_ = os.path.dirname(os.path.realpath(__file__))
-dir_path = os.path.abspath("C:\\FYP Code\\Baazar-App\\RetBaz\\retailer\\public\\uploads")
-print(dir_path)
-# UPLOAD_FOLDER = dir_path + '/uploads'
+dir_path = os.path.dirname(os.path.realpath(__file__))
+# dir_path = os.path.abspath("/")
+
+UPLOAD_FOLDER = dir_path + '/uploads'
 # STATIC_FOLDER = dir_path + '/static'
-UPLOAD_FOLDER = dir_path
+# UPLOAD_FOLDER = dir_path
 
 STATIC_FOLDER = 'lays'
 

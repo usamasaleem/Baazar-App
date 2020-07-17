@@ -28,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           packages.add(new RNFirebaseAuthPackage());
             packages.add(  new LinearGradientPackage()); 
+               
+                
          return packages;
         }
 

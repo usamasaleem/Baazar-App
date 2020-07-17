@@ -5,7 +5,12 @@ import { Link, Redirect,  } from 'react-router-dom'
 import {post,put} from 'axios';
 import Icon from "../../assets/icons/Union 1.svg"
 import {reactLocalStorage} from 'reactjs-localstorage';
+
 import IconPassword from "../../assets/icons/password.svg"
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 export default class Login extends Component {
 
     constructor() {
@@ -54,7 +59,19 @@ export default class Login extends Component {
                   redirect:true
               })
              
-          })
+          }).catch(function (error) {
+            console.log(error.response.status)
+            if (error.response.status === 422) {
+                console.log('failed');
+                toast("*Email or Password are Required", { type: "error" });
+  
+              }
+              if (error.response.status === 500) {
+                console.log('failed');
+                toast("Failed! Incorrect email or password", { type: "error" });
+  
+              }
+          });
           console.log(this.state);
       }
     render() {

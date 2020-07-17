@@ -39,9 +39,28 @@ export default class ExpandedCard extends Component {
         .then(res=>{
             console.log("verified"+res)
         })
-        post(`http://localhost:4000/retailer/makeAccount/`,  data ,config)
-        .then(res=>{
-            console.log("created"+res)
+
+        const store={
+            storeName:this.props.value.stores.name
+        }
+        console.log(this.props.value.stores.name)
+        post(`http://localhost:4000/retailer/v1/accounts`,  store ,config)
+        .then(response=>{
+            console.log("created"+response.data)
+            const update={
+                stripe_id:response.data.id
+            }
+            const config = {
+                headers: {
+                    'Content-Type':'application/json'
+                }
+            }
+            put(`http://localhost:4000/retailer/verified/`+this.props.value._id,  update ,config)
+            .then(res=>{
+                console.log("id"+response.id)
+                window.location.reload();
+              
+            })
         })
 
     
@@ -80,7 +99,7 @@ export default class ExpandedCard extends Component {
                                 <p>Address</p>
                             </Heading>
                             <Content className="content">
-                                <p>Store 10 , main defence road, khuwaja corperattion lazlazar rawalpindi</p>
+                                <p>{this.props.value.stores.address}</p>
                             </Content>
 
                         </DetailInnerContainer>

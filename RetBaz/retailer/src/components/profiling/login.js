@@ -52,6 +52,8 @@ export default class Login extends Component {
            
               console.log(res.data.user)
               reactLocalStorage.set('nauman', res.data.user.stores);
+              reactLocalStorage.set('reailerID', res.data.user._id);
+              reactLocalStorage.set('retailer-acc',res.data.user.stripe_id );
               reactLocalStorage.set('loginRetailer', true);
               localStorage.setItem('saved', new Date().getTime())
              
@@ -121,7 +123,7 @@ export default class Login extends Component {
                     </InputContainer>
 
                     <Extra>
-                        <SmallText>Sign Up</SmallText>
+                        <StyledLink to={{pathname: `/register`}}><SmallText>Sign Up</SmallText></StyledLink>
                         <SmallText>Forgot Password</SmallText>
                     </Extra>
                    
@@ -137,6 +139,13 @@ export default class Login extends Component {
         this.setState({ isExpanded: !this.state.isExpanded });
     }
 }
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`
 
 const Button=styled.button
 `

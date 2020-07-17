@@ -28,10 +28,10 @@ export default class ReatilerCard extends Component {
     render() {
         return <LinearGradient  style={styles.container}    colors={['#3F51B5', '#3949AB']}>
             <View style={styles.retailerInfo}>
-                <Text style={styles.retailerName}>Retailer Name</Text>
-                <Text style={styles.retailerLocation}>Retailer Location</Text>
+                <Text  onPress={()=>{this.props.stackNavigation.navigate('Store' ,{id:this.props.item._id})}} style={styles.retailerName}>{this.props.item.name}</Text>
+                <Text  onPress={()=>{this.props.stackNavigation.navigate('Store' ,{id:this.props.item._id})}} style={styles.retailerLocation}>{this.props.item.address}</Text>
             </View>
-            <View style={styles.retailerImageContainer}>
+            <View onPress={()=>{this.props.stackNavigation.navigate('Store' ,{id:this.props.item._id})}} style={styles.retailerImageContainer}>
                 <Image style={styles.retailerImage} source={require('../../assets/Images/arrow.png')}/>
             </View>
 

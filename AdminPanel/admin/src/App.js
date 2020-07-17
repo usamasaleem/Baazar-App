@@ -7,6 +7,7 @@ import Deliverer from './containers/deliverer';
 import Inventory from './containers/inventory';
 import Payment from './containers/payment';
 import PaymentDetails from './containers/paymentDetails';
+import Login from './components/profiling/login';
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,6 +24,8 @@ function App() {
             
           </Route> */}
           <Route exact path="/" render={(routeProps) => <Home {...routeProps} />}>
+            </Route>
+            <Route exact path="/login" render={(routeProps) => <Login {...routeProps} />}>
             </Route>
             <Route exact path="/retailer" render={(routeProps) => <Retailer {...routeProps} />}>
             </Route>

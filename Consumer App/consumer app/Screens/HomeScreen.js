@@ -3,46 +3,150 @@ import {
     View,
     ScrollView,
     Text,
-    StyleSheet} from 'react-native';
+    StyleSheet,
+    AsyncStorage} from 'react-native';
 import { Input } from 'react-native-elements';
 import Icon from 'react-native-ionicons'
 import Product from '../Components/Product/Product';
-
+import { RNCamera } from 'react-native-camera';
+import Camera from './camera'
+import {get} from 'axios';
 export default class HomeScreen extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            data:[],
+            products:[],
+            search:"",
+            camera:false
+          }
+          this.search = this.search.bind(this);
+    }
+
+
+     componentDidMount(){
+
+        
+         AsyncStorage.getItem('UserID').then(value=>{
+             console.log(value)
+         })
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
         }
-    }
+        
+        get('http://192.168.100.64:4000/store/location', config)
+        .then((response) => {
+            console.log(response.data)
+            this.setState({
+                data:response.data
+            })
+            for (let i = 0; i < response.data.length; i++) {
+
+                get(`http://192.168.100.64:4000/product/getPros/`+response.data[i]._id,config).then(res=>{
+                    console.log(res.data)
+                    this.setState({ products: this.state.products.concat(res.data) })
+                 
+                      
+            
+                //   console.log(this.state.products)
+                })
+            }
+        }
+        
+        
+        )
+        
+     }
 
 
-    componentWillMount() {
+    // getProducts(){
+    //     const url = 'http://localhost:4000/store/location';
+    //         const config = {
+    //             headers: {
+    //                 'content-type': 'multipart/form-data'
+    //             }
+    //         }
+    //         return  get(url,config)
+    // }
+    search(search){
+        
+    
+        const url = 'http://192.168.100.64:4000/product/search/'+search;
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            get(url,config).then(res=>{
+                this.setState({ products: res.data,camera:false})
+            })
+    
+    console.log("in search "+search)
+   
 
-    }
+}
 
     render() {
 
         const { navigation } = this.props;
 
-     
 
+
+        if(this.state.camera){
+           return <View style={styles.container}>
+                <Camera action={this.search}/>
+            </View>
+            
+
+        }
+     
+if(!this.state.camera)
+{
         return <ScrollView style={styles.container}>
 
             <View style={styles.searchContainer}>
                 <Input
                     placeholder='Search Products'
+                    name='search'
                     containerStyle={styles.searchInputContainer}
                     inputContainerStyle={styles.search}
+                    onChangeText={e => this.setState({
+                        search:e
+                    })}
+
+                    
                     rightIcon={
+                        <View style={{flexDirection:"row"}}>
+                              <Icon
+                            name='camera'
+                            
+                            size={24}
+                            color='#BDBDBD'
+                            style={{paddingRight:10}}
+                            onPress={()=>{
+                                // this.props.navigation.navigate('Camera')
+                                this.setState({
+                                    camera:true
+                                })
+                            }}
+                        />
                         <Icon
                             name='search'
                             size={24}
                             color='#BDBDBD'
+                            onPress={()=>{
+                                this.search(this.state.search)
+                            }}
                         />
+                        </View>
                     }
                 />
+
             </View>
+           
 
 
             <View style={styles.categoriesList}>
@@ -118,8 +222,14 @@ export default class HomeScreen extends Component {
 
             <View style={styles.productList}>
 
-                <View style={styles.row}>
-                    <Product stackNavigation={navigation} />
+            {this.state.products.map((item) => 
+                      <View style={styles.row} >
+                    <Product stackNavigation={navigation} item={item} value={item._id}  />
+                    
+                      </View>)
+                            }
+                {/* <View style={styles.row}>
+                    <Product stackNavigation={navigation} item={item} value={item._id}  />
                     <Product />
                 </View>
 
@@ -139,7 +249,7 @@ export default class HomeScreen extends Component {
                 <View style={styles.row}>
                     <Product />
                     <Product />
-                </View>
+                </View> */}
 
 
             </View>
@@ -151,6 +261,7 @@ export default class HomeScreen extends Component {
 
     }
 
+}
 }
 
 const styles = StyleSheet.create({
@@ -207,9 +318,13 @@ const styles = StyleSheet.create({
     },
     productList: {
         marginTop: 40,
+        flex: 1,
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        
     },
     row:{
-        flexDirection:'row',
+        marginLeft:15,
         justifyContent:'space-between',
         marginVertical:12,
     }
