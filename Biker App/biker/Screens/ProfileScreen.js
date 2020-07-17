@@ -9,6 +9,7 @@ import {
     Platform,
     TouchableOpacity,
     Switch,
+    PermissionsAndroid,
     AsyncStorage
 } from 'react-native';
 import { Button } from 'react-native-elements';
@@ -22,7 +23,9 @@ import { inject, observer } from "mobx-react";
 import store from "../store/TestStore";
 import personIcon from '../assets/Icons/person.svg';
 import ProfileImage from '../assets/Icons/userplaceholder.svg';
-
+import Axios from 'axios';
+import Contacts from 'react-native-contacts';
+import {ip} from "../config"
 
 inject('store')
 @observer
@@ -31,14 +34,15 @@ export default class ProfileScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: 'Find Order'
+            title: 'Find Order',
+            isActive: true,
         }
 
     }
 
 
     componentWillMount(){
-        console.log(this.props)
+        
     }
 
 
@@ -61,11 +65,22 @@ export default class ProfileScreen extends Component {
 
 
             <View style={styles.profileDetailContainer}>
-                <ProfileImage width={80} height={80}  style={{marginVertical:30}} />
+                <ProfileImage width={80} height={80} style={{ marginVertical: 30 }} />
                 <Text style={[styles.profileDetailText, styles.nameText]}>Usama Saleem</Text>
                 <Text style={[styles.profileDetailText, styles.infoText]}>Metro Bike 125</Text>
                 <Text style={[styles.profileDetailText, styles.infoText]}>PND-420</Text>
-                <Switch />
+                <Switch
+                    onValueChange={() => {
+                        Axios.put(ip+"deliverer/update/+923025699794",{availability:this.state.isActive}).then((resp)=>{
+
+                        })
+
+                        this.setState({ isActive: !this.state.isActive })
+
+
+                    }}
+                    value={!this.state.isActive}
+                />
                 <View style={styles.reportContainer}>
 
                     <View style={styles.reportRow}>

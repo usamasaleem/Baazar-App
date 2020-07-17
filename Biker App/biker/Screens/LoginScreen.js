@@ -18,13 +18,12 @@ import firebase from 'react-native-firebase';
 
 
 
-
 export default class LoginScreen extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            phoneNumberInp: '',
+            phoneNumberInp: '+',
             isLoggedIn: false,
         }
         this.checkInput = this.checkInput.bind(this)
@@ -40,8 +39,8 @@ export default class LoginScreen extends Component {
                     if (val == "true") {
                         this.setState({ isLoggedIn: true })
                     }
-                    else{
-                        this.setState({ isLoggedIn: false })    
+                    else {
+                        this.setState({ isLoggedIn: false })
                     }
                 }
                 else {
@@ -49,6 +48,7 @@ export default class LoginScreen extends Component {
                 }
 
             })
+
 
     }
 
@@ -63,9 +63,8 @@ export default class LoginScreen extends Component {
 
                     <Text style={styles.loginText}>Login</Text>
                     <View style={styles.inpContainer}>
-                        <Input style={styles.inp} placeholder="Phone Number" leftIcon={{ type: 'material', name: 'person', color: '#BDBDBD' }}
+                        <Input style={styles.inp} keyboardType={"phone-pad"} placeholder="Phone Number" leftIcon={{ type: 'material', name: 'person', color: '#BDBDBD' }}
                             onChangeText={val => this.setState({ phoneNumberInp: val })}
-
                         />
                     </View>
                     <Button
@@ -94,20 +93,26 @@ export default class LoginScreen extends Component {
 
             )
         }
-        else{
-             navigation.push('Main')
-             return <View></View>
+        else {
+            navigation.push('Main')
+            return <View></View>
         }
-        
+
 
 
     }
 
     checkInput(val) {
-        if (val === '' || val.length < 13)
+
+     
+
+
+        if (val === '' || val.length < 13 || !val.match(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g)) {
             return false
-        else
+        }
+        else {
             return true
+        }
     }
 
 }

@@ -7,7 +7,9 @@ import {
   FlatList,
   StyleSheet,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert,
+  ToastAndroid
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import MapComponent from '../Components/MapComponent/MapComponent'
@@ -19,14 +21,15 @@ import { SvgUri } from 'react-native-svg';
 import { inject, observer } from "mobx-react";
 import store from "../store/TestStore";
 import personIcon from '../assets/Icons/person.svg';
-
-
+import Axios from 'axios';
+import {ip} from '../config.js';
 export default class FindOrderScreen extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      title: 'Find Order'
+      title: 'Find Order',
+      biker:null
     }
     this.BottomSheetRef = React.createRef();
     this.onViewableItemsChanged.bind(this)
@@ -34,9 +37,15 @@ export default class FindOrderScreen extends Component {
 
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    Axios.get('http://192.168.1.8:4000/deliverer/+923025699796').then((resp)=>{
+    console.log("recasdsa")
+    })
 
   }
+
+
+  
 
   onViewableItemsChanged({ viewableItems, changed }) {
     console.log('viewableItems', viewableItems)
@@ -46,6 +55,8 @@ export default class FindOrderScreen extends Component {
   viewabilityConfig = { viewAreaCoveragePercentThreshold: 50 }
 
   render() {
+
+    
 
 
     const { navigation, route } = this.props;
@@ -116,12 +127,7 @@ export default class FindOrderScreen extends Component {
     // DEFINE COMPONENTS HERE
 
 
-
-
-
     return (<View style={styles.container} >
-
-
 
       <View style={styles.map}>
 
@@ -129,7 +135,10 @@ export default class FindOrderScreen extends Component {
         <MapComponent showDirection={false} />
       </View>
 
-      <BottomSheet
+
+      {this.state.biker != null && this.state.biker.availability &&
+      
+        <BottomSheet
         // enabledHeaderGestureInteraction={true}
         enabledContentGestureInteraction={true}
         snapPoints={[650, 350, 70]}
@@ -138,7 +147,14 @@ export default class FindOrderScreen extends Component {
         ref={this.BottomSheetRef}
         initialSnap={1}
       />
+      }
 
+
+      {this.state.biker != null && !this.state.biker.availability &&
+      <View>
+        <Text style={{fontSize:16,textAlign:'center',padding:16}}>You cannot see orders currenlty as you are offline</Text>
+      </View>
+      }
 
       <View style={{ zIndex: 5 }}></View>
 

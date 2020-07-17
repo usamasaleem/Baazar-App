@@ -242,6 +242,12 @@ export default class MapComponent extends Component {
     }, 1000);
 
 
+
+    
+
+
+
+
   }
 
 
@@ -274,6 +280,8 @@ export default class MapComponent extends Component {
 
         destination={this.state.routes[this.state.routes.length - 1]}
 
+        mode="WALKING"
+        precision="high"
         strokeWidth={3}
         strokeColor="#343847"
 

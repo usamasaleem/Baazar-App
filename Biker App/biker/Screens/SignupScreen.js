@@ -13,7 +13,8 @@ import { TextInput } from 'react-native-paper';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import { ip } from "../config.js"
+import Axios from 'axios';
 
 export default class SignupScreen extends Component {
 
@@ -43,7 +44,7 @@ export default class SignupScreen extends Component {
                         onChangeText={(val) => this.setState({ name: val })}
                         value={this.state.name}
                     />
-                    <Input containerStyle={styles.inp} placeholder="Phone Number" leftIcon={{ type: 'material', name: 'person', color: '#BDBDBD' }}
+                    <Input containerStyle={styles.inp} keyboardType={"phone-pad"} placeholder="Phone Number" leftIcon={{ type: 'material', name: 'person', color: '#BDBDBD' }}
                         onChangeText={(val) => this.setState({ phoneNumber: val })}
                         value={this.state.phoneNumber}
                     />
@@ -70,6 +71,9 @@ export default class SignupScreen extends Component {
                     buttonStyle={{ backgroundColor: '#343847', padding: 14 }}
                     onPress={() => {
                         if (this.verifiyInputs()) {
+
+
+
                             let tempBiker = {
                                 lisenceNumber: this.state.lisenceNumber,
                                 name: this.state.name,
@@ -79,15 +83,11 @@ export default class SignupScreen extends Component {
                             }
 
                             this.setState({ biker: tempBiker })
-                            console.log(tempBiker)
-                            if(this.state.biker)
-                            {
-                                navigation.navigate('PersonalInfo', {
-                                    biker: this.state.biker,
-                                    mydata: 'Usama'
-                                })
-                            }
-                            
+                            navigation.navigate('PersonalInfo', {
+                                biker: tempBiker,
+                                mydata: 'Usama'
+                            })
+
                         }
                         else {
                             ToastAndroid.show("Invalid  Check your Inputs", ToastAndroid.LONG);
@@ -96,7 +96,7 @@ export default class SignupScreen extends Component {
                 />
                 <View style={styles.linkContainer}>
                     <TouchableOpacity
-                        onPress={() => { navigation.push('Login') }}
+                        onPress={() => { navigation.pop() }}
                     >
                         <Text style={styles.link}>Already Have an Account ?</Text>
                     </TouchableOpacity>
@@ -111,22 +111,12 @@ export default class SignupScreen extends Component {
 
     verifiyInputs() {
 
-        if (
-            this.state.name == '' &&
-            this.state.address == '' &&
-            this.state.city == '' &&
-            this.state.lisenceNumber == '' &&
-            this.state.phoneNumber == '' &&
-            this.state.phoneNumber.length >= 13) { return false }
-        else {
-
-
-
-            console.log(this.state.biker)
-
+        if (this.state.name != '' && this.state.address != '' && this.state.city != '' && this.state.lisenceNumber != '' && this.state.phoneNumber.length >= 13 && this.state.phoneNumber.match(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g)) {
             return true
         }
-
+        else {
+            return false
+        }
     }
 
 

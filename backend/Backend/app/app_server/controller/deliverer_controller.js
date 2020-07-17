@@ -23,7 +23,7 @@ var deliverer_controller = {
 
     update_deliverer: (req, res, next) => {
 
-        deliverer_schema.findByIdAndUpdate(req.params.id,req.body,{ new: true },(err, todo) => {
+        deliverer_schema.findOneAndUpdate({'phoneNumber':req.params.phoneNumber},req.body,{ new: true },(err, todo) => {
             
                 if (err)   { 
                             res.status(500);
@@ -38,7 +38,9 @@ var deliverer_controller = {
                 else       {
                             res.status(200);
                             res.json(todo);
+                            res.end()
                            }
+
 
             })
 
@@ -70,7 +72,7 @@ var deliverer_controller = {
 
     view_deliverer: (req, res) => {
 
-        deliverer_schema.findOne({ 'name': req.params.name }, function (err, doc) {
+        deliverer_schema.findOne({ 'phoneNumber': req.params.phoneNumber }, function (err, doc) {
             
             if (err)  {
                        res.status("500");
@@ -93,9 +95,7 @@ var deliverer_controller = {
 
     view_all_deliverer: (req, res, next) => {
 
-        let sort_by = req.query.sort_by;
-        if( sort_by== undefined) sort_by ='full_name';
-
+       
         deliverer_schema.find({}, (err, doc) => {
 
             if (err)   {
@@ -113,7 +113,7 @@ var deliverer_controller = {
                         res.json(doc);
                        }
 
-        }).sort(sort_by)
+        })
     
     },
 
