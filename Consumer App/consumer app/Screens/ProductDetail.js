@@ -4,12 +4,12 @@ import {
     StyleSheet,
     Text,
     Image,
-    View,
+    View,AsyncStorage
 } from 'react-native';
 import {get,post} from 'axios';
 import { Button } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
-
+import {ip} from '../Components/global'
 export default class ProductDetail extends Component {
 
     constructor(props) {
@@ -19,12 +19,18 @@ export default class ProductDetail extends Component {
             store:[],
             isAdded:false,
             qty:1,
+            user:""
         }
         this.addToCart = this.addToCart.bind(this);
     }
 
 
     componentDidMount() {
+        AsyncStorage.getItem('UserID').then(value=>{
+            this.setState({
+                user:value
+            })
+        })
         const  id = this.props.route.params.id;
         console.log("detail props"+id)
         this.getProducts().then((response)=>{
@@ -46,7 +52,7 @@ export default class ProductDetail extends Component {
     }
     getProducts(){
         const id=this.props.route.params.id;
-        const url = 'http://192.168.100.64:4000/product/'+id;
+        const url = ip+'product/'+id;
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data'
@@ -64,7 +70,7 @@ export default class ProductDetail extends Component {
               addedToCart:true,
               quantity:this.state.qty,
               products:id,
-              userID:'5ee0c874322e6c19e8ed4440'
+              userID:this.state.user
           }
 
           const config = {
@@ -72,7 +78,7 @@ export default class ProductDetail extends Component {
                 'Content-Type':'application/json'
             }
         }
-        post(`http://192.168.100.64:4000/shoppingCart/add`, carts ,config)
+        post(ip+`shoppingCart/add`, carts ,config)
           .then(res => {
             console.log(res);
             console.log(res.data);
@@ -87,7 +93,7 @@ export default class ProductDetail extends Component {
         return <ScrollView style={styles.container}>
 
             <View style={styles.imageContainer}>
-                <Image style={styles.prodImage} source={{uri:`http://192.168.100.64:4000/uploads/${this.state.data.fileName}`}} />
+                <Image style={styles.prodImage} source={{uri:ip+`uploads/${this.state.data.fileName}`}} />
             </View>
             <View style={styles.prodDetails}>
                 <Text style={styles.prodTitle}>{this.state.data.name}</Text>

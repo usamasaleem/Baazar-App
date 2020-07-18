@@ -9,6 +9,7 @@ import Icon from 'react-native-ionicons'
 import Product from '../Components/Product/Product';
 import ReatilerCard from '../Components/RetailerCard/RetailerCard';
 import {get} from 'axios';
+import {ip} from '../Components/global'
 export default class Retailer extends Component {
 
     constructor(props) {
@@ -26,7 +27,7 @@ export default class Retailer extends Component {
             }
         }
         
-        get('http://192.168.100.64:4000/store/location', config)
+        get(ip+'store/location', config)
         .then((response) => {
             console.log(response.data)
             this.setState({

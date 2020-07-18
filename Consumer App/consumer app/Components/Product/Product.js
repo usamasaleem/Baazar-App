@@ -10,7 +10,7 @@ import {
 import Icon from 'react-native-ionicons'
 import {get,post} from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import {ip} from '../global'
 // import img from 'http://192.168.100.64:4000/images/monaLisa.jpg'
 
 export default class Product extends Component {
@@ -76,7 +76,7 @@ export default class Product extends Component {
                             'Content-Type':'application/json'
                         }
                     }
-                    post(`http://192.168.100.64:4000/shoppingCart/add`, carts ,config)
+                    post(ip+`shoppingCart/add`, carts ,config)
                       .then(res => {
                         console.log(res);
                         console.log(res.data);
@@ -104,7 +104,7 @@ export default class Product extends Component {
                         'Content-Type':'application/json'
                     }
                 }
-                post(`http://192.168.100.64:4000/quickbuy/add`, quickbuy ,config)
+                post(ip+`quickbuy/add`, quickbuy ,config)
                   .then(res => {
                     console.log(res);
                     console.log(res.data);
@@ -121,7 +121,7 @@ export default class Product extends Component {
        
             <TouchableOpacity onPress={()=>{this.props.stackNavigation.navigate('ProductDetail' ,{id:this.props.item._id,name:this.props.item.name})}}>
                 <View style={styles.imageContainer}>
-                    <Image source={{uri:`http://192.168.100.64:4000/uploads/${this.props.item.fileName}`}} style={styles.productImage} />
+                    <Image source={{uri:ip+`uploads/${this.props.item.fileName}`}} style={styles.productImage} />
                 </View>
             </TouchableOpacity>
 
@@ -149,13 +149,13 @@ export default class Product extends Component {
              {this.state.isAdded && 
                <Icon name={'md-checkmark-circle'}  size={26} color={'#BDBDBD'} />
              }
-             {!this.state.isAddedToQuick &&  !this.state.outOfStock &&
+             {/* {!this.state.isAddedToQuick &&  !this.state.outOfStock &&
         <Icon name={'rocket'}  size={26} color={'#BDBDBD'}   onPress={() => this.addToQuickBuy(this.props.item._id)} style={{marginBottom:10}}/>
            }
            
            {this.state.isAddedToQuick && 
         <Icon name={'rocket'}  size={26} color={'red'}  style={{marginBottom:10}}/>
-           }
+           } */}
 
 
             </View>

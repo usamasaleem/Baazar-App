@@ -48,7 +48,7 @@ var schedule_controller = {
 
     delete_schedule: (req, res, next) => {
 console.log(req.params)
-        schedule_schema.deleteMany({"userID":req.params.id},(err,doc)=>{
+        schedule_schema.findByIdAndRemove(req.params.id,(err,doc)=>{
 
             if(err)    {
                         res.status(500);

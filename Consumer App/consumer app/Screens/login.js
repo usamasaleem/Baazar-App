@@ -16,6 +16,7 @@ import styled from 'styled-components';
 import Icon from 'react-native-ionicons'
 import {post,put} from 'axios';
 import { AsyncStorage } from 'react-native';
+import {ip} from '../Components/global'
 export default class Login extends Component {
 
     constructor(props) {
@@ -65,7 +66,7 @@ export default class Login extends Component {
                 'Content-Type':'application/json'
             }
         }
-        post(`http://192.168.100.64:4000/authentication/customer/login`,  data ,config)
+        post(ip+`authentication/customer/login`,  data ,config)
           .then(res => {
               if(res.status==500){
                   console.log('err')

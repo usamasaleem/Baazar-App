@@ -40,26 +40,28 @@ export default class CartItem extends Component {
               'Authorization': '***'
           }
       }
-        axios.delete(ip+'shoppingcart/deleteCartItem/'+id,config).then(res=>{
+   
+      axios.delete(ip+'schedule/delete/'+id,config).then(res=>{
   
           console.log(res.data)
           this.setState({
               deleted:true,
               visible:false
           })
-          this.props.navigation.navigate('Cart')
+          this.props.navigation.navigate('QuickBuy')
           })
       }
+      
 
     render() {
 
 
         return <View style={styles.container}>
-
-            <Image style={styles.prodImage} source={{uri:ip+`uploads/${this.props.item.products.fileName}`}}/>
-            <Text  style={styles.prodName}>{this.props.item.products.name}</Text>
-            <Text  style={styles.prodPrice}>RS. {this.props.item.products.Seller_price}</Text>
             <Icon name={'trash'} size={24} color={'red'} onPress={this.dialog}></Icon>
+            
+            <Text  onPress={()=>{this.props.navigation.navigate('Inside' ,{id:this.props.item.schedule})}} style={styles.prodName}>{this.props.item.schedule}</Text>
+            <Text  style={styles.prodPrice}></Text>
+            <Image style={styles.prodImage} source={require('../../assets/Images/Forward.png')} />
 
                         <View style={styles.dialog}>
 
@@ -107,6 +109,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
         borderRadius:16,
+        height:100
        
     },
     dialog:{
@@ -115,7 +118,8 @@ const styles = StyleSheet.create({
 
     prodImage:{
         width:50,
-        height:50
+        height:40,
+        marginLeft:80
     },
     prodPrice: {
         marginTop: 0,
@@ -125,7 +129,11 @@ const styles = StyleSheet.create({
     },
     prodName: {
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 18,
+        marginLeft:40,
+        flex:1,
+        
+
     },
 
 })

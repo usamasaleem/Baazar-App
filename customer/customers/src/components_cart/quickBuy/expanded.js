@@ -5,11 +5,11 @@ import Icon from "../../assets/images/Avatar.jpg";
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoneyBillAt,faFighterJet,faPlusCircle ,faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {faTrashAlt ,faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import { faMoneyBillAlt } from '@fortawesome/free-regular-svg-icons';
 import avatar from '../../assets/images/Avatar.jpg'
 import { BrowserRouter as Router, Route,Switch, Redirect,Link} from 'react-router-dom'
-
+import axios from 'axios'
 export default class ExpandedCard extends Component {
 
     constructor() {
@@ -25,22 +25,34 @@ export default class ExpandedCard extends Component {
          
       }
       
+      deleteQuickbuy(id){
+        const config = {
+          headers: {
+             
+              'Authorization': '***'
+          }
+      }
+        axios.delete('http://localhost:4000/schedule/delete/'+id,config).then(res=>{
+  
+          console.log(res.data)
+          window.location.reload()
+          })
+      }
   
 
     render() {
         return (
             <>
                 <ExpandedCardContainer >
-                <StyledLink to={{pathname: `/inside/${this.props.item.schedule}`}}>
-                   
-
-                    </StyledLink>
+                <DeleteButton onClick={() => this.deleteQuickbuy(this.props.item._id)}  ><FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon></DeleteButton>
+                
                     <StyledLink  to={{pathname: `/inside/${this.props.item.schedule}`}}>
              <ExpandedCardDetailContainer className="ExpandedCardDetailContainer">
 
                         <DetailInnerContainer className="DetailInnerContainer">
-                        
+                       
                             <Heading className="heading">
+                          
                                 <p >{this.props.item.schedule} Grocery</p>
                             </Heading>
                             <Heading className="heading">
@@ -73,8 +85,18 @@ const StyledLink = styled(Link)`
         text-decoration: none;
     }
 `
+const DeleteButton=styled.button`
+border:none;
+background:none;
+cursor:pointer;
+outline:none;
+color:#979797;
+padding:10px;
+
+
+`
 const ExpandedCardContainer =styled.div`
-display: grid;
+//display: grid;
 padding: 1rem 0;
 //grid-template-columns: auto 65%;
 grid-column-gap: 5%;

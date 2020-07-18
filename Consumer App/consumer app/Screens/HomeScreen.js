@@ -11,6 +11,7 @@ import Product from '../Components/Product/Product';
 import { RNCamera } from 'react-native-camera';
 import Camera from './camera'
 import {get} from 'axios';
+import {ip} from '../Components/global'
 export default class HomeScreen extends Component {
 
     constructor(props) {
@@ -37,7 +38,7 @@ export default class HomeScreen extends Component {
             }
         }
         
-        get('http://192.168.100.64:4000/store/location', config)
+        get(ip+'store/location', config)
         .then((response) => {
             console.log(response.data)
             this.setState({
@@ -45,7 +46,7 @@ export default class HomeScreen extends Component {
             })
             for (let i = 0; i < response.data.length; i++) {
 
-                get(`http://192.168.100.64:4000/product/getPros/`+response.data[i]._id,config).then(res=>{
+                get(ip+`product/getPros/`+response.data[i]._id,config).then(res=>{
                     console.log(res.data)
                     this.setState({ products: this.state.products.concat(res.data) })
                  
@@ -74,7 +75,7 @@ export default class HomeScreen extends Component {
     search(search){
         
     
-        const url = 'http://192.168.100.64:4000/product/search/'+search;
+        const url = ip+'product/search/'+search;
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data'

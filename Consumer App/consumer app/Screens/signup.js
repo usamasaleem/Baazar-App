@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import Icon from 'react-native-ionicons'
 import Geolocation from 'react-native-geolocation-service';
 const GOOGLE_MAPS_APIKEY = 'AIzaSyB_UY8Mg65jm8F_BHOarN0wQAf1pFlqqtM';
+import {ip} from '../Components/global'
 export default class Signup extends Component {
 
     constructor(props) {
@@ -86,7 +87,7 @@ export default class Signup extends Component {
         }
 
         if(this.state.name!=""&&this.state.email!=""&&this.state.number!=null && this.state.password!="" && this.state.address!="" ){
-        post(`http://192.168.100.64:4000/authentication/customer/`,  data ,config)
+        post(ip+`authentication/customer/`,  data ,config)
           .then(res => {
               
               

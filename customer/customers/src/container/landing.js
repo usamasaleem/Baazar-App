@@ -99,7 +99,7 @@ export default class LandingPage extends Component {
 
                         <Lower  >
                             <Lottie options={defaultOptions}
-                                
+
                                 width={250}
                             />
 
@@ -107,7 +107,7 @@ export default class LandingPage extends Component {
 
 
 
-                        
+
 
                     </MainDiv>
                 </Section>
@@ -118,25 +118,15 @@ export default class LandingPage extends Component {
                 </div>
 
                 {/* how it works */}
-                <Section3 class="section-3">
-                {/* <Wcontainer class="w-container"> */}
-
-                   
-                        <Sectionheding class="section-heding">
-                            Categories</Sectionheding>
+                <Section3 >
+                    <Container>
                         
-                            
-                        <Div182 class="div-block-182">
                         {this.state.data.map((item) => 
-                      <CategoryCard item={item} value={item._id} ></CategoryCard>)
+                      <CategoryCard item={item} value={item._id} onClick={this.print}></CategoryCard>)
                             }
-                         
-                        
-                        </Div182>
-                   
-                {/* </Wcontainer> */}
-            </Section3>
-            {/* Footer */}
+                    </Container>
+                </Section3>
+                {/* Footer */}
                 {/* <Footer></Footer> */}
 
             </>
@@ -150,6 +140,15 @@ const Section = styled.div`
 // padding-left: 10px;
 
 
+`
+const Container = styled.div`
+display: flex;
+/* justify-content: center; */
+flex-direction: row;
+flex-wrap: wrap;
+margin-left:10%;
+margin-right:10%;
+justify-content:center;
 `
 const MainDiv = styled.div`
 height:80vh;
@@ -184,11 +183,11 @@ font-family:'Poppins'
 const Img = styled.img`
 
 `
-  const Section3=styled.div`
+const Section3 = styled.div`
     margin-bottom: 40px;
     
   `
-  const Sectionheding =styled.div`
+const Sectionheding = styled.div`
 
     margin-top: 0px;
     margin-bottom: 40px;
@@ -199,12 +198,12 @@ const Img = styled.img`
     text-align: center;
   `
 
-  const Wcontainer=styled.div `
+const Wcontainer = styled.div`
     margin-left: auto;
     margin-right: auto;
     max-width: 940px;
   `
-  const Div183=styled.div`
+const Div183 = styled.div`
   padding-right: 10px;
   padding-left: 10px;
   -webkit-flex-wrap: nowrap;
@@ -215,9 +214,9 @@ const Img = styled.img`
   -ms-flex-align: start;
   align-items: flex-start;
   overflow: auto;
-  ` 
+  `
 
-    const Div182=styled.div`
+const Div182 = styled.div`
     display:inline-flex;
 width:100%;
 flex-wrap:wrap;
