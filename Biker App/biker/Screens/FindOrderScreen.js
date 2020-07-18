@@ -38,8 +38,9 @@ export default class FindOrderScreen extends Component {
   }
 
   componentWillMount() {
-    Axios.get('http://192.168.1.8:4000/deliverer/+923025699796').then((resp)=>{
+    Axios.get(ip+'deliverer/+923025699794').then((resp)=>{
     console.log("recasdsa")
+    this.setState({biker:resp.data})
     })
 
   }

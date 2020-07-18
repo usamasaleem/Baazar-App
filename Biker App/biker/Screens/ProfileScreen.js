@@ -66,7 +66,7 @@ export default class ProfileScreen extends Component {
 
             <View style={styles.profileDetailContainer}>
                 <ProfileImage width={80} height={80} style={{ marginVertical: 30 }} />
-                <Text style={[styles.profileDetailText, styles.nameText]}>Usama Saleem</Text>
+                <Text style={[styles.profileDetailText, styles.nameText]}>Ahmed</Text>
                 <Text style={[styles.profileDetailText, styles.infoText]}>Metro Bike 125</Text>
                 <Text style={[styles.profileDetailText, styles.infoText]}>PND-420</Text>
                 <Switch
@@ -90,8 +90,8 @@ export default class ProfileScreen extends Component {
                     </View>
 
                     <View style={styles.reportRow}>
-                        <Text style={styles.reportInfoText}>140 km</Text>
-                        <Text style={styles.reportInfoText}>850000 PKR</Text>
+                        <Text style={styles.reportInfoText}>4.6 km</Text>
+                        <Text style={styles.reportInfoText}>5000 PKR</Text>
                         <Text style={styles.reportInfoText}>4.5</Text>
                     </View>
 

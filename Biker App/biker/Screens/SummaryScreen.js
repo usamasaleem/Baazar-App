@@ -46,12 +46,12 @@ export default class SummaryScreen extends Component {
                 <View style={styles.cardDetail}>
                     <View style={styles.cardDetailSection}>
                         <Text style={styles.cardSubText}>Total Distance</Text>
-                        <Text style={styles.cardMainText}>18.5 Km</Text>
+                        <Text style={styles.cardMainText}>4.6 Km</Text>
                     </View>
 
                     <View style={styles.cardDetailSection}>
                         <Text style={styles.cardSubText}>Total Distance</Text>
-                        <Text style={[styles.cardMainText, styles.moneyText]}>Rs 4200</Text>
+                        <Text style={[styles.cardMainText, styles.moneyText]}>Rs 5000</Text>
                     </View>
 
                 </View>
@@ -68,8 +68,8 @@ export default class SummaryScreen extends Component {
             return <View style={styles.routeCard}>
 
                 <View style={styles.routeCardHeader}>
-                    <Text style={[styles.dateText, styles.routeCardText]}>24 Oct, 1:30PM</Text>
-                    <Text style={[styles.priceText, styles.routeCardText]}>Rs 1,500</Text>
+                    <Text style={[styles.dateText, styles.routeCardText]}>18 Jul, 3:30PM</Text>
+                    <Text style={[styles.priceText, styles.routeCardText]}>Rs 5000</Text>
                 </View>
 
                 <View style={styles.routeCardDetail}>
@@ -79,8 +79,8 @@ export default class SummaryScreen extends Component {
 
                         <CircleDotIcon />
                         <View style={styles.routes}>
-                            <Text style={styles.routeText}>Deliverer's Starting Location</Text>
-                            <Text style={styles.routeText}>Consumer's Starting Location</Text>
+                            <Text style={styles.routeText}>Saddar Chandni Chowk</Text>
+                            <Text style={styles.routeText}>Punjab Cash n Carry Rwp</Text>
                         </View>
                     </View>
 
@@ -147,22 +147,6 @@ export default class SummaryScreen extends Component {
                     <View style={styles.sectionRow}>
                         <RouteCard />
                     </View>
-                    <View style={styles.sectionRow}>
-                        <RouteCard />
-                    </View>
-                    <View style={styles.sectionRow}>
-                        <RouteCard />
-                    </View>
-                    <View style={styles.sectionRow}>
-                        <RouteCard />
-                    </View>
-                    <View style={styles.sectionRow}>
-                        <RouteCard />
-                    </View>
-                    <View style={styles.sectionRow}>
-                        <RouteCard />
-                    </View>
-
 
                 </View>
 

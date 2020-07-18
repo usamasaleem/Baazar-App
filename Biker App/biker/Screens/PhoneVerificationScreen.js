@@ -73,8 +73,8 @@ export default class PhoneVerificationScreen extends Component {
                     buttonStyle={{ backgroundColor: '#343847', padding: 14 }}
                     onPress={() => {
                         this.setState({ verifying: true })
-                        this.verifiyNumber(phoneNumber)
-                        // navigation.replace('Main')
+                        // this.verifiyNumber(phoneNumber)
+                        navigation.replace('Main')
 
 
 
@@ -106,9 +106,6 @@ export default class PhoneVerificationScreen extends Component {
                 ToastAndroid.show("Invalid Code", ToastAndroid.LONG);
                 console.log(err)
             })
-
-
-
 
 
 
