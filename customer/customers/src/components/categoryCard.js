@@ -17,17 +17,12 @@ export default class CategoryCard extends Component {
 
 
         
-            <Category af-el="category-card" class="category" >
-                
-               <StyledLink to={{pathname: `5km/${this.props.item.name}`}}>
-                   
-                <Link14  class="link-block-14 w-inline-block">
-                    <IMG className='catImg' src={`http://localhost:4000/uploads/dairy.jpg`} ></IMG>
-                    <Heading af-sock="category-heading" class="card-heading-category">{this.props.item.name}<br /></Heading>
-                    
-                </Link14>
-                </StyledLink>
-            </Category>
+        <CheckBox >
+            <Img src={`http://localhost:4000/uploads/dairy.jpg`}></Img>
+            <TextBox><Heading>Dairy Milk</Heading></TextBox>
+        
+     
+         </CheckBox>
         
 
 
@@ -41,6 +36,50 @@ const StyledLink = styled(Link)`
     &:focus, &:hover, &:visited, &:link, &:active {
         text-decoration: none;
     }
+`
+const Heading = styled.p`
+margin-top:5%;
+padding-left:10px;
+justify-content: space-between;
+color:#292929;
+font-family:'Poppins';
+font-size:24px;
+font-weight:100;
+
+`
+const TextBox=styled.div`
+`
+
+const Box = styled.div` 
+display: flex;
+    flex-direction: column;
+    height: 60%;
+    padding: 10px 10px 10px 10px;
+// grid-template-rows:30%;
+
+
+width:100%;
+
+`
+const Img=styled.img`
+opacity:0.8;
+width:100%;
+height:100%;
+border-radius: 3px;
+`
+const CheckBox = styled.div` 
+
+
+background-color:#FDFDFF;
+border:solid 0 #707070;
+
+height:300px;
+width:20%;
+margin-left:60px;
+padding-bottom:5px;
+margin-top:3%;
+box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 `
 const Category=styled.div`
 height:300px;
@@ -75,23 +114,4 @@ text-decoration: none;
 max-width: 100%;
 display: inline-block;
 `
-const IMG=styled.img`
-opacity:0.8;
-width:100%;
-height:100%;
-border-radius: 3px;
-`
-const Heading=styled.p`
-color: #fff;
-font-size: 1.5rem;
-line-height: 1.9rem;
-font-weight: 700;
-text-align: left;
-color: #333;
-position: absolute;
-top: 70px;
-font-size: 1.5rem;
-font-family:'Poppins';
-margin-left:10px;
 
-`

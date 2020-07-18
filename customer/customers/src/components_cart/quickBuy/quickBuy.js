@@ -279,7 +279,8 @@ export default class Cart extends Component {
         <Container>
           {/* <smallText>Profile>Shopping Cart</smallText> */}
           <TextContainer>
-            <Text><FontAwesomeIcon icon={faMoneyBillAlt} /> Quick Buy </Text>
+    <Text><FontAwesomeIcon icon={faMoneyBillAlt} /> Quick Buy {this.props.schedule}
+    </Text>
 
             <Edit>
               <Popup trigger={<IMG src={add}></IMG>} modal>

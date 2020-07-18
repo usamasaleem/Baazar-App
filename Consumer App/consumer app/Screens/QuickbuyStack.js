@@ -5,7 +5,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import HomeScreen from "./HomeScreen";
 import ProductDetail from './ProductDetail';
 import Cart from './Cart';
-import QuickBuy from './QuickBuy';
+import QuickBuy from './quickBuyLanding';
+import Inside from './QuickBuy'
 
 
 const routeOption = ({ route, navigation }) => {
@@ -39,6 +40,7 @@ export function QuickbuyStack() {
     const InnerNavigator = () => {
         return (<Stack.Navigator>
             <Stack.Screen name="QuickBuy" component={QuickBuy} options={routeOption} />
+            <Stack.Screen name="Inside" component={Inside} options={routeOption} />
             
             <Stack.Screen name="Cart" component={Cart} options={routeOption} />
         </Stack.Navigator >

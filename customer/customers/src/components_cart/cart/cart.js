@@ -12,7 +12,8 @@ import {reactLocalStorage} from 'reactjs-localstorage';
 import StripeCheckout from 'react-stripe-checkout'
 import { toast } from "react-toastify";
 import { Link, Redirect,  } from 'react-router-dom'
-
+import Popup from "reactjs-popup";
+import DatePicker from 'react-date-picker';
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 var uniqid = require('uniqid');
@@ -26,7 +27,10 @@ export default class Cart extends Component {
         data:[],
         emptyCart:false,
         SubTotal:0,
-        inventoryUpdated:false
+        inventoryUpdated:false,
+        name:"",
+        startDate:new Date(),
+        isClose:false
    
       }
  this.Total=this.Total.bind(this);
@@ -115,31 +119,55 @@ export default class Cart extends Component {
 }
 
 addToQuickBuy(){
-  const config = {
+  const data = {
+    userID:reactLocalStorage.get('UserID'),
+    schedule:this.state.name,
+    date:this.state.startDate
+};
+console.log(data)
+const config = {
     headers: {
-        'Content-Type':'application/json',
-        'Authorization': '***'
+        'Content-Type':'application/json'
     }
 }
-  for (let i = 0; i < this.state.data.length; i++) {
-    const pro={
-
-      addedToCart:true,
-      quantity:this.state.data[i].quantity,
-      products:this.state.data[i].products,
-      userID:reactLocalStorage.get('UserID'),
-     
-
-    }
-  
-  
-  post(`http://localhost:4000/quickbuy/add`,  pro ,config)
+post(`http://localhost:4000/schedule/add`,  data ,config)
   .then(res => {
 
-    console.log(res.data)
+    const config = {
+      headers: {
+          'Content-Type':'application/json',
+          'Authorization': '***'
+      }
+  }
+  
+    for (let i = 0; i < this.state.data.length; i++) {
+      const pro={
+  
+        addedToCart:true,
+        quantity:this.state.data[i].quantity,
+        products:this.state.data[i].products,
+        userID:reactLocalStorage.get('UserID'),
+        schedule:this.state.name.toLowerCase()
+       
+  
+      }
+    
+    
+    post(`http://localhost:4000/quickbuy/add`,  pro ,config)
+    .then(res => {
+      
+      console.log("addded")
+    })
+  
+  
+  }
+  toast("Succesfully added to Quickbuy", { type: "success" });
+  this.setState({isClose:true})
+      
   })
 
-}
+
+ 
 }
 // handleToken(token){
 //   const config = {
@@ -286,7 +314,51 @@ handleToken(token) {
              {/* <smallText>Profile>Shopping Cart</smallText> */}
              <TextContainer>
              <Text><FontAwesomeIcon icon={faMoneyBillAlt}/> Shopping Cart  </Text>
-             <QuickBuy onClick={this.addToQuickBuy}><FontAwesomeIcon icon={faFighterJet}/> Add to Quick Buy</QuickBuy>
+             
+             <Edit>
+                        <Popup trigger={<QuickBuy ><FontAwesomeIcon icon={faFighterJet}/> Add to Quick Buy</QuickBuy>} modal>
+                            {close => (
+                                <Modal >
+                                    <Close onClick={close}>
+                                        &times;
+                        </Close>
+                                    <Header > <Heading>Schedule Grocery</Heading>
+                                        {/* <div style={{width:'45%', marginBottom:'10px'}}><Search action={this.search} /></div> */}
+                                    </Header>
+                                    <Content >
+                                        <div style={{
+                                            display:'flex',
+                                            flexDirection:'column',
+                                            width:'50%',
+                                             margin: 'auto'
+                                            }}>
+                                                <Tex>Schedule Name</Tex>
+                                        <Input type="text" placeholder="Name" value={this.state.name} name="name" onChange={e => this.setState({name:e.target.value})}></Input>
+                                        <Tex> Date</Tex>
+                                        <DatePicker
+                                            onChange={this.handleChange}
+                                            value={this.state.startDate}
+                                           
+                
+                                        />
+                                        <Buttons onClick={this.addToQuickBuy}>Add</Buttons>
+
+                                      
+                                        </div>
+                                        
+
+                                    </Content>
+                                    {this.state.isClose &&
+
+                                close()
+
+                            }
+
+                                </Modal>
+                            )}
+                        </Popup>
+                    </Edit>
+
              </TextContainer>
              {/* <ProductTablecolumns className="ProductTable-columns">
                     <ProductTable__column className="ProductTable__column" >*</ProductTable__column>
@@ -372,10 +444,10 @@ const TextContainer=styled.div`
 display:flex;
 `
 const QuickBuy = styled.p`
-padding-top:20px;
+padding-top:40px;
 justify-content: space-between;
 align-self:flex-end;
-margin-left:45%;
+
 cursor: pointer;
 font-weight:bold;
 font-family:'Poppins';
@@ -560,5 +632,123 @@ padding-bottom: 1rem
 
 `
 
+
+
+const Edit = styled.div`
+position:relative;
+margin-left:auto;
+`
+
+const DeleteButton = styled.button`
+border:none;
+background:none;
+cursor:pointer;
+outline:none;
+`
+
+
+
+const Modal = styled.div`
+    font-size: 12px;
+  `
+const Header = styled.div`
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+  `
+
+const Content = styled.div`
+    width: 100%;
+    padding: 10px 5px;
+  `
+const Action = styled.div`
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+  `
+const Close = styled.a`
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+  `
+
+
+const Inputs = styled.div`
+display:block;
+width: min-content;
+margin-left:20px;
+`
+const Photo = styled.div`
+width:30%;
+height:150px;
+border: 1px solid #707070;
+margin-left:20px;
+margin-right:20px;
+`
+const Form = styled.div`
+display:inline-flex;
+width :500px;
+
+`
+const IconInput = styled.img`
+
+width:100%;
+
+cursor: pointer;
+
+`
+const InputContainer = styled.div`
+position:relative;
+width:100%;
+display:inline-flex;
+justify-content:space-evenly;
+margin-bottom:40px;
+`
+
+const Input = styled.input`
+width:200px;
+border: none;
+border-bottom: 2px solid #BDBDBD;
+height:30px;
+text-align:center;
+margin-bottom:20px;
+&:focus{
+    outline: none;
+}
+::placeholder{
+    color:#BDBDBD;
+    font-family:'Poppins';
+    font-weight:bold;
+    font-size:18px;
+    text-align:center;
+}
+`
+const Buttons=styled.button
+`
+    align-self: center;
+    margin-top: 20px;
+    
+    border-radius: 10px;
+    background-color: #343847;
+    border: 2px solid #707070;
+    font-size: .9rem;
+    color:white;
+    font-size:18px;
+    width:200px;
+    padding:5px;
+    cursor:pointer;
+    height:50px;
+`
  
 

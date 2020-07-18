@@ -1,8 +1,36 @@
 import React from 'react';
-
+import Lottie from 'react-lottie'
+import animationData from '../assets/lottieflow-ecommerce-14-15-000000-easey.json'
+import animationData2 from '../assets/lottieflow-ecommerce-14-19-000000-easey.json'
+import animationData3 from '../assets/lottieflow-ecommerce-14-20-000000-easey.json'
 
 import styled from 'styled-components'
 function HowItWorks() {
+     const defaultOptions = {
+            loop: true,
+            autoplay: true,
+            animationData: animationData,
+            rendererSettings: {
+                preserveAspectRatio: 'xMidYMid slice'
+            }
+        };
+        const defaultOptions2 = {
+          loop: true,
+          autoplay: true,
+          animationData: animationData2,
+          rendererSettings: {
+              preserveAspectRatio: 'xMidYMid slice'
+          }
+      };
+      const defaultOptions3 = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData3,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+
     return (
 
         <div class="section-2">
@@ -10,17 +38,29 @@ function HowItWorks() {
                 <Sectionheding class="section-heding">How it works</Sectionheding>
                 <HIWW class="how-it-works-wrap">
                     <HIWcard class="how-it-works-card">
-                        <LottieAnimation data-w-id="7734c54d-a957-6722-9619-46ac73cdd4ed" data-animation-type="lottie" data-src="documents/lottieflow-ecommerce-14-15-000000-easey.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="1.15" data-duration="1.3" class="lottie-animation"></LottieAnimation>
+                    <Lottie options={defaultOptions}
+                                
+                                width={120}
+                                height={120}
+                            />
                         <HIWheading class="how-it-works-heading">Buy local online</HIWheading>
                         <HIWdescription class="how-it-works-description">Your local retail stores made <br />available online</HIWdescription>
                     </HIWcard>
                     <HIWcard class="how-it-works-card">
-                        <LottieAnimation data-w-id="7ed876bd-e84f-2de2-df47-37a10e51cd0e" data-animation-type="lottie" data-src="documents/lottieflow-ecommerce-14-19-000000-easey.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3.95" data-duration="0" class="lottie-animation"></LottieAnimation>
+                    <Lottie options={defaultOptions2}
+                                
+                                
+                                height={120}
+                            />
                         <HIWheading class="how-it-works-heading">Fast Delivery</HIWheading>
                         <HIWdescription class="how-it-works-description">Get your orders delivered in 3 hours of ordering</HIWdescription>
                     </HIWcard>
                     <HIWcard class="how-it-works-card">
-                        <LottieAnimationPayment data-w-id="f9e6f8a2-e0d2-08db-17e1-c4af95a439e1" data-animation-type="lottie" data-src="documents/lottieflow-ecommerce-14-20-000000-easey.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="2.9833333333333334" data-duration="0" class="lottie-animation payment"></LottieAnimationPayment>
+                    <Lottie options={defaultOptions3}
+                                
+                                width={120}
+                                height={120}
+                            />
                         <HIWheading class="how-it-works-heading">Flexible Payment</HIWheading>
                         <HIWdescription class="how-it-works-description">Pay online via credit or debit card. Or using cash on delivery </HIWdescription>
                     </HIWcard>

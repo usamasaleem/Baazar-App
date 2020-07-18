@@ -16,6 +16,7 @@ import { CreditCardInput, LiteCreditCardInput } from "react-native-input-credit-
 import Dialog, {  DialogFooter, DialogButton, DialogContent} from 'react-native-popup-dialog';
 import { TabRouter } from '@react-navigation/native';
 import { AsyncStorage } from 'react-native';
+import {ip} from '../Components/global'
 export default class Cart extends Component {
 
     constructor(props) {
@@ -56,7 +57,7 @@ export default class Cart extends Component {
               
           }
         }
-      get('http://192.168.100.64:4000/shoppingCart/'+value,config).then(response=>{
+      get(ip+'shoppingCart/'+value,config).then(response=>{
 
         this.setState({
           data:response.data,
@@ -139,13 +140,13 @@ export default class Cart extends Component {
         }
         console.log(token)
        
-        post(`http://192.168.100.64:4000/payment/v1/tokens`, token ,config)
+        post(ip+`payment/v1/tokens`, token ,config)
         .then(res => {
           console.log(res);
           console.log(res.data);
           const product=this.state.SubTotal
           const token=res.data
-          post(`http://192.168.100.64:4000/payment/checkout`,  {token,product} ,config)
+          post(ip+`payment/checkout`,  {token,product} ,config)
             .then(res => {
                 const orderID=res.data.orderID
       
@@ -159,7 +160,7 @@ export default class Cart extends Component {
                 amount:this.state.SubTotal,
                 date:new Date().toISOString().slice(0, 10).split('-').reverse().join('/')
               }
-              post(`http://192.168.100.64:4000/payment/details`,  paymentDetails ,config)
+              post(ip+`payment/details`,  paymentDetails ,config)
                 .then(res => {
                   console.log(res.data)
                 })
@@ -187,7 +188,7 @@ export default class Cart extends Component {
                 const qty=this.state.data[i].products.quantity-this.state.data[i].quantity
                
               
-              post(`http://192.168.100.64:4000/order/add`,  pro ,config)
+              post(ip+`order/add`,  pro ,config)
               .then(res => {
     
                 console.log(res.data)
@@ -195,7 +196,7 @@ export default class Cart extends Component {
             
             }
     
-            get(`http://192.168.100.64:4000/shoppingCart/qty`,config).then(res=>{
+            get(ip+`shoppingCart/qty`,config).then(res=>{
                   console.log(res.data)
                   console.log(res.data.length)
                   
@@ -205,7 +206,7 @@ export default class Cart extends Component {
                       qty:res.data[i].total
                     }
                     console.log(detect.qty);
-                  put(`http://192.168.100.64:4000/product/updateQty/`+res.data[i]._id,  detect ,config).then(res=>{
+                  put(ip+`product/updateQty/`+res.data[i]._id,  detect ,config).then(res=>{
                   console.log('quantity updted'+res.data)
                   console.log('quantity updted'+res)
                     console.log('qty update')
@@ -215,7 +216,7 @@ export default class Cart extends Component {
               if(i==res.data.length-1){
               
                 // console.log("chalagaya" +inventory+this.state.emptyCart)
-                axios.delete('http://192.168.100.64:4000/shoppingcart/delete/'+this.state.data[0].userID,config).then(res=>{
+                axios.delete(ip+'shoppingcart/delete/'+this.state.data[0].userID,config).then(res=>{
                     Alert.alert(
                         'Payment Successful'
                      )
@@ -260,7 +261,7 @@ export default class Cart extends Component {
      
       AsyncStorage.getItem('UserID').then((value) => {
         console.log(value)
-        const url = 'http://192.168.100.64:4000/shoppingCart/5ee0c874322e6c19e8ed4440';
+        const url = ip+'shoppingCart/5ee0c874322e6c19e8ed4440';
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
