@@ -17,6 +17,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import firebase from 'react-native-firebase';
 import { Surface, Shape } from '@react-native-community/art';
 import * as Progress from 'react-native-progress';
+import { StackActions, NavigationActions } from 'react-navigation';
+
 
 export default class PhoneVerificationScreen extends Component {
 
@@ -33,7 +35,7 @@ export default class PhoneVerificationScreen extends Component {
     }
 
 
-    componentWillMount() {
+    componentDidMount() {
         const { navigation } = this.props;
         let phoneNumber = this.props.route.params.number
         firebase.auth().signInWithPhoneNumber(phoneNumber)
@@ -53,7 +55,7 @@ export default class PhoneVerificationScreen extends Component {
 
         const { navigation } = this.props;
         let phoneNumber = this.props.route.params.number
-
+ 
         return (
             <View style={styles.container}>
 
@@ -72,8 +74,10 @@ export default class PhoneVerificationScreen extends Component {
                     onPress={() => {
                         this.setState({ verifying: true })
                         this.verifiyNumber(phoneNumber)
-                
-                            navigation.push('Main')
+                        // navigation.replace('Main')
+
+
+
                     }}
                 />
 
@@ -91,34 +95,27 @@ export default class PhoneVerificationScreen extends Component {
 
     verifiyNumber(phoneNumber) {
 
-
         this.state.verificationCode.confirm(this.state.enteredCode)
-                .then(() => {
-                    this.setState({ verified: true })
-                    AsyncStorage.setItem("isLoggedIn", "true")
-                })
-                .catch((err) => {
-                    this.setState({ verified: false })
-                    console.log(err)
-                })
-        }
+            .then(() => {
+                this.setState({ verified: true })
+                AsyncStorage.setItem("isLoggedIn", "true")
+                this.props.navigation.replace('Main')
+            })
+            .catch((err) => {
+                this.setState({ verified: false })
+                ToastAndroid.show("Invalid Code", ToastAndroid.LONG);
+                console.log(err)
+            })
 
 
-        // if (this.state.verificationCode != undefined && this.state.enteredCode.length == 6) {
-        //     this.state.verificationCode.confirm(this.state.enteredCode)
-        //         .then(() => {
-        //             this.setState({ verified: true })
-        //             AsyncStorage.setItem("isLoggedIn", "true")
-        //         })
-        //         .catch((err) => {
-        //             this.setState({ verified: false })
-        //             console.log(err)
-        //         })
-        // }
-        // else {
-        //     ToastAndroid.show("Enter 6 digit code", ToastAndroid.LONG)
-        // }
+
+
+
+
     }
+
+
+}
 
 
 

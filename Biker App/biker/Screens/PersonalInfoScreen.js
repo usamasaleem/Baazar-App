@@ -15,7 +15,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
 import { ToastAndroid } from 'react-native';
 import Axios from 'axios';
-
+import { ip } from "../config"
 
 
 export default class SignupScreen extends Component {
@@ -26,10 +26,10 @@ export default class SignupScreen extends Component {
             selectedImageUri: "../assets/Images/blank-profile-picture.png",
             hasSelectedImage: false,
             imageName: "blank-profile-picture.png",
-            biker:{},
-            uri:'',
-            type:'',
-            name:'',
+            biker: {},
+            uri: '',
+            type: '',
+            name: '',
         }
     }
 
@@ -60,10 +60,10 @@ export default class SignupScreen extends Component {
     }
 
 
-    componentWillMount(){
-        const biker =  this.props.route.params.biker
+    componentWillMount() {
+        const biker = this.props.route.params.biker
         console.log(this.props)
-        this.setState({biker:biker})
+        this.setState({ biker: biker })
     }
 
 
@@ -104,7 +104,7 @@ export default class SignupScreen extends Component {
                         containerStyle={styles.loginBtn}
                         buttonStyle={{ backgroundColor: '#343847', padding: 14, }}
                         onPress={() => {
-                                this.chooseImage()
+                            this.chooseImage()
                         }}
                     />
                 }
@@ -131,48 +131,73 @@ export default class SignupScreen extends Component {
     }
 
 
-registerUser(navigation){
+    registerUser(navigation) {
+
+        const formData = new FormData();
+
+        formData.append('profilePic', {
+            uri: this.state.uri,
+            name: this.state.name,
+            type: this.state.type,
+        })
+
+        const config = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+            },
+            body: formData,
+        };
 
 
-    let formData = new FormData();
-       formData.append('profilePic',{
-        uri:this.state.uri,
-        name:this.state.name,
-        type:this.state.type,
-    })
-    
-    console.log(formData)
+        // console.log(this.state.biker)
 
-    let biker  = {
+        // let biker = {
+        //     name: this.state.biker.name,
+        //     liscenceNumber: this.state.biker.lisenceNumber,
+        //     city: this.state.biker.city,
+        //     availability: false,
+        //     address: this.state.biker.address,
+        //     phoneNumber: this.state.biker.phoneNumber,
+        //     imageUrl: this.state.name,
+        // }
 
-        name:this.state.biker.name,
-        liscenceNumber:this.state.biker.lisenceNumber,
-        city:this.state.biker.city,
-        availability:false,
-        address:this.state.biker.address,
-        phoneNumber : this.state.biker.phoneNumber,
-        imageUrl:'http://10.113.50.45:3000/'+this.state.selectedImageUri,
+        // console.log(biker)
+
+
+
+        fetch(ip+"deliverer/saveImage", config)
+        .then((checkStatusAndGetJSONResponse) => {
+
+            navigation.replace('Login')
+
+        })
+
+
+        // Axios.post(ip+"deliverer/add", biker).then((resp) => {
+
+        //     if (resp.data == 'Successfully added') {
+
+        //         fetch(ip+"deliverer/saveImage", config)
+        //             .then((checkStatusAndGetJSONResponse) => {
+
+        //                 navigation.replace('Login')
+
+        //             })
+
+        //     }
+
+
+        // })
+
+
+
+
+
+
 
     }
-
-
-    
-    console.log(biker)
-
-    
-    Axios.post("http://192.168.100.65:3000/deliverer/add",biker).then(()=>{
-        ToastAndroid.show("Profile Added",ToastAndroid.LONG);
-        navigation.navigate('Login')
-    })
-
-    // Axios.post("http://192.168.100.65:3000/deliverer/saveImage",formData).then(()=>{
-        // ToastAndroid.show("Image Saved",ToastAndroid.LONG);
-        // navigation.navigate('Login')
-    // })
-
-
-
-}    
 
 
 }

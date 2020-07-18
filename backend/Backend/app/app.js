@@ -109,7 +109,7 @@ module.exports = app;
 // DB Connection //
 
 function create_db_connection(uri) {
-  mongoose.connect("mongodb://localhost:27017/CreativeSpree", { useNewUrlParser: "true" });
+  mongoose.connect("mongodb://localhost:27017/Baazar", { useNewUrlParser: "true" });
 
   mongoose.connection.on("error", (err) => {
 

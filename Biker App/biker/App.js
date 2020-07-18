@@ -30,6 +30,10 @@ import RecievingScreen from './Screens/RecievingScreen';
 import sample from './Constants/FakeApi.json';
 import DetailScreen from './Screens/DetailScreen';
 import FindOrderScreen from './Screens/FindOrderScreen';
+import NewComp from './Components/MapComponent/MapComponent'
+import { StackActions, NavigationActions } from 'react-navigation';
+
+
 
 export default function App() {
 
@@ -38,56 +42,67 @@ export default function App() {
   const Stack = createStackNavigator();
 
   const MainNavigator = () => {
-    return(
-    <Stack.Navigator
-      initialRouteName ="Login"
-    >
+    return (
 
-      <Stack.Screen name="Login"        component={LoginScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Signup"       component={SignupScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="PersonalInfo" component={PersonalInfoScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="PhoneVerify"  component={PhoneVerificationScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Recieving"    component={RecievingScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Main"         component={DrawerNavigatorContainer} options={{ headerShown: false }} />
-     
+      <Stack.Navigator
+        initialRouteName="Main"
+      >
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="PersonalInfo" component={PersonalInfoScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="PhoneVerify" component={PhoneVerificationScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Recieving" component={RecievingScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Main" component={DrawerNavigatorContainer} options={{ headerShown: false }} />
+        <Stack.Screen name="Map" component={NewComp} options={{ headerShown: false }} />
+
       </Stack.Navigator>
-    )}
-
-  const DrawerNavigatorContainer = () => {
-    return(
-    <Tab.Navigator
-      barStyle={{ backgroundColor: '#ffffff', elevation: 10, }}
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color }) => {
-          let iconName;
-          if (route.name === 'Home') {
-            iconName = 'home'
-          } else if (route.name === 'Summary') {
-            iconName = 'compass'
-          }
-          else if (route.name === 'Profile') {
-            iconName = 'person'
-          }
-
-          // You can return any component that you like here!
-          return <Icon name={iconName} size={26} color={color} />;
-        },
-      })}
-      activeColor='#4D7CFE'
-      inactiveColor='#BDBDBD'
-
-      tabBarOptions={{
-
-      }}
-
-    >
-      <Tab.Screen name="Home" component={StackNav} />
-      <Tab.Screen name="Summary" component={SummaryScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen}  />
+    )
+  }
 
 
-    </Tab.Navigator>
-    )}
+
+  const DrawerNavigatorContainer = ({ navigation }) => {
+   
+   
+   
+    
+
+
+    return (
+      <Tab.Navigator
+        barStyle={{ backgroundColor: '#ffffff', elevation: 10, }}
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color }) => {
+            let iconName;
+            if (route.name === 'Home') {
+              iconName = 'home'
+            } else if (route.name === 'Summary') {
+              iconName = 'compass'
+            }
+            else if (route.name === 'Profile') {
+              iconName = 'person'
+            }
+
+            // You can return any component that you like here!
+            return <Icon name={iconName} size={26} color={color} />;
+          },
+        })}
+        activeColor='#4D7CFE'
+        inactiveColor='#BDBDBD'
+
+        tabBarOptions={{
+
+        }}
+
+      >
+        <Tab.Screen name="Home" component={StackNav} />
+        <Tab.Screen name="Summary" component={SummaryScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+
+
+      </Tab.Navigator>
+    )
+  }
 
 
 
