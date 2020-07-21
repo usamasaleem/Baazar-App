@@ -58,7 +58,7 @@ export default class ExpandedCard extends Component {
             put(`http://localhost:4000/retailer/verified/`+this.props.value._id,  update ,config)
             .then(res=>{
                 console.log("id"+response.id)
-                window.location.reload();
+                // window.location.reload();
               
             })
         })

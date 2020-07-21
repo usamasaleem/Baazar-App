@@ -4,7 +4,7 @@ import Navbar from '../Navbar/navbar';
 import Search from '../SearchBar/SearchBar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen,faPlus,faArrowLeft,faUpload} from '@fortawesome/free-solid-svg-icons';
-import {post,put} from 'axios';
+import {post,put,get} from 'axios';
 import $ from 'jquery'
 import {reactLocalStorage} from 'reactjs-localstorage';
 import { Link, Redirect,  } from 'react-router-dom'
@@ -30,7 +30,7 @@ class AddProduct extends Component {
             number_of_carton: 0,
             Seller_price: 0,
             Retail_price: 0,
-          
+            serverCategories:[],
             details: " "
                
         
@@ -43,6 +43,7 @@ class AddProduct extends Component {
 
           this.handleChange = this.handleChange.bind(this)
           this.handleSubmit = this.handleSubmit.bind(this)
+          this.getCategory = this.getCategory.bind(this)
 
     }
 
@@ -93,7 +94,20 @@ class AddProduct extends Component {
         // })
       
     }
-        
+      
+    getCategory(){
+        const config = {
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }
+        get(`http://localhost:4000/category/` ,config)
+        .then(res => {
+         
+            this.setState({serverCategories:res.data})
+        })
+      
+    }
     
        
       toServer(e){
@@ -102,6 +116,7 @@ class AddProduct extends Component {
       }
       componentDidMount() {
         this._handleClick();
+        this.getCategory();
       }
       handleChange = event => {
         this.setState({ 
@@ -277,10 +292,10 @@ class AddProduct extends Component {
                             <Label>Category</Label>
                             <Select value={this.state.category} name="category" onChange={e => this.setState({category:e.target.value})}>
                                 <Option>Category</Option>
-                                <Option>Snacks</Option>
-                                <Option>Dairy</Option>
-                            {this.state.catego.map((item,i) => 
-                                <Option className="cat" id={"1"+i} >{item}</Option>)
+                                {/* <Option>Snacks</Option>
+                                <Option>Dairy</Option> */}
+                            {this.state.serverCategories.map((item,i) => 
+                                <Option className="cat" id={"1"+i} >{item.name}</Option>)
                             }
                                             
                             </Select>

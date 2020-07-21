@@ -34,10 +34,10 @@ class AddProduct extends Component {
        
           <SideNav>
              <StyledLink to='/walkin'  ><Icon style={{marginTop:"250px"}}>
-                  <Img src={onspot}>
+                  <Img >
                   </Img>
                   <Label>
-                        Walk in
+                        
                   </Label>
               </Icon>
               </StyledLink>
