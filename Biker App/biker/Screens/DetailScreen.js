@@ -15,6 +15,7 @@ import { Header, Overlay } from 'react-native-elements';
 import PersonIcon from '../assets/Icons/person.svg';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import sample from '../Constants/FakeApi.json';
+import { ip } from '../config';
 
 
 export default class DetailScreen extends Component {
@@ -65,6 +66,8 @@ export default class DetailScreen extends Component {
     }
 
     const stopsLength = this.state.order.stops.length;
+    
+
 
     const RetailerSection = ({ name, address, itemsNum, items }) => {
       return <View style={styles.retailerSection}>
@@ -76,7 +79,7 @@ export default class DetailScreen extends Component {
             style={styles.cardList}
             data={items}
             renderItem={({ item }) => <View style={styles.productItemCard}>
-              <Image style={styles.productItemImg} source={require('../assets/Images/prodImg.png')} />
+              <Image style={styles.productItemImg} source={{uri:ip+"images/"+item.img}} />
               <Text style={styles.productItemText}>{item.name}</Text>
               <Text style={styles.productItemText}>{item.qty}</Text>
             </View>
@@ -284,5 +287,9 @@ const styles = StyleSheet.create({
 
   },
   productItemText: {},
-  productItemImg: {}
+  productItemImg: {
+    width:100,
+    height:100,
+    resizeMode: 'contain',
+  }
 })

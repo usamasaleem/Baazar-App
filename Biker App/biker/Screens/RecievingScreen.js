@@ -10,17 +10,19 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements';
-import { Header } from 'react-native-elements';
+import { Header, Overlay } from 'react-native-elements';
 import PersonIcon from '../assets/Icons/person.svg';
 import { DATA } from '../Constants/data'
-
+import { ip } from "../config"
 
 export default class RecievingScreen extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      selectedRetailer: {}
+      selectedRetailer: {},
+      showConfirmOrder: false,
+      orderAccepted: false,
     }
   }
 
@@ -34,7 +36,8 @@ export default class RecievingScreen extends Component {
     const { navigation } = this.props;
     const retailer = this.state.selectedRetailer
 
-    
+    console.log(retailer)
+
 
     const ItemCard = ({ showCheckbox }) => {
       return <View style={styles.itemCard}>
@@ -52,6 +55,19 @@ export default class RecievingScreen extends Component {
       </View>
     }
 
+    const ConfirmOrderDialog = () => {
+      return <View style={styles.confirmOrderDialog}>
+        <Text style={styles.confirmOrderText}>Please Confirm that you accept the order</Text>
+        <View style={styles.confirmOrderBtnContainer}>
+          <Button title="Cancel" containerStyle={{ width: "40%", marginRight: 10 }} buttonStyle={{ backgroundColor: "#757575" }}
+            onPress={() => { this.setState({ showConfirmOrder: false }) }} />
+          <Button title="Confirm" containerStyle={{ width: "40%", marginLeft: 10 }} onPress={() => {
+            this.setState({ showConfirmOrder: false })
+            this.setState({ orderAccepted: true })
+          }} />
+        </View>
+      </View>
+    }
 
     return (<ScrollView style={styles.container}>
       <View style={styles.container} >
@@ -68,7 +84,7 @@ export default class RecievingScreen extends Component {
                 style={styles.cardList}
                 data={retailer.items}
                 renderItem={({ item }) => <View style={styles.productItemCard}>
-                  <Image style={styles.productItemImg} source={require('../assets/Images/prodImg.png')} />
+                  <Image style={styles.productItemImg} source={{ uri: ip + 'images/' + item.img }} />
                   <Text style={styles.productItemText}>{item.name}</Text>
                   <Text style={styles.productItemText}>{item.qty}</Text>
                 </View>
@@ -87,15 +103,37 @@ export default class RecievingScreen extends Component {
           </View>
 
 
-          <View style={styles.RecieveBtnContainer}>
-            <TouchableOpacity style={styles.acceptOrderBtn} activeOpacity={1} onPress={() => {
-              this.setState({ showConfirmOrder: true })
-            }}>
-              <Text style={styles.acceptBtnText}>Accept</Text>
-            </TouchableOpacity></View>
 
+          {!this.state.orderAccepted &&
+
+            <View style={styles.RecieveBtnContainer}>
+              <TouchableOpacity style={styles.acceptOrderBtn} activeOpacity={1} onPress={() => {
+                this.setState({ showConfirmOrder: true })
+              }}>
+                <Text style={styles.acceptBtnText}>Complete Order</Text>
+              </TouchableOpacity></View>
+
+          }
+
+
+          {this.state.orderAccepted &&
+
+            <View style={styles.RecieveBtnContainer}>
+              <TouchableOpacity style={styles.OrderCompletedBtn} disabled activeOpacity={1} onPress={() => {
+              }}>
+                <Text style={styles.acceptBtnText}>Order Completed</Text>
+              </TouchableOpacity></View>
+
+          }
 
         </View>
+
+
+        <Overlay isVisible={this.state.showConfirmOrder} borderRadius={16} onBackdropPress={() => { this.setState({ showConfirmOrder: false }) }}
+          height={200} >
+          <ConfirmOrderDialog />
+        </Overlay>
+
 
 
 
@@ -176,7 +214,11 @@ const styles = StyleSheet.create({
 
   },
   productItemText: {},
-  productItemImg: {},
+  productItemImg: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+  },
 
   retailerSection: {
     marginTop: 24,
@@ -205,14 +247,69 @@ const styles = StyleSheet.create({
   },
   priceContainer: {
     flexDirection: "row",
-    justifyContent:"space-between",
+    justifyContent: "space-between",
     alignItems: "center",
-    marginTop:30
+    marginTop: 30
   },
   Totaltxt: {
     fontSize: 22,
     fontWeight: "bold",
     color: '#343847'
+  },
+  acceptOrderBtnContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginVertical: 15,
+  },
+  acceptOrderBtn: {
+    backgroundColor: '#4D7CFE',
+    width: 240,
+    paddingVertical: 15,
+    borderRadius: 16
+  },
+  acceptBtnText: {
+    textAlign: "center",
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  confirmOrderDialog: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  confirmOrderText: {
+    fontSize: 16,
+    textAlign: "center"
+  },
+  confirmOrderBtnContainer: {
+    marginTop: 20,
+    flexDirection: "row",
+  },
+  iconContainer: {
+    marginRight: 18
+  },
+  productItemCard: {
+    zIndex: 10,
+    elevation: 1.5,
+    marginRight: 14,
+    padding: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 16
+
+  },
+  productItemText: {},
+  productItemImg: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+  },
+  OrderCompletedBtn:{
+    backgroundColor: '#4CAF50',
+    width: 240,
+    paddingVertical: 15,
+    borderRadius: 16
   }
 
 })

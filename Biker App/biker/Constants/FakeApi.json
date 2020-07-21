@@ -1,10 +1,10 @@
 [
     {
         "id":"12315",   
-        "name": "Usama",
+        "name": "AHMED",
         "stops": [
             {
-                "name": "TRA KA GHAR ",
+                "name": "CONSUMER A ",
                 "location": {
                     "latitude": "33.745648",
                     "longitude": "33.7878"
@@ -23,12 +23,14 @@
                 "totalPrice":"PKR 2500",
                 "items":[
                     {
-                        "name":"Lip Stick",
-                        "qty":"8"
+                        "name":"Apple",
+                        "qty":"2Kg",
+                        "img":"Apple.png"
                     },
                     {
-                        "name":"Red Stick",
-                        "qty":"2"
+                        "name":"Lays",
+                        "qty":"1 (Family Pack)",
+                        "img":"Lays.png"
                     }
                 ]
             },
@@ -38,13 +40,11 @@
                 "items": 3,
                 "items":[
                     {
-                        "name":"Lip Stick",
-                        "qty":"8"
-                    },
-                    {
-                        "name":"Red Stick",
-                        "qty":"2"
+                        "name":"Coke",
+                        "qty":"1.5 ltr",
+                        "img":"Coke.png"
                     }
+                  
                 ]
             },
             {
@@ -53,12 +53,14 @@
                 "items": 1,
                 "items":[
                     {
-                        "name":"Lip Stick",
-                        "qty":"8"
+                        "name":"Snickers",
+                        "qty":"1 (L)",
+                        "img":"Snickers.png"
                     },
                     {
-                        "name":"Red Stick",
-                        "qty":"2"
+                        "name":"Dairy Milk",
+                        "qty":"2",
+                        "img":"DairyMilk.png"
                     }
                 ]
             }
