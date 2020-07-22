@@ -1,0 +1,191 @@
+[{
+  "_id": {
+    "$oid": "5ee8f4c58440e1681ce95fb1"
+  },
+  "date": "16/06/2020",
+  "orderID": "kbi1w2k5",
+  "storeID": "5ed586e252539c5b5c11d2f1",
+  "items": "3",
+  "due": 120,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee8fa998c73f32d4ce6e820"
+  },
+  "date": "16/06/2020",
+  "orderID": "kbi1w2k5",
+  "storeID": "5ed81bc43dc0ee3fd4c7fd7d",
+  "items": "1",
+  "due": 50,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee934237a1bbf1ff0f35929"
+  },
+  "date": "16/06/2020",
+  "orderID": "kbieo0b4",
+  "items": "2",
+  "due": 55,
+  "storeID": "5ed586e252539c5b5c11d2f1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eea1370d334700ae0204ad4"
+  },
+  "date": "17/06/2020",
+  "orderID": "kbjasdqh",
+  "items": "1",
+  "due": 50,
+  "storeID": "5ed81bc43dc0ee3fd4c7fd7d",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eeb54a19274db36fc1a42fb"
+  },
+  "date": "18/06/2020",
+  "orderID": "kbjasdqh",
+  "items": "1",
+  "due": 30,
+  "storeID": "5ed586e252539c5b5c11d2f1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eee813cf60dd968b802dd9c"
+  },
+  "date": "20/06/2020",
+  "orderID": "kblakhjw",
+  "items": "1",
+  "due": 30,
+  "storeID": "5ed586e252539c5b5c11d2f1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f033130deb38a34d4c940f5"
+  },
+  "date": "06/07/2020",
+  "orderID": "kblawgma",
+  "items": "3",
+  "due": 110,
+  "storeID": "5ed586e252539c5b5c11d2f1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f06f3b6cc224c0c9c5bde2e"
+  },
+  "date": "09/07/2020",
+  "orderID": "kblap2hm",
+  "items": "1",
+  "due": 30,
+  "storeID": "5ed586e252539c5b5c11d2f1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f06f3e6cc224c0c9c5bde2f"
+  },
+  "date": "09/07/2020",
+  "orderID": "87vmctskc0g5elr",
+  "items": "2",
+  "due": 95,
+  "storeID": "5ed586e252539c5b5c11d2f1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f0add2caaf30e23205dfc03"
+  },
+  "date": "12/07/2020",
+  "orderID": "kciwcvsf",
+  "items": "2",
+  "due": 100,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1563649d91fc6e948cbed4"
+  },
+  "date": "20/07/2020",
+  "orderID": "kcuaymog",
+  "items": "3",
+  "due": 360,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f157fe3b95c6239104a8a0e"
+  },
+  "date": "20/07/2020",
+  "orderID": "kcuf8uw9",
+  "items": "4",
+  "due": 370,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1589414109446f20b6b3d4"
+  },
+  "date": "20/07/2020",
+  "orderID": "kcugrfzc",
+  "items": "3",
+  "due": 350,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f158a24a497b34278c832f1"
+  },
+  "date": "20/07/2020",
+  "orderID": "kcugxpn8",
+  "items": "3",
+  "due": 320,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15c497e9168b525c20548b"
+  },
+  "date": "20/07/2020",
+  "orderID": "kcuklf0q",
+  "items": "2",
+  "due": 300,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15c9080165f60a94ed5a2a"
+  },
+  "date": "20/07/2020",
+  "orderID": "kcuq3ssz",
+  "items": "2",
+  "due": 100,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15ca17537d0a03e09da9eb"
+  },
+  "date": "20/07/2020",
+  "orderID": "kcuprsqi",
+  "items": "2",
+  "due": 1500,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15cb51f745896be80b20ed"
+  },
+  "date": "20/07/2020",
+  "orderID": "kcuq9uhw",
+  "items": "1",
+  "due": 2500,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f16ec807dec366b7801caca"
+  },
+  "date": "21/07/2020",
+  "orderID": "kcvynxtl",
+  "items": "2",
+  "due": 300,
+  "storeID": "5f0ac3e21b634b2c1c3ff30b",
+  "__v": 0
+}]

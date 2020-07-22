@@ -100,7 +100,7 @@ class payment extends Component {
                     <SubDiv>
                 <Products>
                         <Title>
-                            <Heading>Payable Dues</Heading>
+                            <Heading>Paid By Customers</Heading>
                             {/* <Filter>Filter</Filter> */}
                             {/* <Button><StyledLink to="/addproducts">Add Product</StyledLink></Button> */}
                         

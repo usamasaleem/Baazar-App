@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "5eda45acd113674ee8f7611d"
+  },
+  "name": "Snacks",
+  "description": "Not good for health",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eda45c1d113674ee8f7611e"
+  },
+  "name": "Dairy",
+  "description": "Doodh peo jan bnao",
+  "__v": 0
+}]

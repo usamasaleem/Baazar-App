@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit} from '@fortawesome/free-solid-svg-icons';
+import { faEdit,faTrash} from '@fortawesome/free-solid-svg-icons';
 // import SearchBar from '../SearchBar/SearchBar';
  import {devices} from '../../assets/devices/devices';
 import Navbar from '../Navbar/navbar';
 import {put,post} from 'axios';
+import axios from 'axios';
 import Icon from "../../assets/icons/photoadd.svg"
 import {
     BrowserRouter as Router,
@@ -29,6 +30,27 @@ class card extends Component {
    
         
     }
+    deleteCategory(id) {
+        
+        
+      console.log(id);
+      
+   
+
+        const config = {
+          headers: {
+            'Authorization': '***'
+          }
+      }
+      axios.delete(`http://localhost:4000/category/delete/`+id ,config)
+        .then(res => {
+         
+          console.log(res.data);
+          window.location.reload()
+        })
+        
+  
+  }
 
     editCategory(id) {
         
@@ -82,6 +104,7 @@ class card extends Component {
                   
                    
                    <Edit>
+                   <UploadButton  onClick={() => this.deleteCategory(this.props.item._id)}  ><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></UploadButton>
                     <Popup   trigger={<UploadButton  ><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon></UploadButton>} modal>
                     {close => (
                       <Modal >
@@ -140,7 +163,7 @@ class card extends Component {
 
 const Edit=styled.div`
 position:relative;
-left:140px;
+left:110px;
 `
 const UploadButton=styled.button`
 border:none;

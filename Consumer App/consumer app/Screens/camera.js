@@ -111,9 +111,15 @@ componentDidMount(){
                     console.log(this.state.response.labelAnnotations[0])
                     for(let i=0; i<5; i++){
                       
-                      if(this.state.response.labelAnnotations[i].description=='Snack'){
+                      if(this.state.response.labelAnnotations[i].description=='Snack' ){
                         console.log("SnAckuy"+this.state.response.labelAnnotations[i].description)
                         this.props.action(this.state.response.labelAnnotations[i].description+'s')
+                        this.props.navigation.navigate('Home')
+                        
+                      }
+                      if(this.state.response.labelAnnotations[i].description=='Drink' ){
+                        console.log("SnAckuy"+this.state.response.labelAnnotations[i].description)
+                        this.props.action('Dairy')
                         this.props.navigation.navigate('Home')
                         
                       }

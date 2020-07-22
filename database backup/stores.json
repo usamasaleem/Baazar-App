@@ -1,0 +1,193 @@
+[{
+  "_id": {
+    "$oid": "5ed81bc43dc0ee3fd4c7fd7d"
+  },
+  "name": "Save Mart",
+  "address": "Tulsa Road, Rawalpindi",
+  "number": "03335126123",
+  "lat": 33.568355,
+  "lng": 73.0557815,
+  "location": {
+    "coordinates": [
+      73.0557815,
+      33.568355
+    ]
+  },
+  "products": [
+    {
+      "_id": {
+        "$oid": "5ed8cf2a1d69e72f50a436cd"
+      },
+      "pid": {
+        "$oid": "5ed8cf291d69e72f50a436cc"
+      }
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  },
+  "name": "Gilani Mart",
+  "number": "03075135138",
+  "address": "Gilani mart adyala",
+  "location": {
+    "coordinates": [
+      73.05526370000001,
+      33.5490411
+    ]
+  },
+  "products": [
+    {
+      "_id": {
+        "$oid": "5f0acd54b4831a1d54cfeec6"
+      },
+      "pid": {
+        "$oid": "5f0acd53b4831a1d54cfeec5"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0ace14b4831a1d54cfeec9"
+      },
+      "pid": {
+        "$oid": "5f0ace14b4831a1d54cfeec8"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0ad104b4831a1d54cfeecd"
+      },
+      "pid": {
+        "$oid": "5f0ad104b4831a1d54cfeecc"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0ad13cb4831a1d54cfeecf"
+      },
+      "pid": {
+        "$oid": "5f0ad13cb4831a1d54cfeece"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0ad1c1b4831a1d54cfeed1"
+      },
+      "pid": {
+        "$oid": "5f0ad1c1b4831a1d54cfeed0"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0ad288b4831a1d54cfeed3"
+      },
+      "pid": {
+        "$oid": "5f0ad288b4831a1d54cfeed2"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0ad2c9b4831a1d54cfeed5"
+      },
+      "pid": {
+        "$oid": "5f0ad2c9b4831a1d54cfeed4"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0ad46ab4831a1d54cfeed7"
+      },
+      "pid": {
+        "$oid": "5f0ad46ab4831a1d54cfeed6"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0ad538b4831a1d54cfeed9"
+      },
+      "pid": {
+        "$oid": "5f0ad538b4831a1d54cfeed8"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0ada45aaf30e23205dfbfb"
+      },
+      "pid": {
+        "$oid": "5f0ada45aaf30e23205dfbfa"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f0afa3daaf30e23205dfc0e"
+      },
+      "pid": {
+        "$oid": "5f0afa3daaf30e23205dfc0d"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5f15d73ff745896be80b20ef"
+      },
+      "pid": {
+        "$oid": "5f15d73ef745896be80b20ee"
+      }
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f0af8beaaf30e23205dfc0c"
+  },
+  "name": "Punjab Cash and Carry",
+  "number": "0515550475",
+  "address": "Punjab Cash and carry Askari 14",
+  "location": {
+    "coordinates": [
+      73.0682042,
+      33.5387586
+    ]
+  },
+  "products": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1582874109446f20b6b3cc"
+  },
+  "name": "Azaar Kariyana",
+  "number": "05155504456",
+  "address": "Csd lalkurti rawalpindi",
+  "location": {
+    "coordinates": [
+      73.0540864,
+      33.5855362
+    ]
+  },
+  "products": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f16db467dec366b7801cac2"
+  },
+  "name": "Tehzeeb Mart",
+  "number": "0515550475",
+  "address": "tahzeeb bakers blue area islamabad",
+  "location": {
+    "coordinates": [
+      73.068041,
+      33.7156728
+    ]
+  },
+  "products": [
+    {
+      "_id": {
+        "$oid": "5f16dfbb7dec366b7801cac4"
+      },
+      "pid": {
+        "$oid": "5f16dfba7dec366b7801cac3"
+      }
+    }
+  ],
+  "__v": 0
+}]

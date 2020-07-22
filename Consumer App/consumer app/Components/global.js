@@ -1,1 +1,1 @@
-export let ip = 'http://192.168.100.64:4000/';
+export let ip = 'http://192.168.100.25:4000/';

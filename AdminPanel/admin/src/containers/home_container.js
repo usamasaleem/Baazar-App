@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Navbar from '../components/Navbar/navbar';
 import Search from '../components/SearchBar/SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen} from '@fortawesome/free-solid-svg-icons';
+import { faUser,faBell ,faBox,faBoxOpen} from '@fortawesome/free-solid-svg-icons';
 import {get} from 'axios';
 import {reactLocalStorage} from 'reactjs-localstorage';
 import Logout from '../components/profiling/logout'
@@ -110,17 +110,17 @@ class home_container extends Component {
 
                 <InventoryDetail>
                     <TotalProducts>
-                        <SmallHeading>Total Products</SmallHeading>
-                        <Value>0</Value>
-                       <Icon><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></Icon> 
+                        <SmallHeading>Total Request</SmallHeading>
+                        <Value>1</Value>
+                       <Icon><FontAwesomeIcon icon={faBell}></FontAwesomeIcon></Icon> 
 
                     </TotalProducts>
 
-                    <OutofStock>
+                    {/* <OutofStock>
                     <SmallHeading>Total Products</SmallHeading>
                         <Value style={{color: "red"}}>0</Value>
                        <IconOut><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></IconOut> 
-                    </OutofStock>
+                    </OutofStock> */}
 
                 </InventoryDetail>
                 </SubDiv>

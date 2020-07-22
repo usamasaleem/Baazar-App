@@ -101,7 +101,7 @@ class payment extends Component {
                     <SubDiv>
                 <Products>
                         <Title>
-                            <Heading>Stores to Pay</Heading>
+                            <Heading>Stores</Heading>
                             {/* <Filter>Filter</Filter> */}
                             {/* <Button><StyledLink to="/addproducts">Add Product</StyledLink></Button> */}
                         

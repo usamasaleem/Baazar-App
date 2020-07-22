@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Navbar from '../components/Navbar/navbar';
 import Search from '../components/SearchBar/SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen} from '@fortawesome/free-solid-svg-icons';
+import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen,faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
 import {get} from 'axios';
 import {reactLocalStorage} from 'reactjs-localstorage';
 import Logout from '../components/profiling/logout'
@@ -179,7 +179,7 @@ class home_container extends Component {
                     <OutofStock>
                     <SmallHeading style={{color: "red"}}>Out of Stock</SmallHeading>
                         <Value style={{color: "red"}}>{this.state.stock}</Value>
-                       <IconOut><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></IconOut> 
+                       <IconOut><FontAwesomeIcon style={{color: "red"}} icon={faExclamationTriangle}></FontAwesomeIcon></IconOut> 
                     </OutofStock>
 
                 </InventoryDetail>
@@ -237,7 +237,7 @@ font-size:3rem;
 const IconOut=styled.i
 `
 position:relative;
-top:-80px;
+top:-90px;
 left:100px;
 font-size:3rem;
 

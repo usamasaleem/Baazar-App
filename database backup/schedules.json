@@ -1,0 +1,85 @@
+[{
+  "_id": {
+    "$oid": "5f1008268b2c2945782f2596"
+  },
+  "userID": {
+    "$oid": "5ee0c874322e6c19e8ed4440"
+  },
+  "schedule": "Monthly",
+  "date": {
+    "$date": "2020-07-16T19:00:00Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f104f28ec2e0245f441ba32"
+  },
+  "userID": {
+    "$oid": "5ee0c874322e6c19e8ed4440"
+  },
+  "schedule": "Weekly",
+  "date": {
+    "$date": "2020-07-16T12:59:10.771Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1093512ec73d5680260d10"
+  },
+  "userID": {
+    "$oid": "5ee0c874322e6c19e8ed4440"
+  },
+  "schedule": "Cart",
+  "date": {
+    "$date": "2020-07-16T17:49:56.995Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1094872ec73d5680260d13"
+  },
+  "userID": {
+    "$oid": "5ee0c874322e6c19e8ed4440"
+  },
+  "schedule": "Cart-2",
+  "date": {
+    "$date": "2020-07-16T17:55:07.651Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f10d231b58d9c42d0f2682f"
+  },
+  "userID": {
+    "$oid": "5ee0c874322e6c19e8ed4440"
+  },
+  "schedule": "My favourite cart",
+  "date": {
+    "$date": "2020-07-16T22:17:55.635Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f10d31cb58d9c42d0f26838"
+  },
+  "userID": {
+    "$oid": "5ee0c874322e6c19e8ed4440"
+  },
+  "schedule": "For next week",
+  "date": {
+    "$date": "2020-07-16T22:21:58.352Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f12bf7351bda33b60af0d95"
+  },
+  "userID": {
+    "$oid": "5ee0c874322e6c19e8ed4440"
+  },
+  "schedule": "Mobile cart",
+  "date": {
+    "$date": "2016-05-26T00:00:00Z"
+  },
+  "__v": 0
+}]

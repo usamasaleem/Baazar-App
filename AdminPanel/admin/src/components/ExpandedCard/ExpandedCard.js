@@ -117,7 +117,10 @@ export default class ExpandedCard extends Component {
                          <DetailInnerContainer className="DetailInnerContainer">
                           
                             <Content className="content">
+                                {!this.props.value.verified &&
                                 <Button onClick={this.handleVerify}>Verifiy</Button>
+                                }
+                                
                             </Content>
 
                         </DetailInnerContainer>

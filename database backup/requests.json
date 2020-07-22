@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "5f16ef587dec366b7801cacb"
+  },
+  "type": "Delete",
+  "retailer": {
+    "$oid": "5f1582614109446f20b6b3cb"
+  },
+  "stores": {
+    "$oid": "5f1582874109446f20b6b3cc"
+  },
+  "__v": 0
+}]

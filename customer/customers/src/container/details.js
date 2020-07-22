@@ -181,13 +181,13 @@ class Details extends Component {
                         </ProductsDetails>
 
                         <RelatedProducts>
-                        <Title>Related Porducts</Title>
+                        <Title></Title>
 
                         <CardContainer>
+                                            {/* <Cards/>
                                             <Cards/>
                                             <Cards/>
-                                            <Cards/>
-                                            <Cards/>      
+                                            <Cards/>       */}
                        </CardContainer>
                                         
                  

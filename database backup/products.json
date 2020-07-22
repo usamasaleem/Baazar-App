@@ -1,0 +1,241 @@
+[{
+  "_id": {
+    "$oid": "5ed81c3a7d95950cc8741ca5"
+  },
+  "cart": false,
+  "name": " Dairy Milk",
+  "category": "Snacks",
+  "size": "Small",
+  "brand": " ",
+  "product_per_carton": "50",
+  "number_of_carton": 50,
+  "quantity": 2447,
+  "Seller_price": "50",
+  "Retail_price": "40",
+  "fileName": "dairy milk.jpg",
+  "details": " Cadbury Dairy Milk is a brand of milk chocolate manufactured by Cadbury. It was introduced in the United Kingdom in 1905 and now consists of a number of products.",
+  "stores": {
+    "$oid": "5ed81bc43dc0ee3fd4c7fd7d"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ed8cf291d69e72f50a436cc"
+  },
+  "cart": false,
+  "name": "Dairy Millk",
+  "category": "Snacks",
+  "size": "Small",
+  "brand": " ",
+  "product_per_carton": "50",
+  "number_of_carton": 50,
+  "quantity": 2475,
+  "Seller_price": "50",
+  "Retail_price": "40",
+  "fileName": "dairy milk1.jpg",
+  "details": " Cadbury Dairy Milk is a brand of milk chocolate manufactured by Cadbury. It was introduced in the United Kingdom in 1905 and now consists of a number of products.",
+  "__v": 0,
+  "stores": {
+    "$oid": "5ed81bc43dc0ee3fd4c7fd7d"
+  }
+},{
+  "_id": {
+    "$oid": "5f0acd53b4831a1d54cfeec5"
+  },
+  "cart": false,
+  "name": " Lays",
+  "category": "Snacks",
+  "size": "Small",
+  "brand": "Pepsico",
+  "product_per_carton": "50",
+  "number_of_carton": 50,
+  "Seller_price": "50",
+  "Retail_price": "40",
+  "details": " Lay's is a brand of potato chip varieties, as well as the name of the company that founded the chip brand in the U.S. It has also been called Frito-Lay with Fritos. Lay's has been owned by PepsiCo through Frito-Lay since 1965. ",
+  "quantity": 2437,
+  "fileName": "DSC_0562.JPG",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  }
+},{
+  "_id": {
+    "$oid": "5f0ace14b4831a1d54cfeec8"
+  },
+  "cart": false,
+  "name": " Lays",
+  "category": "Snacks",
+  "size": "Small",
+  "brand": "Pepsico",
+  "product_per_carton": "50",
+  "number_of_carton": 50,
+  "Seller_price": "10",
+  "Retail_price": "10",
+  "details": " Milk is a white, nutrient-rich liquid food produced in the mammary glands of mammals. It is the primary source of nutrition for infant mammals before they are able to digest other types of food.",
+  "quantity": 2477,
+  "fileName": "4.jpg",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  }
+},{
+  "_id": {
+    "$oid": "5f0ad104b4831a1d54cfeecc"
+  },
+  "cart": false,
+  "name": " Pepsi",
+  "category": "Snacks",
+  "size": "Small",
+  "brand": "Pepsico",
+  "product_per_carton": "20",
+  "number_of_carton": 100,
+  "Seller_price": "50",
+  "Retail_price": "45",
+  "details": " PepsiCo, Inc. is an American multinational food, snack and beverage corporation headquartered in Harrison, New York, in the hamlet of Purchase. PepsiCo has interests in the manufacturing, marketing, and distribution of grain-based snack foods, beverages, and other products.",
+  "quantity": 1975,
+  "fileName": "pepsi.jpg",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  }
+},{
+  "_id": {
+    "$oid": "5f0ad13cb4831a1d54cfeece"
+  },
+  "cart": false,
+  "name": " Coke",
+  "category": "Snacks",
+  "size": "Small",
+  "brand": "Pepsico",
+  "product_per_carton": "50",
+  "number_of_carton": 50,
+  "Seller_price": "50",
+  "Retail_price": "45",
+  "details": " Coca-Cola, or Coke, is a carbonated soft drink manufactured by The Coca-Cola Company. Originally marketed as a temperance drink and intended as a patent medicine, it was invented in the late 19th century",
+  "quantity": 2465,
+  "fileName": "coke1.jpg",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  }
+},{
+  "_id": {
+    "$oid": "5f0ad46ab4831a1d54cfeed6"
+  },
+  "cart": false,
+  "name": " Bravo",
+  "category": "Dairy",
+  "size": "Small",
+  "brand": "Pepsico",
+  "product_per_carton": "30",
+  "number_of_carton": 40,
+  "Seller_price": "30",
+  "Retail_price": "20",
+  "details": " Milk is a white, nutrient-rich liquid food produced in the mammary glands of mammals. It is the primary source of nutrition for infant mammals before they are able to digest other types of food.",
+  "quantity": 9,
+  "fileName": "Bravo-Apple-Juice_010.jpg",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  }
+},{
+  "_id": {
+    "$oid": "5f0ad538b4831a1d54cfeed8"
+  },
+  "cart": false,
+  "name": " Lipton",
+  "category": "Dairy",
+  "size": "Small",
+  "brand": "Brand",
+  "product_per_carton": "40",
+  "number_of_carton": 100,
+  "Seller_price": "250",
+  "Retail_price": "200",
+  "details": " Lipton is a British brand of tea, owned by Unilever. Lipton was also a supermarket chain in the United Kingdom before it was sold to Argyll Foods, to allow the company to focus solely on tea.",
+  "quantity": 3967,
+  "fileName": "lipton.jpg",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  }
+},{
+  "_id": {
+    "$oid": "5f0ada45aaf30e23205dfbfa"
+  },
+  "cart": false,
+  "name": " coka cola",
+  "category": "Snacks",
+  "size": "Small",
+  "brand": "Brand",
+  "product_per_carton": "50",
+  "number_of_carton": 200,
+  "Seller_price": "60",
+  "Retail_price": "50",
+  "details": " Coca-Cola, or Coke, is a carbonated soft drink manufactured by The Coca-Cola Company. Originally marketed as a temperance drink and intended as a patent medicine, it was invented in the late 19th century ",
+  "quantity": 9991,
+  "fileName": "coke2.jpg",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  }
+},{
+  "_id": {
+    "$oid": "5f0afa3daaf30e23205dfc0d"
+  },
+  "cart": false,
+  "name": "Lipton",
+  "category": "Dairy",
+  "size": "Small",
+  "brand": " ",
+  "product_per_carton": "20",
+  "number_of_carton": 60,
+  "Seller_price": "250",
+  "Retail_price": "200",
+  "details": " Milk is a white, nutrient-rich liquid food produced in the mammary glands of mammals. It is the primary source of nutrition for infant mammals before they are able to digest other types of food.",
+  "quantity": 1170,
+  "fileName": "lipton.jpg",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  }
+},{
+  "_id": {
+    "$oid": "5f15d73ef745896be80b20ee"
+  },
+  "cart": false,
+  "name": " Sugar",
+  "category": "Dairy",
+  "size": "Small",
+  "brand": "Pepsico",
+  "product_per_carton": "20",
+  "number_of_carton": 10,
+  "Seller_price": "89",
+  "Retail_price": "70",
+  "details": " Sugar is the generic name for sweet-tasting, soluble carbohydrates, many of which are used in food. Table sugar, granulated sugar, or regular sugar, refers to sucrose, a disaccharide composed of glucose and fructose. ",
+  "quantity": 199,
+  "fileName": "sugar.png",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f0ac3e21b634b2c1c3ff30b"
+  }
+},{
+  "_id": {
+    "$oid": "5f16dfba7dec366b7801cac3"
+  },
+  "cart": false,
+  "name": " Dalda Oil",
+  "category": "Dairy",
+  "size": "Small",
+  "brand": " ",
+  "product_per_carton": "10",
+  "number_of_carton": 50,
+  "Seller_price": "300",
+  "Retail_price": "250",
+  "details": " Dalda is a brand of hydrogenated vegetable oil popular in South Asia",
+  "quantity": 500,
+  "fileName": "dalda.jpg",
+  "__v": 0,
+  "stores": {
+    "$oid": "5f16db467dec366b7801cac2"
+  }
+}]

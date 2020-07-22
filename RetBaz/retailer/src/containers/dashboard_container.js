@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Navbar from '../components/Navbar/navbar';
 import Search from '../components/SearchBar/SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen,faPlus} from '@fortawesome/free-solid-svg-icons';
+import { faBars,faUser,faShoppingBag,faAlignRight,faBell ,faBox,faBoxOpen,faPlus,faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
 import {Bar,Pie,Doughnut} from 'react-chartjs-2';
 import {get} from 'axios';
 import {reactLocalStorage} from 'reactjs-localstorage';
@@ -362,7 +362,7 @@ stock(){
                             
                             <IconContainer>
                             <Value style={{color: "red"}}>{this.state.stock}</Value>
-                            <FontAwesomeIcon className="fa-2x" icon={faBoxOpen}></FontAwesomeIcon>
+                            <FontAwesomeIcon style={{color: "red"}} className="fa-2x" icon={faExclamationTriangle}></FontAwesomeIcon>
                             </IconContainer>
                             </AddProduct>
                     </ProductSummary>

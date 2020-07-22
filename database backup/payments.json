@@ -1,0 +1,505 @@
+[{
+  "_id": {
+    "$oid": "5ee8ddded84ee2698cbe0a55"
+  },
+  "orderID": "kbi1w2k5",
+  "amount": 170,
+  "date": "16/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee931b1b147656c206c03dc"
+  },
+  "orderID": "kbieo0b4",
+  "amount": 55,
+  "date": "16/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eea03e161d830073c62beb2"
+  },
+  "orderID": "kbjapawj",
+  "amount": 160,
+  "date": "17/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eea047161d830073c62beb9"
+  },
+  "orderID": "kbjasdqh",
+  "amount": 80,
+  "date": "17/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eeb74c985813905883f0b91"
+  },
+  "orderID": "kbkuxhfp",
+  "amount": 30,
+  "date": "18/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eebdb65133b4010508a3466"
+  },
+  "orderID": "kblakhjw",
+  "amount": 30,
+  "date": "18/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eebdc3b133b4010508a3468"
+  },
+  "orderID": "kblap2hm",
+  "amount": 30,
+  "date": "18/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eebdc7f133b4010508a346b"
+  },
+  "orderID": "kblaqjjc",
+  "amount": 50,
+  "date": "18/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eebdd94133b4010508a3470"
+  },
+  "orderID": "kblawgma",
+  "amount": 110,
+  "date": "18/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef4ee5451455531c88f2e1d"
+  },
+  "orderID": "kbv4mbw5",
+  "amount": 65,
+  "date": "25/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef4f4609348466d408798ca"
+  },
+  "orderID": "kbv5jjki",
+  "amount": 30,
+  "date": "25/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5d315edb0321450b65163"
+  },
+  "orderID": "87vm40gkbw3himh",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5d3daedb0321450b65165"
+  },
+  "orderID": "87vm40gkbw3lqg3",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5d437edb0321450b65167"
+  },
+  "orderID": "87vm40gkbw3nq56",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5d476edb0321450b65169"
+  },
+  "orderID": "87vm40gkbw3p32o",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5d4b4edb0321450b6516b"
+  },
+  "orderID": "87vm40gkbw3qevn",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5ed3eedb0321450b65178"
+  },
+  "orderID": "87vm40gkbw7h1m0",
+  "amount": 20,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5ed8fedb0321450b6517b"
+  },
+  "orderID": "87vm40gkbw7is8m",
+  "amount": 20,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5f33bedb0321450b6517f"
+  },
+  "orderID": "87vm40gkbw8dwot",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5f3faedb0321450b65182"
+  },
+  "orderID": "87vm40gkbw8i0ic",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5f4a0edb0321450b65185"
+  },
+  "orderID": "87vm40gkbw8lkeh",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5f721edb0321450b65188"
+  },
+  "orderID": "87vm40gkbw8zb18",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5f847edb0321450b6518b"
+  },
+  "orderID": "87vm40gkbw95m5p",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5fa82edb0321450b6518e"
+  },
+  "orderID": "87vm40gkbw9huo1",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef5fc78edb0321450b65191"
+  },
+  "orderID": "87vm40gkbw9sllf",
+  "amount": 50,
+  "date": "26/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef9d6f4c8f25040f0fbe3cd"
+  },
+  "orderID": "87vmctskc0g5elr",
+  "amount": 145,
+  "date": "29/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ef9f11dc8f25040f0fbe3d5"
+  },
+  "orderID": "87vmctskc0k4y9i",
+  "amount": 30,
+  "date": "29/06/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5efc47a0afb5bb3f7cd1fc49"
+  },
+  "orderID": "ptecjgkc33cyrv",
+  "amount": 215,
+  "date": "01/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f06ffcbcc224c0c9c5bde35"
+  },
+  "orderID": "kcepm4x4",
+  "amount": 1325,
+  "date": "09/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f0adcd1aaf30e23205dfc00"
+  },
+  "orderID": "kciwcvsf",
+  "amount": 100,
+  "date": "12/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f0adf04aaf30e23205dfc07"
+  },
+  "orderID": "kciwoxqv",
+  "amount": 110,
+  "date": "12/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f0c36c3aaf30e23205dfc11"
+  },
+  "orderID": "87vm6xskckd32ie",
+  "amount": 50,
+  "date": "13/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f0c45b9821d9b4b088e70e8"
+  },
+  "orderID": "87vmetkkckfd5jt",
+  "amount": 100,
+  "date": "13/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f10098f8b2c2945782f259b"
+  },
+  "orderID": "kcoi9or8",
+  "amount": 350,
+  "date": "16/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f10d0f7b58d9c42d0f26828"
+  },
+  "orderID": "kcpcntgm",
+  "amount": 550,
+  "date": "16/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f10d25cb58d9c42d0f26832"
+  },
+  "orderID": "kcpcvhdp",
+  "amount": 100,
+  "date": "16/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f10d378b58d9c42d0f2683c"
+  },
+  "orderID": "kcpd1k66",
+  "amount": 200,
+  "date": "16/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f11e41815e98e05f4149288"
+  },
+  "orderID": "87vm16ckcqilftd",
+  "amount": 100,
+  "date": "17/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f11e62351bda33b60af0d7c"
+  },
+  "orderID": "87vmbq8kcqiwnyh",
+  "amount": 100,
+  "date": "17/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1216ca51bda33b60af0d81"
+  },
+  "orderID": "87vmbq8kcqqbm3u",
+  "amount": 100,
+  "date": "17/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f12bbea51bda33b60af0d8f"
+  },
+  "orderID": "87vmbq8kcrfhn68",
+  "amount": 210,
+  "date": "18/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f12d7ac51bda33b60af0d9b"
+  },
+  "orderID": "87vmbq8kcrjpy8a",
+  "amount": 310,
+  "date": "18/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f12d83551bda33b60af0d9e"
+  },
+  "orderID": "87vmbq8kcrjsvsv",
+  "amount": 310,
+  "date": "18/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f12d87351bda33b60af0da1"
+  },
+  "orderID": "87vmbq8kcrju89u",
+  "amount": 310,
+  "date": "18/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f12eb4751bda33b60af0da8"
+  },
+  "orderID": "87vmbq8kcrmpj90",
+  "amount": 100,
+  "date": "18/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1347120b9aa4044c36edaa"
+  },
+  "orderID": "kcs0p76l",
+  "amount": 60,
+  "date": "18/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f134a04cd714b4694dfe434"
+  },
+  "orderID": "kcs15d2k",
+  "amount": 60,
+  "date": "18/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f134ac8c558ac363447e6bd"
+  },
+  "orderID": "kcs19kfc",
+  "amount": 310,
+  "date": "18/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1562cb9d91fc6e948cbed0"
+  },
+  "orderID": "kcuaymog",
+  "amount": 360,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f157ee649db1254946f758e"
+  },
+  "orderID": "kcuf8uw9",
+  "amount": 370,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1588d94109446f20b6b3d0"
+  },
+  "orderID": "kcugrfzc",
+  "amount": 350,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1589fda497b34278c832ed"
+  },
+  "orderID": "kcugxpn8",
+  "amount": 320,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f158f4b5781141e288075bf"
+  },
+  "orderID": "kcuhqt3e",
+  "amount": 250,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15938e1105445c8079e84f"
+  },
+  "orderID": "kcuie6is",
+  "amount": 3110,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f1595661105445c8079e85a"
+  },
+  "orderID": "kcuiob4z",
+  "amount": 2680,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15a1fe5e096160c86d9592"
+  },
+  "orderID": "kcuklf0q",
+  "amount": 300,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15c3f65e096160c86d9597"
+  },
+  "orderID": "kcuprsqi",
+  "amount": 1500,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15c626e9168b525c20548c"
+  },
+  "orderID": "kcuq3ssz",
+  "amount": 100,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15c7405a0e7f33541b4ff6"
+  },
+  "orderID": "kcuq9uhw",
+  "amount": 2500,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15e232f745896be80b20f4"
+  },
+  "orderID": "87vmlbckcuudozg",
+  "amount": 350,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f15e5137dec366b7801cab4"
+  },
+  "orderID": "87vml88kcuuthko",
+  "amount": 439,
+  "date": "20/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f16d65b7dec366b7801cabd"
+  },
+  "orderID": "87vml88kcvvldoc",
+  "amount": 110,
+  "date": "21/07/2020",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f16ea847dec366b7801cac7"
+  },
+  "orderID": "kcvynxtl",
+  "amount": 300,
+  "date": "21/07/2020",
+  "__v": 0
+}]

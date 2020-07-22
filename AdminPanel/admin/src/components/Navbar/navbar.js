@@ -28,17 +28,17 @@ class navbar extends Component {
             <NavBartitleContainer className="NavBar-titleContainer">
            
             <NavBar__logo className="NavBar__logo">Baazar.</NavBar__logo>
-            <StyledLink to={{pathname: `/`}} > <DashBoard><Icon><FontAwesomeIcon icon={faChartLine}></FontAwesomeIcon></Icon>Dashboard</DashBoard></StyledLink>
+            <StyledLink to={{pathname: `/`}} > <DashBoard><Icon><FontAwesomeIcon ></FontAwesomeIcon></Icon>Dashboard</DashBoard></StyledLink>
            
-            <StyledLink to={{pathname: `/deliverer`}} ><Products><Icon><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></Icon>Deliverer </Products></StyledLink>
-            <StyledLink to={{pathname: `/retailer`}} ><Products style={{ marginRight:" 5px"}}><Icon><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></Icon>Retailer </Products></StyledLink>
+            <StyledLink to={{pathname: `/deliverer`}} ><Products><Icon><FontAwesomeIcon ></FontAwesomeIcon></Icon>Deliverer </Products></StyledLink>
+            <StyledLink to={{pathname: `/retailer`}} ><Products style={{ marginRight:" 5px"}}><Icon><FontAwesomeIcon ></FontAwesomeIcon></Icon>Retailer </Products></StyledLink>
          
             </NavBartitleContainer>
 
             <SubNavContent>
            
-            <StyledLink to={{pathname: `/inventory`}} ><Sales><Icon><FontAwesomeIcon icon={faBoxOpen}></FontAwesomeIcon></Icon>Inventory</Sales></StyledLink>
-            <StyledLink to={{pathname: `/payment`}} ><Analytics><Icon><FontAwesomeIcon icon={faCog}></FontAwesomeIcon></Icon>Payment </Analytics></StyledLink>
+            <StyledLink to={{pathname: `/inventory`}} ><Sales><Icon><FontAwesomeIcon ></FontAwesomeIcon></Icon>Inventory</Sales></StyledLink>
+            <StyledLink to={{pathname: `/payment`}} ><Analytics><Icon><FontAwesomeIcon ></FontAwesomeIcon></Icon>Payment </Analytics></StyledLink>
             </SubNavContent>
         </Navbar>
              
